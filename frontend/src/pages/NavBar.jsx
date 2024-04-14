@@ -20,7 +20,7 @@ const NavBar = () => {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 px-3">
+    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 px-3 text-white">
       <Typography
         as="li"
         variant="small"
@@ -65,13 +65,13 @@ const NavBar = () => {
   );
 
   return (
-    <div className="max-h-max  ">
-      <Navbar className="sticky top-0  h-max max-w-full rounded-none px-4 py-2 border-none lg:px-8 lg:py-4 bg-background">
-        <div className="flex items-center justify-between text-blue-gray-900">
+    <div className="max-h-max">
+      <Navbar className="fixed top-0 z-50 w-full h-max px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
+        <div className="flex items-center justify-between">
           <Typography
             as="a"
             href="#"
-            className="mr-4 cursor-pointer py-1.5 font-medium text-white"
+            className="mr-4 cursor-pointer py-1.5 font-medium"
           >
             Material Tailwind
           </Typography>
@@ -82,14 +82,14 @@ const NavBar = () => {
               <Button
                 variant="text"
                 size="sm"
-                className="hidden lg:inline-block"
+                className="hidden lg:inline-block  hover:bg-hoverBackground hover:text-white"
               >
                 <span>Log In</span>
               </Button>
               <Button
                 variant="gradient"
                 size="sm"
-                className="hidden lg:inline-block"
+                className="hidden lg:inline-block hover:bg-hoverBackground hover:text-black"
               >
                 <span>Sign in</span>
               </Button>
@@ -133,24 +133,10 @@ const NavBar = () => {
             </IconButton>
           </div>
         </div>
-        <MobileNav open={openNav}>
-          {navList}
-          <div className="flex items-center gap-x-1">
-            <Button
-              fullWidth
-              variant="text"
-              size="sm"
-              className="bg-blue-500 rounded-lg"
-            >
-              <span>Log In</span>
-            </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
-            </Button>
-          </div>
-        </MobileNav>
+        <MobileNav open={openNav}>{navList}</MobileNav>
       </Navbar>
     </div>
   );
 };
+
 export default NavBar;

@@ -11,7 +11,7 @@ function App() {
       <div className="flex">
         <SideBar />
         {/* <HeroSection16 /> */}
-        <div className=" space-y-10 mx-auto">
+        <div className=" space-y-10 ml-[25rem] mt-20">
           <Post />
           <Post />
         </div>
