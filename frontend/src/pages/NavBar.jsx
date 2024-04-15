@@ -1,12 +1,10 @@
 import React from "react";
-import SideBar from "./SideBar";
 import {
   Navbar,
   MobileNav,
   Typography,
   Button,
   IconButton,
-  Card,
 } from "@material-tailwind/react";
 
 const NavBar = () => {
@@ -27,7 +25,7 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a  className="flex items-center">
           Pages
         </a>
       </Typography>
@@ -37,7 +35,7 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a  className="flex items-center">
           Account
         </a>
       </Typography>
@@ -47,7 +45,7 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a  className="flex items-center">
           Blocks
         </a>
       </Typography>
@@ -57,7 +55,7 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a href="#" className="flex items-center">
+        <a  className="flex items-center">
           Docs
         </a>
       </Typography>
@@ -70,7 +68,7 @@ const NavBar = () => {
         <div className="flex items-center justify-between">
           <Typography
             as="a"
-            href="#"
+            
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
             Material Tailwind
