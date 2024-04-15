@@ -31,7 +31,7 @@ const Register = () => {
                 placeholder="First Name"
                 onFocus={handleClick}
                 onBlur={handleClickRm}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+                className="w-full px-3 mt-2 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
               />
             </label>
             <label htmlFor="lastName" className="block text-gray-700">
@@ -41,11 +41,11 @@ const Register = () => {
                 placeholder="Last Name"
                 onFocus={handleClick}
                 onBlur={handleClickRm}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+                className="w-full px-3 mt-2 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
               />
             </label>
           </div>
-          <div>
+          <div className="">
             <label htmlFor="lastName" className="block text-gray-700">
               Email
               <input
@@ -53,7 +53,7 @@ const Register = () => {
                 placeholder="Last Name"
                 onFocus={handleClick}
                 onBlur={handleClickRm}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+                className="w-full mt-2 px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
               />
             </label>
           </div>
@@ -65,7 +65,7 @@ const Register = () => {
                 placeholder="Last Name"
                 onFocus={handleClick}
                 onBlur={handleClickRm}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+                className="w-full mt-2 px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
               />
             </label>
           </div>
@@ -76,14 +76,14 @@ const Register = () => {
                 placeholder="Address"
                 onFocus={handleClick}
                 onBlur={handleClickRm}
-                className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+                className="w-full mt-2 px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
               ></textarea>
             </label>
           </div>
           <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
             Register
           </button>
-          <div className="flex flex-row">
+          <div className="flex flex-row mt-5">
             <p className="mr-1">Already have an account?</p>
             <Link to="/login">
               <p className="ml-1 text-blue-600 underline cursor-pointer">
