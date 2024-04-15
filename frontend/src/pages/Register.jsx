@@ -14,7 +14,7 @@ const Register = () => {
 
   return (
     <div className="relative">
-      <img className="w-full" src={GymImage} alt="Gym" />
+      <img className="w-[1920px] h-[695px]" src={GymImage} alt="Gym" />
 
       <div className="mt-10 absolute inset-0 w-[600px] ml-5">
         <div
@@ -48,6 +48,18 @@ const Register = () => {
           <div>
             <label htmlFor="lastName" className="block text-gray-700">
               Email
+              <input
+                type="text"
+                placeholder="Last Name"
+                onFocus={handleClick}
+                onBlur={handleClickRm}
+                className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="lastName" className="block text-gray-700">
+              Phone Number
               <input
                 type="text"
                 placeholder="Last Name"

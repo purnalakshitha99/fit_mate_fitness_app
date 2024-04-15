@@ -15,7 +15,7 @@ const Login = () => {
 
   return (
     <div className="relative">
-      <img className="w-full" src={Gym3} alt="Gym" />
+      <img className="w-[1920px] h-[695px]" src={Gym3} alt="Gym" />
 
       <div className="absolute inset-0 flex justify-center items-center">
         <div
