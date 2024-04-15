@@ -1,10 +1,10 @@
-package com.example.backend;
+package fitmate_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendApplicationTests {
+class FitmateApiApplicationTests {
 
 	@Test
 	void contextLoads() {
