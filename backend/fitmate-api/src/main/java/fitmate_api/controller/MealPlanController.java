@@ -19,7 +19,9 @@ public class MealPlanController {
 
     @PostMapping("/users/{user_id}/meal_plans")
     public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanRequest mealPlanRequest)throws UserNotFoundException {
-
+        System.out.println("hiiiiiiiii");
         return mealPlanService.create(userId,mealPlanRequest);
     }
+
+
 }

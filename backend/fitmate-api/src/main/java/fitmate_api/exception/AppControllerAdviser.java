@@ -1,9 +1,6 @@
 package fitmate_api.exception;
 
-import com.nimbusds.oauth2.sdk.AuthorizationErrorResponse;
-import com.nimbusds.oauth2.sdk.ErrorObject;
-import com.nimbusds.oauth2.sdk.ErrorResponse;
-import com.nimbusds.oauth2.sdk.http.HTTPResponse;
+
 import fitmate_api.controller.response.error.CustomErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
