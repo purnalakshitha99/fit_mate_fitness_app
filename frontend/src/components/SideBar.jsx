@@ -17,7 +17,7 @@ import {
 
 const SideBar = () => {
   return (
-    <Card className="w-full md:w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white fixed inset-y-0 left-0 z-50">
+    <Card className=" top-16 mt-3 w-full md:w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white fixed  left-0 ">
       <div className="mb-2 p-4 flex flex-col items-center md:items-start space-y-5">
         <img
           className="h-20 w-20 rounded-full"

@@ -9,7 +9,7 @@ const Tabs = () => {
   };
 
   return (
-    <div className="">
+    <div className=" w-[1000px]">
       <div className="relative right-0">
         <ul
           className="relative flex flex-wrap p-5 list-none rounded-xl bg-blue-gray-50/60 border" // Removed border class
@@ -61,6 +61,7 @@ const Tabs = () => {
           </div>
           <div className={`block ${activeTab === "message" ? "opacity-100" : "hidden"}`} id="message" role="tabpanel">
             <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
+             <Post />
              <Post />
             </p>
           </div>
