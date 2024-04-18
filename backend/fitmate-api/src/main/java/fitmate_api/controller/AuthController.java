@@ -1,7 +1,6 @@
 package fitmate_api.controller;
 
-import com.example.fitnesstest.DTO.UserDTO;
-import com.example.fitnesstest.service.UserService;
+
 import lombok.AllArgsConstructor;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
