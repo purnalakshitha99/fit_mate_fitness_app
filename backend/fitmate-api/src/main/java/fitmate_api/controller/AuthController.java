@@ -1,6 +1,8 @@
 package fitmate_api.controller;
 
 
+import fitmate_api.DTO.UserDTO;
+import fitmate_api.service.UserService;
 import lombok.AllArgsConstructor;
 import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;

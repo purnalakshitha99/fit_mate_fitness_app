@@ -1,9 +1,8 @@
 package fitmate_api.service;
 
-import com.example.fitnesstest.DTO.UserDTO;
-import com.example.fitnesstest.entity.User;
-import com.example.fitnesstest.response.CommonResponse;
-import com.example.fitnesstest.response.UserResponse;
+
+import fitmate_api.DTO.UserDTO;
+import fitmate_api.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
