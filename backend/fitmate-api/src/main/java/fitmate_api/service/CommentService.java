@@ -1,6 +1,7 @@
 package fitmate_api.service;
 
-import com.example.fitnesstest.DTO.CommentDTO;
+
+import fitmate_api.DTO.CommentDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

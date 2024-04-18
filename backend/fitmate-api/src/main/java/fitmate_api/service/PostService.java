@@ -1,8 +1,8 @@
 package fitmate_api.service;
 
-import com.example.fitnesstest.DTO.PostDTO;
-import com.example.fitnesstest.entity.Post;
-import com.example.fitnesstest.response.PostResponse;
+import fitmate_api.DTO.PostDTO;
+import fitmate_api.controller.response.PostResponse;
+import fitmate_api.model.Post;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

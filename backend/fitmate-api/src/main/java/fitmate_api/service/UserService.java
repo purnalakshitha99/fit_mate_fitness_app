@@ -2,6 +2,8 @@ package fitmate_api.service;
 
 
 import fitmate_api.DTO.UserDTO;
+import fitmate_api.controller.response.CommonResponse;
+import fitmate_api.controller.response.UserResponse;
 import fitmate_api.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

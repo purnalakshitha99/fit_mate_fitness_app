@@ -1,0 +1,47 @@
+package fitmate_api.controller;
+
+
+
+import fitmate_api.DTO.PostDTO;
+import fitmate_api.controller.response.CommonResponse;
+import fitmate_api.controller.response.PostResponse;
+import fitmate_api.service.PostService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
+public class PostController {
+    private PostService postService;
+
+    @PostMapping("/posts")
+    public ResponseEntity<CommonResponse> createUser(@RequestBody PostDTO postDTO)  {
+
+        postService.savePost(postDTO);
+        return ResponseEntity.ok(new CommonResponse("User Created"));
+    }
+
+    @GetMapping("/posts")
+    public ResponseEntity<List<PostResponse>> getAllUsers() {
+        List<PostResponse> postList = postService.getAllPosts();
+
+        return ResponseEntity.ok(postList);
+    }
+
+    @GetMapping("/posts/{post_id}")
+    public ResponseEntity<PostResponse> getUserById(@PathVariable("post_id") Long id){
+        PostResponse postResponse = postService.getPostById(id);
+        return ResponseEntity.ok(postResponse);
+    }
+
+    @DeleteMapping("/posts/{post_id}")
+    public ResponseEntity<?> deleteUser(@PathVariable ("post_id") Long id){
+        postService.deletePost(id);
+
+        return ResponseEntity.ok("User Deleted!");
+    }
+}
