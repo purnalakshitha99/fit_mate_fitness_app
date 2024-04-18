@@ -13,6 +13,10 @@ const Login = () => {
     setInputFocused(false);
   };
 
+  const handleGoogleLogin = async() => {
+    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+};
+
   return (
     <div className="relative">
       <img className="w-[1920px] h-[695px]" src={Gym3} alt="Gym" />
@@ -43,8 +47,11 @@ const Login = () => {
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
           />
-          <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+          <button className="w-full mb-5 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
             Login
+          </button>
+          <button onClick={handleGoogleLogin} className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+            google login
           </button>
           <div className="flex flex-row">
             <p className="mr-1">Don't have an Account?</p>

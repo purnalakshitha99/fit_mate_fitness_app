@@ -25,9 +25,7 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a  className="flex items-center">
-          Pages
-        </a>
+        <a className="flex items-center">Pages</a>
       </Typography>
       <Typography
         as="li"
@@ -35,9 +33,7 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a  className="flex items-center">
-          Account
-        </a>
+        <a className="flex items-center">Account</a>
       </Typography>
       <Typography
         as="li"
@@ -45,9 +41,7 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a  className="flex items-center">
-          Blocks
-        </a>
+        <a className="flex items-center">Blocks</a>
       </Typography>
       <Typography
         as="li"
@@ -55,23 +49,17 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a  className="flex items-center">
-          Docs
-        </a>
+        <a className="flex items-center">Docs</a>
       </Typography>
     </ul>
   );
 
   return (
-    <div className="max-h-max">
-      <Navbar className="fixed top-0 z-50 w-full h-max px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
+    <div className="max-h-max ">
+      <Navbar className="fixed z-50 rounded-none top-0  w-full h-max px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
         <div className="flex items-center justify-between">
-          <Typography
-            as="a"
-            
-            className="mr-4 cursor-pointer py-1.5 font-medium"
-          >
-            Material Tailwind
+          <Typography as="a" className="mr-4 text-white cursor-pointer font-serif text-2xl py-1.5 font-medium">
+            Fitmate
           </Typography>
 
           <div className="flex items-center gap-4">
