@@ -3,6 +3,7 @@ package fitmate_api.controller;
 
 
 
+import fitmate_api.DTO.LoginDTO;
 import fitmate_api.DTO.UserDTO;
 import fitmate_api.response.UserResponse;
 import fitmate_api.model.User;
@@ -24,8 +25,6 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<Object> createUser(@RequestBody UserDTO userDTO) throws IOException {
-
-
         return userService.saveUser(userDTO);
     }
 
@@ -62,5 +61,13 @@ public class UserController {
         userService.deleteUser(id);
 
         return ResponseEntity.ok("User Deleted!");
+    }
+
+
+    @PostMapping("/users/login")
+    public ResponseEntity<Object> loginUser(@RequestBody LoginDTO loginDTO){
+
+
+        return  userService.loginUser(loginDTO);
     }
 }
