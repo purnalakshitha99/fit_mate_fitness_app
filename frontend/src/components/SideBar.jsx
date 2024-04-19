@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   Card,
   Typography,
@@ -14,9 +15,12 @@ import {
 
   PowerIcon,
 } from "@heroicons/react/24/solid";
+import WorkOutStatus from "./models/WorkOutStatus";
 
-const SideBar = () => {
+const SideBar = ({ openMealPlan, openMyActivities, openWorkOutPost, openWorkOutStatus }) => {
+
   return (
+    <>
     <Card className=" top-16 mt-3 w-full md:w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white fixed  left-0 ">
       <div className="mb-2 p-4 flex flex-col items-center md:items-start space-y-5">
         <img
@@ -33,13 +37,13 @@ const SideBar = () => {
           </ListItemPrefix>
           Home
         </ListItem>
-        <ListItem className="hover:bg-hoverBackground p-3">
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openMyActivities}>
           <ListItemPrefix>
             <ShoppingBagIcon className="h-5 w-5" />
           </ListItemPrefix>
           My Activities
         </ListItem>
-        <ListItem className="hover:bg-hoverBackground p-3">
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openWorkOutPost}>
           <ListItemPrefix>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,11 +60,27 @@ const SideBar = () => {
           </ListItemPrefix>
           Workout Post
         </ListItem>
-        <ListItem className="hover:bg-hoverBackground p-3">
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openWorkOutStatus}  >
           <ListItemPrefix>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2 7a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2V7zM2 13a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2z"
+              clipRule="evenodd"
+            />
+          </svg>
+          </ListItemPrefix >
+          Workout Status
+        </ListItem>
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openMealPlan} >
+          <ListItemPrefix>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -88,6 +108,7 @@ const SideBar = () => {
         </ListItem>
       </List>
     </Card>
+    </>
   );
 };
 
