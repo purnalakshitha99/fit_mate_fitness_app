@@ -3,8 +3,8 @@ package fitmate_api.controller;
 
 
 import fitmate_api.DTO.PostDTO;
-import fitmate_api.controller.response.CommonResponse;
-import fitmate_api.controller.response.PostResponse;
+import fitmate_api.response.CommonResponse;
+import fitmate_api.response.PostResponse;
 import fitmate_api.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,8 @@ import java.util.List;
 public class PostController {
     private PostService postService;
 
-    @PostMapping("/posts")
+    @PostMapping("/posts" +
+            "")
     public ResponseEntity<CommonResponse> createUser(@RequestBody PostDTO postDTO)  {
 
         postService.savePost(postDTO);

@@ -4,7 +4,7 @@ package fitmate_api.controller;
 
 
 import fitmate_api.DTO.UserDTO;
-import fitmate_api.controller.response.UserResponse;
+import fitmate_api.response.UserResponse;
 import fitmate_api.model.User;
 import fitmate_api.service.UserService;
 import lombok.AllArgsConstructor;

@@ -8,8 +8,6 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "meal_plans")
-
-
 public class MealPlan {
 
     @Id
