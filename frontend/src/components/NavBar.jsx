@@ -18,7 +18,7 @@ const NavBar = () => {
   }, []);
 
   const navList = (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 px-3 text-white">
+    <ul className="mt-2 cursor-pointer mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 px-3 text-white">
       <Typography
         as="li"
         variant="small"
