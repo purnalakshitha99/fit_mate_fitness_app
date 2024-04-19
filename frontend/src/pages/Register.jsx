@@ -1,15 +1,34 @@
 import React, { useState } from "react";
 import GymImage from "../assets/gym8.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const [click, setClick] = useState(false);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    phoneNumber: "",
+    bio: "",
+  });
+  const navigate = useNavigate();
 
-  const handleClick = () => {
-    setClick(true);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUser({ ...user, [e.target.name]: value });
   };
-  const handleClickRm = () => {
-    setClick(false);
+
+  const saveUser = async (e) => {
+    console.log(user);
+    e.preventDefault();
+    UserService.saveUser(user)
+      .then((response) => {
+        console.log(response);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("error");
+      });
   };
 
   return (
@@ -28,6 +47,8 @@ const Register = () => {
               First Name
               <input
                 type="text"
+                name="firstName"
+                onChange={(e) => handleChange(e)}
                 placeholder="First Name"
                 onFocus={handleClick}
                 onBlur={handleClickRm}
@@ -38,7 +59,9 @@ const Register = () => {
               Last Name
               <input
                 type="text"
+                name="lastName"
                 placeholder="Last Name"
+                onChange={(e) => handleChange(e)}
                 onFocus={handleClick}
                 onBlur={handleClickRm}
                 className="w-full px-3 mt-2 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
@@ -50,7 +73,9 @@ const Register = () => {
               Email
               <input
                 type="text"
+                name="email"
                 placeholder="Last Name"
+                onChange={(e) => handleChange(e)}
                 onFocus={handleClick}
                 onBlur={handleClickRm}
                 className="w-full mt-2 px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
@@ -62,6 +87,8 @@ const Register = () => {
               Phone Number
               <input
                 type="text"
+                name="phoneNumber"
+                onChange={(e) => handleChange(e)}
                 placeholder="Last Name"
                 onFocus={handleClick}
                 onBlur={handleClickRm}
@@ -74,13 +101,18 @@ const Register = () => {
               Address
               <textarea
                 placeholder="Address"
+                name="bio"
+                onChange={(e) => handleChange(e)}
                 onFocus={handleClick}
                 onBlur={handleClickRm}
                 className="w-full mt-2 px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
               ></textarea>
             </label>
           </div>
-          <button className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+          <button
+            onClick={saveUser}
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+          >
             Register
           </button>
           <div className="flex flex-row mt-5">
