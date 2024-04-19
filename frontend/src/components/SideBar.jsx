@@ -60,7 +60,23 @@ const SideBar = () => {
           <ListItemPrefix>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            
+            className="h-5 w-5"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M2 7a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2V7zM2 13a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H4a2 2 0 01-2-2v-2z"
+              clipRule="evenodd"
+            />
+          </svg>
+          </ListItemPrefix>
+          Workout Status
+        </ListItem>
+        <ListItem className="hover:bg-hoverBackground p-3">
+          <ListItemPrefix>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
             viewBox="0 0 20 20"
             fill="currentColor"
