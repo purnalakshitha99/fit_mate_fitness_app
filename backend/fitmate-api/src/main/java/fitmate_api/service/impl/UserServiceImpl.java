@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
         for (User user : userList) {
             User user1 = new User();
-            user1.setUserId(user.getUserId());
+            user1.setId(user.getId());
             user1.setFirstName(user.getFirstName());
             user1.setUsername(user.getUsername());
 

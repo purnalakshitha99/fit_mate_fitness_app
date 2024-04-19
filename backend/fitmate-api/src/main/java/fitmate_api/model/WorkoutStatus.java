@@ -8,7 +8,7 @@ public class WorkoutStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "status_id")
-    private Long statusId;
+    private Long Id;
 
     @OneToOne
     @JoinColumn(name = "post_id", nullable = false)
