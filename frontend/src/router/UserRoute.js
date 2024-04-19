@@ -3,8 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import DashBoard from "../pages/Register";
 import Home from "../pages/Home";
-import WorkOutStatus from "../components/models/WorkOutStatus";
-
 
 const UserRoute = () => {
   return (
@@ -14,8 +12,7 @@ const UserRoute = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<DashBoard />} />
         <Route path="/home" element={<Home />} />
-        {/* <Route path="/workoutstatus" element={<WorkOutStatus/>} /> */}
-        
+     
       </Routes>
     </BrowserRouter>
   );

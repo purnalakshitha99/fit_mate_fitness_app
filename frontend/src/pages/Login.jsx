@@ -79,7 +79,7 @@ const Login = () => {
             onChange={(e) => handleChange(e)}
           />
           <button
-            onClick={handleGoogleLogin}
+            onClick={loginUser}
             className="w-full mb-5 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
           >
             Login
