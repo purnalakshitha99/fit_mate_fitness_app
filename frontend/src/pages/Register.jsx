@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import GymImage from "../assets/gym8.jpg";
 import { Link, useNavigate } from "react-router-dom";
+import UserService from "../services/UserService";
 
 const Register = () => {
+  const [click, setClick] = useState(false);
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     email: "",
     username: "",
+    password: "",
     phoneNumber: "",
-    bio: "",
   });
-  const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setUser({ ...user, [e.target.name]: value });
+  const handleClick = () => {
+    setClick(true);
   };
+  const handleClickRm = () => {
+    setClick(false);
+  };
+  const navigate = useNavigate();
 
   const saveUser = async (e) => {
     console.log(user);
@@ -29,6 +33,10 @@ const Register = () => {
       .catch((error) => {
         console.log("error");
       });
+  };
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUser({ ...user, [e.target.name]: value });
   };
 
   return (
@@ -48,8 +56,8 @@ const Register = () => {
               <input
                 type="text"
                 name="firstName"
-                onChange={(e) => handleChange(e)}
                 placeholder="First Name"
+                onChange={(e) => handleChange(e)}
                 onFocus={handleClick}
                 onBlur={handleClickRm}
                 className="w-full px-3 mt-2 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
@@ -68,12 +76,24 @@ const Register = () => {
               />
             </label>
           </div>
-          <div className="">
-            <label htmlFor="lastName" className="block text-gray-700">
+          <div className=" flex flex-row gap-10">
+            <label htmlFor="email" className="block text-gray-700">
               Email
               <input
                 type="text"
                 name="email"
+                placeholder="Last Name"
+                onChange={(e) => handleChange(e)}
+                onFocus={handleClick}
+                onBlur={handleClickRm}
+                className="w-full mt-2 px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+              />
+            </label>
+            <label htmlFor="username" className="block text-gray-700">
+              username
+              <input
+                type="text"
+                name="username"
                 placeholder="Last Name"
                 onChange={(e) => handleChange(e)}
                 onFocus={handleClick}
@@ -88,6 +108,20 @@ const Register = () => {
               <input
                 type="text"
                 name="phoneNumber"
+                onChange={(e) => handleChange(e)}
+                placeholder="Last Name"
+                onFocus={handleClick}
+                onBlur={handleClickRm}
+                className="w-full mt-2 px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="password" className="block text-gray-700">
+              Password
+              <input
+                type="password"
+                name="password"
                 onChange={(e) => handleChange(e)}
                 placeholder="Last Name"
                 onFocus={handleClick}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Gym3 from "../assets/gym6.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import UserService from "../services/UserService";
 
 const Login = () => {
   const [inputFocused, setInputFocused] = useState(false);
@@ -13,9 +14,35 @@ const Login = () => {
     setInputFocused(false);
   };
 
-  const handleGoogleLogin = async() => {
-    window.location.href = 'http://localhost:8080/oauth2/authorization/google';
-};
+  const handleGoogleLogin = async () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
+
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setUser({ ...user, [e.target.name]: value });
+  };
+  const loginUser = async (e) => {
+    console.log(user);
+
+    e.preventDefault();
+    UserService.loginUser(user)
+      .then((response) => {
+        console.log(response);
+        navigate("/home");
+        alert(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(error?.response?.data);
+      });
+  };
 
   return (
     <div className="relative">
@@ -35,22 +62,32 @@ const Login = () => {
           <h2 className="text-xl font-semibold mb-4">Login</h2>
           <input
             type="text"
-            placeholder="Username"
+            placeholder="Email"
+            name="email"
             className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
+            onChange={(e) => handleChange(e)}
           />
           <input
             type="password"
+            name="password"
             placeholder="Password"
             className="w-full px-3 py-2 rounded-md border border-gray-300 mb-3 focus:outline-none focus:border-blue-500 bg-white bg-opacity-10"
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}
+            onChange={(e) => handleChange(e)}
           />
-          <button className="w-full mb-5 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full mb-5 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+          >
             Login
           </button>
-          <button onClick={handleGoogleLogin} className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+          <button
+            onClick={handleGoogleLogin}
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+          >
             google login
           </button>
           <div className="flex flex-row">
