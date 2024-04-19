@@ -5,10 +5,9 @@ import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -23,6 +22,28 @@ public class MealPlanController {
 
         return mealPlanService.create(userId, mealPlanDTO);
     }
+
+
+    @GetMapping("/users/{user_id}/meal_plans")
+    public List<MealPlanResponse> getSpecificUserMealPlan(@PathVariable("user_id")Long userId)throws UserNotFoundException{
+
+        return mealPlanService.getSpecificUserMealPlan(userId);
+    }
+
+
+    @GetMapping("/meal_plans")
+    public List<MealPlanResponse> getAllMealPlan(){
+
+        return mealPlanService.getAllMealPlan();
+    }
+
+    @DeleteMapping("@/users/{user_id}/meal_plans/{meal_plan_id}")
+    public void deleteSpecificMealPlanForUser(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws UserNotFoundException{
+
+        mealPlanService.deleteSpecificMealPlanForUser(userId, mealPlanId);
+    }
+
+
 
 
 
