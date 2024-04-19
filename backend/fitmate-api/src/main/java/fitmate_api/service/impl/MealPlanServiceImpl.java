@@ -22,6 +22,8 @@ public class MealPlanServiceImpl implements MealPlanService {
 
     public MealPlanResponse create(Long userId, MealPlanRequest mealPlanRequest)throws UserNotFoundException {
 
+
+
         MealPlan mealPlan = modelMapper.map(mealPlanRequest,MealPlan.class);
 
         mealPlanRepository.save(mealPlan);
