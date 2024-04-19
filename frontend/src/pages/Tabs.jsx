@@ -9,10 +9,10 @@ const Tabs = () => {
   };
 
   return (
-    <div className=" w-[1000px]">
+    <div className=" w-[1000px] ">
       <div className="relative right-0">
         <ul
-          className="relative flex flex-wrap p-5 list-none rounded-xl bg-blue-gray-50/60 border" // Removed border class
+          className="relative  flex flex-wrap p-5 list-none rounded-xl bg-blue-gray-50/60 border" // Removed border class
           data-tabs="tabs"
           role="list"
         >
