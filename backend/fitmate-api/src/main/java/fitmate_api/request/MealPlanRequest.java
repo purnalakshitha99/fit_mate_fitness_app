@@ -1,14 +1,11 @@
-package fitmate_api.controller.response;
+package fitmate_api.request;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
-@Data
-@Builder
-public class MealPlanResponse {
 
-    private Long id;
+@Data
+public class MealPlanRequest {
 
     private String title;
     private String description;

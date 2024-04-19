@@ -1,7 +1,7 @@
 package fitmate_api.exception;
 
 
-import fitmate_api.controller.response.error.CustomErrorResponse;
+import fitmate_api.response.error.CustomErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

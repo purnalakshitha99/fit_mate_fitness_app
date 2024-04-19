@@ -1,7 +1,7 @@
 package fitmate_api.service.impl;
 
 import fitmate_api.DTO.PostDTO;
-import fitmate_api.controller.response.PostResponse;
+import fitmate_api.response.PostResponse;
 import fitmate_api.model.Post;
 import fitmate_api.repository.PostRepository;
 import fitmate_api.service.PostService;
