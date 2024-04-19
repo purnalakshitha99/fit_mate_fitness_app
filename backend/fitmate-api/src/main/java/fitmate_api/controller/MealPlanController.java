@@ -1,8 +1,8 @@
 package fitmate_api.controller;
 
-import fitmate_api.request.MealPlanRequest;
-import fitmate_api.response.MealPlanResponse;
+import fitmate_api.DTO.MealPlanDTO;
 import fitmate_api.exception.UserNotFoundException;
+import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,10 +18,13 @@ public class MealPlanController {
     private MealPlanService mealPlanService;
 
     @PostMapping("/users/{user_id}/meal_plans")
-    public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanRequest mealPlanRequest)throws UserNotFoundException {
-        System.out.println("hiiiiiiiii");
-        return mealPlanService.create(userId,mealPlanRequest);
+    public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanDTO mealPlanDTO)throws UserNotFoundException {
+
+
+        return mealPlanService.create(userId, mealPlanDTO);
     }
+
+
 
 
 }

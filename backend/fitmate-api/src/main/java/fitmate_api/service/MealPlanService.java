@@ -1,12 +1,11 @@
 package fitmate_api.service;
 
-import fitmate_api.request.MealPlanRequest;
-import fitmate_api.response.MealPlanResponse;
+import fitmate_api.DTO.MealPlanDTO;
 import fitmate_api.exception.UserNotFoundException;
-
+import fitmate_api.response.MealPlanResponse;
 
 
 public interface MealPlanService {
 
-   MealPlanResponse create(Long userId, MealPlanRequest mealPlanRequest)throws UserNotFoundException;
+   MealPlanResponse create(Long userId, MealPlanDTO mealPlanDTO)throws UserNotFoundException;
 }

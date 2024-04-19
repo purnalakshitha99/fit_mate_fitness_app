@@ -1,19 +1,11 @@
-package fitmate_api.model;
+package fitmate_api.DTO;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
-@Entity
-@Table(name = "meal_plans")
-public class MealPlan {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class MealPlanDTO {
 
     private String title;
     private String description;
@@ -22,7 +14,4 @@ public class MealPlan {
     private String information;
     private Integer portionSizes;
     private Date creationDate;
-
-    @ManyToOne
-    private User user;
 }
