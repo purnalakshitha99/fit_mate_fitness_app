@@ -4,12 +4,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "meal_plans")
-
-
 public class MealPlan {
 
     @Id
@@ -23,4 +22,7 @@ public class MealPlan {
     private String information;
     private Integer portionSizes;
     private Date creationDate;
+
+    @ManyToOne
+    private User user;
 }

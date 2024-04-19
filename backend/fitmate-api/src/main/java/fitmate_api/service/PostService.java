@@ -1,7 +1,7 @@
 package fitmate_api.service;
 
 import fitmate_api.DTO.PostDTO;
-import fitmate_api.controller.response.PostResponse;
+import fitmate_api.response.PostResponse;
 import fitmate_api.model.Post;
 import org.springframework.stereotype.Service;
 

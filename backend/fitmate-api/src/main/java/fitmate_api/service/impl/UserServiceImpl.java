@@ -3,8 +3,8 @@ package fitmate_api.service.impl;
 
 
 import fitmate_api.DTO.UserDTO;
-import fitmate_api.controller.response.CommonResponse;
-import fitmate_api.controller.response.UserResponse;
+import fitmate_api.response.CommonResponse;
+import fitmate_api.response.UserResponse;
 import fitmate_api.model.User;
 import fitmate_api.repository.UserRepository;
 import fitmate_api.service.UserService;
