@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   Card,
   Typography,
@@ -14,9 +15,12 @@ import {
 
   PowerIcon,
 } from "@heroicons/react/24/solid";
+import WorkOutStatus from "./models/WorkOutStatus";
 
-const SideBar = () => {
+const SideBar = ({ openMealPlan, openMyActivities, openWorkOutPost, openWorkOutStatus }) => {
+
   return (
+    <>
     <Card className=" top-16 mt-3 w-full md:w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white fixed  left-0 ">
       <div className="mb-2 p-4 flex flex-col items-center md:items-start space-y-5">
         <img
@@ -33,13 +37,13 @@ const SideBar = () => {
           </ListItemPrefix>
           Home
         </ListItem>
-        <ListItem className="hover:bg-hoverBackground p-3">
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openMyActivities}>
           <ListItemPrefix>
             <ShoppingBagIcon className="h-5 w-5" />
           </ListItemPrefix>
           My Activities
         </ListItem>
-        <ListItem className="hover:bg-hoverBackground p-3">
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openWorkOutPost}>
           <ListItemPrefix>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +60,7 @@ const SideBar = () => {
           </ListItemPrefix>
           Workout Post
         </ListItem>
-        <ListItem className="hover:bg-hoverBackground p-3">
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openWorkOutStatus}  >
           <ListItemPrefix>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -70,10 +74,10 @@ const SideBar = () => {
               clipRule="evenodd"
             />
           </svg>
-          </ListItemPrefix>
+          </ListItemPrefix >
           Workout Status
         </ListItem>
-        <ListItem className="hover:bg-hoverBackground p-3">
+        <ListItem className="hover:bg-hoverBackground p-3" onClick={openMealPlan} >
           <ListItemPrefix>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -104,6 +108,7 @@ const SideBar = () => {
         </ListItem>
       </List>
     </Card>
+    </>
   );
 };
 
