@@ -1,8 +1,8 @@
 package fitmate_api.controller;
 
 import fitmate_api.DTO.MealPlanDTO;
-import fitmate_api.controller.response.MealPlanResponse;
 import fitmate_api.exception.UserNotFoundException;
+import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;

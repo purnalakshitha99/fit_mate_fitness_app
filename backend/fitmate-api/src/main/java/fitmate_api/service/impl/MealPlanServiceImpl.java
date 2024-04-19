@@ -1,12 +1,13 @@
 package fitmate_api.service.impl;
 
 import fitmate_api.DTO.MealPlanDTO;
-import fitmate_api.controller.response.MealPlanResponse;
+
 import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.model.MealPlan;
 import fitmate_api.model.User;
 import fitmate_api.repository.MealPlanRepository;
 import fitmate_api.repository.UserRepository;
+import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
