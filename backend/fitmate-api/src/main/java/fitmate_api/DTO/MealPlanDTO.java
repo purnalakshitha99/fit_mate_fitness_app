@@ -1,11 +1,11 @@
-package fitmate_api.controller.request;
+package fitmate_api.DTO;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class MealPlanRequest {
+public class MealPlanDTO {
 
     private String title;
     private String description;

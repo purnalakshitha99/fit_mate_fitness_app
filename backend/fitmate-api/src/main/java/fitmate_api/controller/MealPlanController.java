@@ -1,6 +1,6 @@
 package fitmate_api.controller;
 
-import fitmate_api.controller.request.MealPlanRequest;
+import fitmate_api.DTO.MealPlanDTO;
 import fitmate_api.controller.response.MealPlanResponse;
 import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.service.MealPlanService;
@@ -18,10 +18,10 @@ public class MealPlanController {
     private MealPlanService mealPlanService;
 
     @PostMapping("/users/{user_id}/meal_plans")
-    public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanRequest mealPlanRequest)throws UserNotFoundException {
+    public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanDTO mealPlanDTO)throws UserNotFoundException {
 
 
-        return mealPlanService.create(userId,mealPlanRequest);
+        return mealPlanService.create(userId, mealPlanDTO);
     }
 
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -23,4 +24,7 @@ public class MealPlan {
     private String information;
     private Integer portionSizes;
     private Date creationDate;
+
+    @ManyToOne
+    private User user;
 }

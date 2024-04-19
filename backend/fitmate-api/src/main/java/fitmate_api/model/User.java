@@ -53,5 +53,8 @@ public class User {
     @Column(name = "account_created")
     private LocalTime accountCreated;
 
+    @OneToMany(mappedBy = "user")
+    private List<MealPlan> mealPlanList;
+
 
 }
