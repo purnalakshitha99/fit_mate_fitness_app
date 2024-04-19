@@ -2,6 +2,7 @@ package fitmate_api.service.impl;
 
 
 
+import fitmate_api.DTO.LoginDTO;
 import fitmate_api.DTO.UserDTO;
 import fitmate_api.response.CommonResponse;
 import fitmate_api.response.UserResponse;
@@ -14,6 +15,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,17 +32,20 @@ import java.util.Objects;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
     public static String uploadDirecory = System.getProperty("user.dir") + "/src/main/images";
 
     @Override
     public ResponseEntity<Object> saveUser(UserDTO userDTO) throws IOException {
         if(userDTO.getSource() == null){
-//meka liyn normal register senn eka
+
             User user = new User();
             user.setFirstName(userDTO.getFirstName());
             user.setLastName(userDTO.getLastName());
             user.setUsername(userDTO.getUsername());
             user.setPhoneNumber(userDTO.getPhoneNumber());
+            user.setPasswordHash(passwordEncoder.encode(userDTO.getPassword()));
+            user.setBio(userDTO.getBio());
             user.setEmail(userDTO.getEmail());
 
             userRepository.save(user);
@@ -64,26 +69,7 @@ public class UserServiceImpl implements UserService {
                 return new ResponseEntity<>("Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
-//        Optional<User> userOptional = userRepository.findUserByEmail(userDTO.getEmail());
-//        System.out.println(userDTO.getEmail());
-//        if (!userOptional.isPresent()) {
-//            User user = new User();
-//
-//            user.setFirstName(userDTO.getFirstName());
-//            user.setLastName(userDTO.getLastName());
-//            user.setUsername(userDTO.getUsername());
-//            user.setEmail(userDTO.getEmail());
-//            user.setPasswordHash(userDTO.getPassword());
-//            user.setBio(userDTO.getBio());
-//            user.setAccountCreated(LocalTime.now());
-//
-//            userRepository.save(user);
-//
-//            return ResponseEntity.ok(user);
-//        }
-
         return null;
-
     }
 
     @Override
@@ -165,25 +151,30 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+
     @Override
-    public ResponseEntity<CommonResponse> registerUser(UserDTO userDTO) {
+    public ResponseEntity<Object> loginUser(LoginDTO loginDTO) {
 
-        User user = userRepository.findUserByEmail(userDTO.getEmail()).orElseThrow(
-                () -> new EntityNotFoundException("User Alredy registered!")
-        );
-            user.setFirstName(userDTO.getFirstName());
-            user.setLastName(userDTO.getLastName());
-            user.setUsername(userDTO.getUsername());
-            user.setEmail(userDTO.getEmail());
-            user.setPasswordHash(userDTO.getPassword());
-            user.setBio(userDTO.getBio());
-            user.setAccountCreated(LocalTime.now());
+        User user = userRepository.findByEmail(loginDTO.getEmail());
 
-            userRepository.save(user);
+        if (user == null){
+            return new ResponseEntity<>("Invalid email", HttpStatus.UNAUTHORIZED);
+        }
+        if (passwordEncoder.matches( loginDTO.getPassword(), user.getPasswordHash())){
 
-            CommonResponse commonResponse = new CommonResponse("Registered!");
+            UserResponse userResponse = UserResponse.builder()
+                    .firstName(user.getFirstName())
+                    .lastName(user.getLastName())
+                    .email(user.getEmail())
+                    .bio(user.getBio())
+                    .username(user.getUsername())
+                    .phoneNumber(user.getPhoneNumber())
+                    .build();
 
-return ResponseEntity.ok(commonResponse);
+            return new ResponseEntity<>(userResponse, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Invalid password!",HttpStatus.UNAUTHORIZED);
+        }
 
     }
 

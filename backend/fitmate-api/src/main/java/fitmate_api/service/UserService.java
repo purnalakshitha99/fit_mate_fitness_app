@@ -1,6 +1,7 @@
 package fitmate_api.service;
 
 
+import fitmate_api.DTO.LoginDTO;
 import fitmate_api.DTO.UserDTO;
 import fitmate_api.response.CommonResponse;
 import fitmate_api.response.UserResponse;
@@ -26,5 +27,7 @@ public interface UserService {
 
     void addFollower(Long uId, Long fId);
 
-    ResponseEntity<CommonResponse> registerUser(UserDTO userDTO);
+//    ResponseEntity<CommonResponse> registerUser(UserDTO userDTO);
+
+    ResponseEntity<Object> loginUser(LoginDTO loginDTO);
 }

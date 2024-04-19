@@ -28,26 +28,24 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors((cors -> cors.configurationSource(corsConfigurationSource())))
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers(antMatchers(HttpMethod.GET, "/users/**")).permitAll();
-                    auth.requestMatchers(antMatchers(HttpMethod.POST, "/users/**")).permitAll();
-//                    auth.requestMatchers(antMatchers(HttpMethod.POST, "/user")).permitAll();
-                    auth.anyRequest().authenticated();
+                    auth.anyRequest().permitAll();
+
                 })
                 .oauth2Login(oauth2 ->
-                    oauth2.loginPage("/oauth2/authorization/google")
-                            .permitAll()
-                ).logout(t->
+                        oauth2.loginPage("/oauth2/authorization/google")
+                                .permitAll()
+                ).logout(t ->
                         t.logoutUrl("/logout")
-                        .logoutSuccessUrl("http://localhost:3000")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .deleteCookies("JSESSIONID")
+                                .logoutSuccessUrl("http://localhost:3000")
+                                .invalidateHttpSession(true)
+                                .clearAuthentication(true)
+                                .deleteCookies("JSESSIONID")
                 )
                 .build();
     }
 
     @Bean
-    CorsConfigurationSource corsConfigurationSource(){
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("http://localhost:3000"));
         configuration.addAllowedHeader("*");
@@ -55,7 +53,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration );
+        urlBasedCorsConfigurationSource.registerCorsConfiguration("/**", configuration);
 
         return urlBasedCorsConfigurationSource;
     }
@@ -64,6 +62,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     private RequestMatcher antMatchers(HttpMethod httpMethod, String antPattern) {
         return new AntPathRequestMatcher(antPattern, httpMethod.name());
     }
