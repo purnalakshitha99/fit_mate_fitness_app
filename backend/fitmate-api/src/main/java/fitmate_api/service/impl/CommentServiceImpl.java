@@ -35,8 +35,6 @@ public class CommentServiceImpl implements CommentService {
         Post post = postRepository.findById(pId)
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found!"));
 
-//        Post post = postRepository.findById(pId)
-//                .orElseThrow(() -> new EntityNotFoundException("Post Not Found" + pId));
 
         Comment comment = new Comment();
         comment.setCommentText(commentDTO.getCommentText());
@@ -57,8 +55,8 @@ public class CommentServiceImpl implements CommentService {
         ) {
             CommentDTO commentDTO = new CommentDTO();
             commentDTO.setCommentText(comment.getCommentText());
-            commentDTO.setUserId(comment.getUser().getUserId());
-            commentDTO.setPostId(comment.getPost().getPostId());
+            commentDTO.setUserId(comment.getUser().getId());
+            commentDTO.setPostId(comment.getPost().getId());
             commentDTO.setCreatedAt(comment.getCreatedAt());
 
             commentDTOList.add(commentDTO);

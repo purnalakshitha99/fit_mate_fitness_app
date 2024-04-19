@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-
+@RequestMapping("/api")
 public class UserController {
 
     private UserService userService;
@@ -29,12 +29,6 @@ public class UserController {
         return userService.saveUser(userDTO);
     }
 
-//    @PostMapping("/users/register")
-//    public ResponseEntity<CommonResponse> register(@RequestBody UserDTO userDTO) {
-//
-//
-//        return userService.registerUser(userDTO);
-//    }
 
     @PostMapping("/users/{user_id}/follow/{follower_id}")
     public ResponseEntity<String> addFollowers(@PathVariable("user_id") Long uId, @PathVariable("follower_id")  Long fId) {

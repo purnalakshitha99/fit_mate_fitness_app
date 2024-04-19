@@ -15,7 +15,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Long userId;
+    private Long Id;
 
     @Column(name = "firstname")
     private String firstName;
@@ -53,7 +53,5 @@ public class User {
     @Column(name = "account_created")
     private LocalTime accountCreated;
 
-    @OneToMany(mappedBy = "user")
-    private List<MealPlan> mealPlanList = new ArrayList<>();
 
 }

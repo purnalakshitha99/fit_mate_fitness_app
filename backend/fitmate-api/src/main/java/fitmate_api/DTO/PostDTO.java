@@ -1,8 +1,9 @@
 package fitmate_api.DTO;
 
-import com.example.fitnesstest.entity.Media;
-import com.example.fitnesstest.entity.PostType;
-import com.example.fitnesstest.entity.User;
+
+import fitmate_api.model.Media;
+import fitmate_api.model.PostType;
+import fitmate_api.model.User;
 import lombok.Data;
 
 import java.util.List;

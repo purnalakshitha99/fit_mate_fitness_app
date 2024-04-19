@@ -10,7 +10,7 @@ public class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "media_id")
-    private Long mediaId;
+    private Long Id;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
