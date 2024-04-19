@@ -9,8 +9,6 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "meal_plans")
-
-
 public class MealPlan {
 
     @Id

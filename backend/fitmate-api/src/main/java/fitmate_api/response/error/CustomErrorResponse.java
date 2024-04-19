@@ -1,4 +1,4 @@
-package fitmate_api.controller.response.error;
+package fitmate_api.response.error;
 
 import lombok.Data;
 

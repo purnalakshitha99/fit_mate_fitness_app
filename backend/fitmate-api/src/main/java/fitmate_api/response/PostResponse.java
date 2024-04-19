@@ -1,4 +1,4 @@
-package fitmate_api.controller.response;
+package fitmate_api.response;
 
 
 import fitmate_api.model.Media;
