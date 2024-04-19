@@ -31,7 +31,7 @@ const Post = () => {
 
   return (
     <div>
-      <div className="mt-32 text-white rounded-xl bg-background space-y-10 ">
+      <div className=" text-white rounded-xl mb-10 bg-background space-y-10 ">
         <div className="w-full sm:max-w-[1000px] p-4 space-y-5 bg-background  rounded-md m-auto">
           <div className="flex flex-col sm:flex-row items-center juc space-y-3 sm:space-y-0 sm:space-x-3">
             <img
@@ -80,7 +80,7 @@ const Post = () => {
         </div>
 
         {showCommentSection && ( // Render the comment section based on showCommentSection state
-          <div className="w-full sm:max-w-[1000px] p-4 space-y-5  rounded-md  m-auto">
+          <div className="w-full sm:max-w-[1000px] p-4 space-y-5 bg-white  rounded-md  m-auto">
             <div className="gap-5 flex ">
               <img
                 src={Image1}

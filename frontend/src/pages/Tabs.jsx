@@ -25,7 +25,7 @@ const Tabs = () => {
               aria-controls="app"
               onClick={() => handleTabClick("app")}
             >
-              <span className="ml-1">App</span>
+              <span className="ml-1">Feed</span>
             </a>
           </li>
           <li className={`z-30 flex-auto text-center ${activeTab === "message" ? "bg-red-50" : ""}`}>
@@ -53,16 +53,16 @@ const Tabs = () => {
             </a>
           </li>
         </ul>
-        <div data-tab-content="" className="p-5">
+        <div data-tab-content=" " className="p-5">
           <div className={`block ${activeTab === "app" ? "opacity-100" : "hidden"}`} id="app" role="tabpanel">
             <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              Content for App tab
+            <Post />
+             <Post />
             </p>
           </div>
           <div className={`block ${activeTab === "message" ? "opacity-100" : "hidden"}`} id="message" role="tabpanel">
             <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-             <Post />
-             <Post />
+             asdad
             </p>
           </div>
           <div className={`block ${activeTab === "settings" ? "opacity-100" : "hidden"}`} id="settings" role="tabpanel">
