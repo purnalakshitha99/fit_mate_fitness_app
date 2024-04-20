@@ -1,0 +1,80 @@
+Index: fitmate-api/src/main/resources/application.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>spring.application.name=fitmate-api\r\n\r\nspring.datasource.url=jdbc:mysql://localhost:3306/fitmate?createDatabaseIfNotExist=true\r\nspring.datasource.username=root\r\nspring.datasource.password=N3015@cjqr#\r\nspring.jpa.hibernate.ddl-auto=update\r\n\r\n\r\n\r\n#Google Login\r\nspring.security.oauth2.client.registration.google.client-id=591930799028-jd5k09u978c5i97sn1p5udli1n9f40p0.apps.googleusercontent.com\r\nspring.security.oauth2.client.registration.google.client-secret=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
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/fitmate-api/src/main/resources/application.properties b/fitmate-api/src/main/resources/application.properties
+--- a/fitmate-api/src/main/resources/application.properties	
++++ b/fitmate-api/src/main/resources/application.properties	
+@@ -2,7 +2,7 @@
+ 
+ spring.datasource.url=jdbc:mysql://localhost:3306/fitmate?createDatabaseIfNotExist=true
+ spring.datasource.username=root
+-spring.datasource.password=N3015@cjqr#
++spring.datasource.password=pass123
+ spring.jpa.hibernate.ddl-auto=update
+ 
+ 
+Index: fitmate-api/src/main/java/fitmate_api/model/User.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fitmate_api.model;\r\n\r\nimport jakarta.persistence.*;\r\nimport lombok.Data;\r\n\r\nimport java.time.LocalTime;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\n@Data\r\n@Entity\r\n@Table(name = \"user\")\r\npublic class User {\r\n\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    @Column(name = \"user_id\")\r\n    private Long Id;\r\n\r\n    @Column(name = \"firstname\")\r\n    private String firstName;\r\n\r\n    @Column(name = \"lastname\")\r\n    private String lastName;\r\n\r\n    @Column(name = \"username\")\r\n    private String username;\r\n\r\n    @Column(name = \"email\")\r\n    private String email;\r\n\r\n    @Column(name = \"password_hash\")\r\n    private String passwordHash;\r\n\r\n    @Column(name = \"profile_picture_url\")\r\n    private String profilePictureUrl;\r\n\r\n    @Column(name = \"phone_number\")\r\n    private String phoneNumber;\r\n\r\n    @Column(name = \"followers\")\r\n    @ManyToMany\r\n    @JoinTable(\r\n            name = \"user_follower\",\r\n            joinColumns = @JoinColumn(name = \"user_id\"),\r\n            inverseJoinColumns = @JoinColumn(name = \"follower_id\")\r\n    )\r\n    private List<User> followers = new ArrayList<>();\r\n\r\n    @Column(name = \"bio\")\r\n    private String bio;\r\n\r\n    @Column(name = \"account_created\")\r\n    private LocalTime accountCreated;\r\n\r\n    @OneToMany(mappedBy = \"user\")\r\n    private List<MealPlan> mealPlanList;\r\n\r\n    @OneToMany(mappedBy = \"user\")\r\n    private List<WorkoutStatus> workoutStatusList;\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/fitmate-api/src/main/java/fitmate_api/model/User.java b/fitmate-api/src/main/java/fitmate_api/model/User.java
+--- a/fitmate-api/src/main/java/fitmate_api/model/User.java	
++++ b/fitmate-api/src/main/java/fitmate_api/model/User.java	
+@@ -56,8 +56,8 @@
+     @OneToMany(mappedBy = "user")
+     private List<MealPlan> mealPlanList;
+ 
+-    @OneToMany(mappedBy = "user")
+-    private List<WorkoutStatus> workoutStatusList;
++//    @OneToMany(mappedBy = "user")
++//    private List<WorkoutStatus> workoutStatusList;
+ 
+ 
+ }
+Index: fitmate-api/src/main/java/fitmate_api/service/WorkOutStatusService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fitmate_api.service;\r\n\r\nimport fitmate_api.DTO.WorkOutStatusDTO;\r\nimport fitmate_api.exception.UserNotFoundException;\r\nimport fitmate_api.response.WorkoutStatusResponse;\r\nimport org.springframework.stereotype.Service;\r\n\r\n@Service\r\npublic interface WorkOutStatusService {\r\n    WorkoutStatusResponse create(Long userId, WorkOutStatusDTO workOutStatusDTO)throws UserNotFoundException;\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/fitmate-api/src/main/java/fitmate_api/service/WorkOutStatusService.java b/fitmate-api/src/main/java/fitmate_api/service/WorkOutStatusService.java
+--- a/fitmate-api/src/main/java/fitmate_api/service/WorkOutStatusService.java	
++++ b/fitmate-api/src/main/java/fitmate_api/service/WorkOutStatusService.java	
+@@ -7,5 +7,5 @@
+ 
+ @Service
+ public interface WorkOutStatusService {
+-    WorkoutStatusResponse create(Long userId, WorkOutStatusDTO workOutStatusDTO)throws UserNotFoundException;
++    WorkoutStatusResponse create(WorkOutStatusDTO workOutStatusDTO);
+ }
+Index: fitmate-api/src/main/java/fitmate_api/model/WorkoutStatus.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fitmate_api.model;\r\n\r\nimport jakarta.persistence.*;\r\nimport lombok.Data;\r\n\r\n@Data\r\n@Entity\r\n@Table(name = \"WorkoutStatus\")\r\npublic class WorkoutStatus {\r\n    @Id\r\n    @GeneratedValue(strategy = GenerationType.IDENTITY)\r\n    @Column(name = \"status_id\")\r\n    private Long Id;\r\n\r\n    @OneToOne\r\n    @JoinColumn(name = \"post_id\", nullable = false)\r\n    private Post post;\r\n\r\n    @Column(name = \"details\", nullable = false)\r\n    private String details;\r\n\r\n    private String timeStamp;\r\n\r\n    private String typeOfWorkout;\r\n\r\n    private String numberOfPushups;\r\n\r\n    private String weightLifted;\r\n\r\n    private String workoutDuration;\r\n\r\n    private String Description;\r\n\r\n    @ManyToOne\r\n    private User user;\r\n\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/fitmate-api/src/main/java/fitmate_api/model/WorkoutStatus.java b/fitmate-api/src/main/java/fitmate_api/model/WorkoutStatus.java
+--- a/fitmate-api/src/main/java/fitmate_api/model/WorkoutStatus.java	
++++ b/fitmate-api/src/main/java/fitmate_api/model/WorkoutStatus.java	
+@@ -12,9 +12,9 @@
+     @Column(name = "status_id")
+     private Long Id;
+ 
+-    @OneToOne
+-    @JoinColumn(name = "post_id", nullable = false)
+-    private Post post;
++//    @OneToOne
++//    @JoinColumn(name = "post_id", nullable = false)
++//    private Post post;
+ 
+     @Column(name = "details", nullable = false)
+     private String details;
