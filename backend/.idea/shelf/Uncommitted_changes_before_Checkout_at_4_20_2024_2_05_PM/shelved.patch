@@ -1,0 +1,60 @@
+Index: fitmate-api/src/main/java/fitmate_api/controller/WorkoutStatusController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fitmate_api.controller;\r\n\r\nimport fitmate_api.DTO.MealPlanDTO;\r\nimport fitmate_api.DTO.WorkOutStatusDTO;\r\nimport fitmate_api.exception.UserNotFoundException;\r\nimport fitmate_api.response.MealPlanResponse;\r\nimport fitmate_api.response.WorkoutStatusResponse;\r\nimport fitmate_api.service.WorkOutStatusService;\r\nimport fitmate_api.service.WorkoutPlanService;\r\nimport lombok.AllArgsConstructor;\r\nimport org.springframework.web.bind.annotation.PathVariable;\r\nimport org.springframework.web.bind.annotation.PostMapping;\r\nimport org.springframework.web.bind.annotation.RequestBody;\r\nimport org.springframework.web.bind.annotation.RestController;\r\n\r\n@RestController\r\n@AllArgsConstructor\r\n\r\npublic class WorkoutStatusController {\r\n private WorkOutStatusService workOutStatusService;\r\n @PostMapping(\"/users/{user_id}/work_out_status\")\r\n public WorkoutStatusResponse create(@PathVariable(\"user_id\")Long userId, @RequestBody WorkOutStatusDTO workOutStatusDTO)throws UserNotFoundException {\r\n\r\n\r\n  return workOutStatusService.create(userId, workOutStatusDTO);\r\n }\r\n\r\n}\r\n
+===================================================================
+diff --git a/fitmate-api/src/main/java/fitmate_api/controller/WorkoutStatusController.java b/fitmate-api/src/main/java/fitmate_api/controller/WorkoutStatusController.java
+--- a/fitmate-api/src/main/java/fitmate_api/controller/WorkoutStatusController.java	
++++ b/fitmate-api/src/main/java/fitmate_api/controller/WorkoutStatusController.java	
+@@ -18,11 +18,11 @@
+ 
+ public class WorkoutStatusController {
+  private WorkOutStatusService workOutStatusService;
+- @PostMapping("/users/{user_id}/work_out_status")
+- public WorkoutStatusResponse create(@PathVariable("user_id")Long userId, @RequestBody WorkOutStatusDTO workOutStatusDTO)throws UserNotFoundException {
++ @PostMapping("/work_out_status")
++ public WorkoutStatusResponse create( @RequestBody WorkOutStatusDTO workOutStatusDTO) {
+ 
+ 
+-  return workOutStatusService.create(userId, workOutStatusDTO);
++  return workOutStatusService.create( workOutStatusDTO);
+  }
+ 
+ }
+Index: fitmate-api/src/main/java/fitmate_api/service/impl/WorkoutStatusServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package fitmate_api.service.impl;\r\n\r\nimport fitmate_api.DTO.WorkOutStatusDTO;\r\nimport fitmate_api.exception.UserNotFoundException;\r\nimport fitmate_api.model.User;\r\nimport fitmate_api.model.WorkoutStatus;\r\nimport fitmate_api.repository.UserRepository;\r\nimport fitmate_api.repository.WorkoutStatusRepository;\r\nimport fitmate_api.response.WorkoutStatusResponse;\r\nimport fitmate_api.service.WorkOutStatusService;\r\nimport lombok.AllArgsConstructor;\r\nimport org.modelmapper.ModelMapper;\r\nimport org.springframework.stereotype.Service;\r\n\r\n@Service\r\n@AllArgsConstructor\r\npublic class WorkoutStatusServiceImpl implements WorkOutStatusService {\r\n\r\n    private final WorkoutStatusRepository workoutStatusRepository;\r\n    private final UserRepository userRepository;\r\n\r\n    private ModelMapper modelMapper;\r\n\r\n    public WorkoutStatusResponse create(Long userId, WorkOutStatusDTO workOutStatusDTO)throws UserNotFoundException {\r\n\r\n        User user = userRepository.findById(userId).orElseThrow(\r\n                () -> new UserNotFoundException(\"User not found\")\r\n        );\r\n\r\n        WorkoutStatus workoutStatus = modelMapper.map(workOutStatusDTO,WorkoutStatus.class);\r\n\r\n        workoutStatusRepository.save(workoutStatus);\r\n\r\n        return WorkoutStatusResponse.builder().details(workoutStatus.getDetails()).timeStamp(workoutStatus.getTimeStamp()).typeOfWorkout(workoutStatus.getTypeOfWorkout()).numberOfPushups(workoutStatus.getNumberOfPushups()).weightLifted(workoutStatus.getWeightLifted()).workoutDuration(workOutStatusDTO.getWorkoutDuration()).Description(workoutStatus.getDescription()).build();\r\n\r\n\r\n    }\r\n\r\n}\r\n
+===================================================================
+diff --git a/fitmate-api/src/main/java/fitmate_api/service/impl/WorkoutStatusServiceImpl.java b/fitmate-api/src/main/java/fitmate_api/service/impl/WorkoutStatusServiceImpl.java
+--- a/fitmate-api/src/main/java/fitmate_api/service/impl/WorkoutStatusServiceImpl.java	
++++ b/fitmate-api/src/main/java/fitmate_api/service/impl/WorkoutStatusServiceImpl.java	
+@@ -21,18 +21,22 @@
+ 
+     private ModelMapper modelMapper;
+ 
+-    public WorkoutStatusResponse create(Long userId, WorkOutStatusDTO workOutStatusDTO)throws UserNotFoundException {
++    public WorkoutStatusResponse create(WorkOutStatusDTO workOutStatusDTO) {
++
++
++//        WorkoutStatus workoutStatus = modelMapper.map(workOutStatusDTO,WorkoutStatus.class);
++
++        WorkoutStatus workoutStatus = new WorkoutStatus();
+ 
+-        User user = userRepository.findById(userId).orElseThrow(
+-                () -> new UserNotFoundException("User not found")
+-        );
++        workoutStatus.setDetails(workOutStatusDTO.getDetails());
+ 
+-        WorkoutStatus workoutStatus = modelMapper.map(workOutStatusDTO,WorkoutStatus.class);
++
+ 
+         workoutStatusRepository.save(workoutStatus);
+ 
+-        return WorkoutStatusResponse.builder().details(workoutStatus.getDetails()).timeStamp(workoutStatus.getTimeStamp()).typeOfWorkout(workoutStatus.getTypeOfWorkout()).numberOfPushups(workoutStatus.getNumberOfPushups()).weightLifted(workoutStatus.getWeightLifted()).workoutDuration(workOutStatusDTO.getWorkoutDuration()).Description(workoutStatus.getDescription()).build();
++//        return WorkoutStatusResponse.builder().details(workoutStatus.getDetails()).timeStamp(workoutStatus.getTimeStamp()).typeOfWorkout(workoutStatus.getTypeOfWorkout()).numberOfPushups(workoutStatus.getNumberOfPushups()).weightLifted(workoutStatus.getWeightLifted()).workoutDuration(workOutStatusDTO.getWorkoutDuration()).Description(workoutStatus.getDescription()).build();
+ 
++      return null;
+ 
+     }
+ 
