@@ -43,6 +43,7 @@
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.FitmateApiApplication.executor&quot;: &quot;Run&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/MY/Documents/App Development/paf-assignment-2024-jun_we_28/paf-assignment-2024-jun_we_28/backend&quot;,
@@ -84,7 +85,9 @@
       <workItem from="1713530102565" duration="2681000" />
       <workItem from="1713580018744" duration="10546000" />
       <workItem from="1713595103571" duration="509000" />
-      <workItem from="1713595629657" duration="4885000" />
+      <workItem from="1713595629657" duration="11286000" />
+      <workItem from="1713611379472" duration="3307000" />
+      <workItem from="1713614768412" duration="3491000" />
     </task>
     <servers />
   </component>
