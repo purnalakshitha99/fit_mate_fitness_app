@@ -3,6 +3,7 @@ package fitmate_api.controller;
 import fitmate_api.DTO.MealPlanDTO;
 import fitmate_api.exception.MealPlanNotFoundException;
 import fitmate_api.exception.UserNotFoundException;
+import fitmate_api.model.User;
 import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,12 @@ public class MealPlanController {
         System.out.println("delete");
         mealPlanService.deleteSpecificMealPlanForUser(userId, mealPlanId);
     }
+
+
+//    public MealPlanResponse updateSpecificMealPlan(Long userId,Long mealPlanId,MealPlanDTO mealPlanDTO)throws UserNotFoundException,MealPlanNotFoundException{
+//
+//        User user =
+//    }
 
 
 
