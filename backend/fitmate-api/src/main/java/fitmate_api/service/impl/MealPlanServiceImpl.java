@@ -2,6 +2,7 @@ package fitmate_api.service.impl;
 
 import fitmate_api.DTO.MealPlanDTO;
 
+import fitmate_api.exception.MealPlanNotFoundException;
 import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.model.MealPlan;
 import fitmate_api.model.User;
@@ -87,12 +88,21 @@ public class MealPlanServiceImpl implements MealPlanService {
     }
 
     @Override
-    public void deleteSpecificMealPlanForUser(Long userId, Long mealPlanId) throws UserNotFoundException {
+    public void deleteSpecificMealPlanForUser(Long userId, Long mealPlanId) throws UserNotFoundException,MealPlanNotFoundException {
 
         User user = userRepository.findById(userId).orElseThrow(
                 () -> new UserNotFoundException("that user not in a database")
         );
 
         List<MealPlan> mealPlanList = user.getMealPlanList();
+
+        MealPlan deleteToMealPlan = mealPlanList.stream().filter(mealPlan -> mealPlan.getId().equals(mealPlanId)).findFirst().orElse(null);
+
+        if (deleteToMealPlan == null){
+            throw new MealPlanNotFoundException("That dependencies not found in a database");
+        }
+
+        mealPlanList.remove(deleteToMealPlan);
+        userRepository.save(user);
     }
 }
