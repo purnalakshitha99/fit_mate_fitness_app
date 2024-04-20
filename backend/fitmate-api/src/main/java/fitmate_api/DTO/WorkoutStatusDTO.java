@@ -11,6 +11,4 @@ public class WorkoutStatusDTO {
     private Date date;
     private LocalTime time;
     private Integer numberOfPushUp;
-
-
 }
