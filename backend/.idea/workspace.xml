@@ -18,6 +18,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="test2" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -79,7 +84,7 @@
       <workItem from="1713530102565" duration="2681000" />
       <workItem from="1713580018744" duration="10546000" />
       <workItem from="1713595103571" duration="509000" />
-      <workItem from="1713595629657" duration="2053000" />
+      <workItem from="1713595629657" duration="3621000" />
     </task>
     <servers />
   </component>
