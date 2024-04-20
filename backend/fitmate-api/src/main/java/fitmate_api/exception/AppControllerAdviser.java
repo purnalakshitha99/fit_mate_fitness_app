@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class AppControllerAdviser {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(UserNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     public CustomErrorResponse handleNFException(Exception exception) {
 
         CustomErrorResponse customErrorResponse = new CustomErrorResponse();

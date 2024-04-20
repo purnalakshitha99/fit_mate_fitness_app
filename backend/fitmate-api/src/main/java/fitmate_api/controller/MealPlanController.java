@@ -1,6 +1,7 @@
 package fitmate_api.controller;
 
 import fitmate_api.DTO.MealPlanDTO;
+import fitmate_api.exception.MealPlanNotFoundException;
 import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
@@ -31,15 +32,16 @@ public class MealPlanController {
     }
 
 
-    @GetMapping("/meal_plans")
+    @GetMapping("/users/meal_plans")
     public List<MealPlanResponse> getAllMealPlan(){
 
         return mealPlanService.getAllMealPlan();
     }
 
-    @DeleteMapping("@/users/{user_id}/meal_plans/{meal_plan_id}")
-    public void deleteSpecificMealPlanForUser(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws UserNotFoundException{
+    @DeleteMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
+    public void deleteSpecificMealPlanForUser(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws UserNotFoundException, MealPlanNotFoundException {
 
+        System.out.println("delete");
         mealPlanService.deleteSpecificMealPlanForUser(userId, mealPlanId);
     }
 
