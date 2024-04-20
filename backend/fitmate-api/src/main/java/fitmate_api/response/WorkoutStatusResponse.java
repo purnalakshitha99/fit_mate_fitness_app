@@ -15,5 +15,8 @@ public class WorkoutStatusResponse {
     private Date date;
     private LocalTime time;
     private Integer numberOfPushUp;
+    private String duration;
+    private String description;
+    private Float distanceRan;
 
 }

@@ -32,13 +32,17 @@ public class WorkoutStatusServiceImpl implements WorkoutStatusService {
 
       workoutStatus.setTypeOfWorkout(workoutStatusDTO.getTypeOfWorkout());
       workoutStatus.setNumberOfPushUp(workoutStatusDTO.getNumberOfPushUp());
+      workoutStatus.setDuration(workoutStatusDTO.getDuration());
+      workoutStatus.setDistanceRan(workoutStatusDTO.getDistanceRan());
+      workoutStatus.setDescription(workoutStatusDTO.getDescription());
         workoutStatusRepository.save(workoutStatus);
 
         return WorkoutStatusResponse.builder().id(workoutStatus.getId())
                 .typeOfWorkout(workoutStatus.getTypeOfWorkout())
-                .date(workoutStatus.getDate())
-                .time(workoutStatus.getTime())
                 .numberOfPushUp(workoutStatus.getNumberOfPushUp())
+                .distanceRan(workoutStatus.getDistanceRan())
+                .duration(workoutStatus.getDuration())
+                .description(workoutStatus.getDescription())
                 .build();
     }
 
