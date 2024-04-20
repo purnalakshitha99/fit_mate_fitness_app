@@ -22,6 +22,7 @@ public class MealPlanController {
     public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanDTO mealPlanDTO)throws UserNotFoundException {
 
 
+
         return mealPlanService.create(userId, mealPlanDTO);
     }
 
