@@ -21,8 +21,8 @@ const SideBar = ({ openMealPlan, openMyActivities, openWorkOutPost, openWorkOutS
 
   return (
     <>
-    <Card className=" top-16 mt-3 w-full md:w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white fixed  left-0 ">
-      <div className="mb-2 p-4 flex flex-col items-center md:items-start space-y-5">
+    <Card className=" w-full md:w-[20rem]  p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white left-0 ">
+      <div className="mb-2 p-4 flex flex-col items-center md:items-start ">
         <img
           className="h-20 w-20 rounded-full"
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -30,7 +30,7 @@ const SideBar = ({ openMealPlan, openMyActivities, openWorkOutPost, openWorkOutS
         />
         <Typography className="text-2xl font-bold">Sasida Dilhan</Typography>
       </div>
-      <List className="md:space-y-10">
+      <List className="">
         <ListItem className="hover:bg-hoverBackground p-3">
           <ListItemPrefix>
             <PresentationChartBarIcon className="h-5 w-5" />

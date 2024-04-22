@@ -58,7 +58,7 @@ const Home = () => {
           openMyActivities={openMyActivities}
           openWorkOutPost={openWorkOutPost}
           openWorkOutStatus={openWorkOutStatus} />
-        <div className=" space-y-10 ml-[25rem] mt-36">
+        <div className=" space-y-10  mt-24  m-auto">
           <div>
             <Tabs />
           </div>
