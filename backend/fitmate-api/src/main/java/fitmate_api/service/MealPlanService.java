@@ -18,4 +18,6 @@ public interface MealPlanService {
 
 
    MealPlanResponse deleteSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
+
+   MealPlanResponse updateSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO)throws MealPlanNotFoundException,UserNotFoundException;
 }

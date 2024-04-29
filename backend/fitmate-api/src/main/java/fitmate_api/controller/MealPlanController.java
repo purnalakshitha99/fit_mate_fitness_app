@@ -7,6 +7,7 @@ import fitmate_api.model.User;
 import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,6 +45,13 @@ public class MealPlanController {
     public MealPlanResponse deleteSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException{
 
         return mealPlanService.deleteSpecificMealPlan(userId,mealPlanId);
+    }
+
+
+    @PutMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
+    public MealPlanResponse updateSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId,@RequestBody MealPlanDTO mealPlanDTO)throws MealPlanNotFoundException,UserNotFoundException{
+
+        return mealPlanService.updateSpecificMealPlan(userId,mealPlanId,mealPlanDTO);
     }
 
 
