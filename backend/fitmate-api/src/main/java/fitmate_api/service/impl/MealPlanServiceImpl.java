@@ -105,5 +105,41 @@ public class MealPlanServiceImpl implements MealPlanService {
         return MealPlanResponse.builder().id(deleteToMealPlan.getId()).title(deleteToMealPlan.getTitle()).description(deleteToMealPlan.getDescription()).recipes(deleteToMealPlan.getRecipes()).nutritional(deleteToMealPlan.getNutritional()).information(deleteToMealPlan.getInformation()).portionSizes(deleteToMealPlan.getPortionSizes()).creationDate(deleteToMealPlan.getCreationDate()).build();
     }
 
+    @Override
+    public MealPlanResponse updateSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO) throws MealPlanNotFoundException, UserNotFoundException {
+
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("that user not in a database")
+        );
+
+
+        List<MealPlan> mealPlanList = user.getMealPlanList();
+
+        MealPlan updateToMealPlan = mealPlanList.stream().filter(mealPlan -> mealPlan.getId().equals(mealPlanId)).findFirst().orElse(null);
+
+        assert updateToMealPlan != null;
+        updateToMealPlan.setUser(user);
+        updateToMealPlan.setTitle(mealPlanDTO.getTitle());
+        updateToMealPlan.setDescription(mealPlanDTO.getDescription());
+        updateToMealPlan.setRecipes(mealPlanDTO.getRecipes());
+        updateToMealPlan.setNutritional(mealPlanDTO.getNutritional());
+        updateToMealPlan.setInformation(mealPlanDTO.getInformation());
+        updateToMealPlan.setPortionSizes(mealPlanDTO.getPortionSizes());
+        updateToMealPlan.setCreationDate(mealPlanDTO.getCreationDate());
+
+        mealPlanRepository.save(updateToMealPlan);
+
+        return MealPlanResponse.builder().id(updateToMealPlan.getId())
+                .title(updateToMealPlan.getTitle())
+                .description(updateToMealPlan.getDescription())
+                .recipes(updateToMealPlan.getRecipes())
+                .creationDate(updateToMealPlan.getCreationDate())
+                .nutritional(updateToMealPlan.getNutritional())
+                .information(updateToMealPlan.getInformation())
+                .portionSizes(updateToMealPlan.getPortionSizes())
+                .build();
+
+    }
+
 
 }
