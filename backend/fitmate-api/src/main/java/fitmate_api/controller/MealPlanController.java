@@ -41,17 +41,16 @@ public class MealPlanController {
     }
 
     @DeleteMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
-    public void deleteSpecificMealPlanForUser(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws UserNotFoundException, MealPlanNotFoundException {
+    public MealPlanResponse deleteSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException{
 
-        System.out.println("delete");
-        mealPlanService.deleteSpecificMealPlanForUser(userId, mealPlanId);
+        return mealPlanService.deleteSpecificMealPlan(userId,mealPlanId);
     }
 
 
-//    public MealPlanResponse updateSpecificMealPlan(Long userId,Long mealPlanId,MealPlanDTO mealPlanDTO)throws UserNotFoundException,MealPlanNotFoundException{
-//
-//        User user =
-//    }
+
+
+
+
 
 
 

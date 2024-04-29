@@ -16,5 +16,6 @@ public interface MealPlanService {
 
    List<MealPlanResponse> getAllMealPlan();
 
-   void deleteSpecificMealPlanForUser(Long userId, Long mealPlanId)throws UserNotFoundException, MealPlanNotFoundException;
+
+   MealPlanResponse deleteSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
 }
