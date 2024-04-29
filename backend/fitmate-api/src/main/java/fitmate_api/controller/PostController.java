@@ -18,8 +18,7 @@ import java.util.List;
 public class PostController {
     private PostService postService;
 
-    @PostMapping("/posts" +
-            "")
+    @PostMapping("/posts")
     public ResponseEntity<CommonResponse> createUser(@RequestBody PostDTO postDTO)  {
 
         postService.savePost(postDTO);
@@ -44,5 +43,11 @@ public class PostController {
         postService.deletePost(id);
 
         return ResponseEntity.ok("User Deleted!");
+    }
+
+    @PostMapping("/posts/user/{user_id}/post/{post_id}")
+    public ResponseEntity<String> setLike(@PathVariable ("user_id") Long uId, @PathVariable ("post_id") Long pId){
+        return postService.setLikedUser(uId, pId);
+
     }
 }

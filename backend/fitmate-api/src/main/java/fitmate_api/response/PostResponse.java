@@ -1,21 +1,36 @@
 package fitmate_api.response;
 
 
-import fitmate_api.model.Media;
-import fitmate_api.model.PostType;
 import fitmate_api.model.User;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.JoinColumn;
 import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Builder
 public class PostResponse {
-    private User user;
-    private PostType postType;
+
+    private Long userId;
+
+    private String username;
+
     private String content;
-    private Timestamp createdAt;
-    private List<Media> mediaList;
+
+    private LocalTime createdAt;
+
+    private List<Long> likedUsers ;
+
+    private Integer likeCount = 0;
+
+    private List<Long> postImages;
+
+    private String video;
+
 }

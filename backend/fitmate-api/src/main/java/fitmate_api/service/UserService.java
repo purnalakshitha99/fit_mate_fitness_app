@@ -25,9 +25,7 @@ public interface UserService {
 
     void updateUser(UserDTO userDTO,MultipartFile file, Long id) throws IOException;
 
-    void addFollower(Long uId, Long fId);
 
-//    ResponseEntity<CommonResponse> registerUser(UserDTO userDTO);
 
     ResponseEntity<Object> loginUser(LoginDTO loginDTO);
 }

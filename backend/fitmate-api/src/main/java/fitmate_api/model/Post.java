@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -19,9 +20,8 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "post_type")
-    private PostType postType;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "content")
     private String content;
@@ -29,7 +29,19 @@ public class Post {
     @Column(name = "created_at")
     private LocalTime createdAt;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Media> mediaList;
+    @ElementCollection
+    @CollectionTable(name = "post_liked_by_user_ids", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name = "liked_by_user_id")
+    private List<Long> likedUsers = new ArrayList<>();
 
+    @Column(name = "like_count")
+    private Integer likeCount = 0;
+
+    @ElementCollection
+    @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
+    @Column(name = "image")
+    private List<Long> postImages = new ArrayList<>();
+
+    @Column(name = "video")
+    private String video;
 }
