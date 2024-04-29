@@ -12,7 +12,7 @@ public interface MealPlanService {
 
    MealPlanResponse create(Long userId, MealPlanDTO mealPlanDTO)throws UserNotFoundException;
 
-   List<MealPlanResponse> getSpecificUserMealPlan(Long userId)throws UserNotFoundException;
+   List<MealPlanResponse> getSpecificUserMealPlans(Long userId)throws UserNotFoundException;
 
    List<MealPlanResponse> getAllMealPlan();
 
@@ -20,4 +20,6 @@ public interface MealPlanService {
    MealPlanResponse deleteSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
 
    MealPlanResponse updateSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO)throws MealPlanNotFoundException,UserNotFoundException;
+
+   MealPlanResponse getSpecificMealPlanInUser(Long userId, Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException;
 }

@@ -52,7 +52,7 @@ public class MealPlanServiceImpl implements MealPlanService {
 
     }
 
-    public List<MealPlanResponse> getSpecificUserMealPlan(Long userId)throws UserNotFoundException{
+    public List<MealPlanResponse> getSpecificUserMealPlans(Long userId)throws UserNotFoundException{
 
       User user = userRepository.findById(userId).orElseThrow(
               () -> new UserNotFoundException("that user not in a database")
@@ -139,6 +139,22 @@ public class MealPlanServiceImpl implements MealPlanService {
                 .portionSizes(updateToMealPlan.getPortionSizes())
                 .build();
 
+    }
+
+    @Override
+    public MealPlanResponse getSpecificMealPlanInUser(Long userId, Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException {
+
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("that user not in a database")
+        );
+
+
+        List<MealPlan> mealPlanList = user.getMealPlanList();
+
+        MealPlan getToMealPlan = mealPlanList.stream().filter(mealPlan -> mealPlan.getId().equals(mealPlanId)).findFirst().orElse(null);
+
+        assert getToMealPlan != null;
+        return MealPlanResponse.builder().id(getToMealPlan.getId()).title(getToMealPlan.getTitle()).description(getToMealPlan.getDescription()).recipes(getToMealPlan.getRecipes()).nutritional(getToMealPlan.getNutritional()).information(getToMealPlan.getInformation()).portionSizes(getToMealPlan.getPortionSizes()).creationDate(getToMealPlan.getCreationDate()).build();
     }
 
 
