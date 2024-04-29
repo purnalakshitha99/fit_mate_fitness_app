@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [openNav, setOpenNav] = React.useState(false);
@@ -25,7 +26,8 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a className="flex items-center">Pages</a>
+        <Link className="flex items-center" to="/imageUpload">Images</Link>
+        {/* <a className="flex items-center">Pages</a> */}
       </Typography>
       <Typography
         as="li"
@@ -55,8 +57,8 @@ const NavBar = () => {
   );
 
   return (
-    <div className="max-h-max ">
-      <Navbar className="fixed z-50 rounded-none top-0  w-full h-max px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
+    <div className="max-h-max">
+      <Navbar className=" z-50 rounded-none top-0  w-full h-max px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
         <div className="flex items-center justify-between">
           <Typography as="a" className="mr-4 text-white cursor-pointer font-serif text-2xl py-1.5 font-medium">
             Fitmate

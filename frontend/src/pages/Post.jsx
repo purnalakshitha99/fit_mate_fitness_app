@@ -89,7 +89,7 @@ const Post = () => {
               />
               Sasida Dilhan
             </div>
-            <div className="rounded-lg p-2">
+            <div className="rounded-lg p-2 text-black">
               {submittedValue}
               <div className=" space-x-8">
                 <input
