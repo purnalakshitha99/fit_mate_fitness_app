@@ -2,6 +2,7 @@ package fitmate_api.service.impl;
 
 import fitmate_api.DTO.MealPlanDTO;
 
+import fitmate_api.exception.MealPlanNotFoundException;
 import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.model.MealPlan;
 import fitmate_api.model.User;
@@ -87,12 +88,22 @@ public class MealPlanServiceImpl implements MealPlanService {
     }
 
     @Override
-    public void deleteSpecificMealPlanForUser(Long userId, Long mealPlanId) throws UserNotFoundException {
+    public MealPlanResponse deleteSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException {
 
         User user = userRepository.findById(userId).orElseThrow(
-                () -> new UserNotFoundException("that user not in a database")
+                ()-> new UserNotFoundException("that user not in a database")
         );
 
+
         List<MealPlan> mealPlanList = user.getMealPlanList();
+
+        MealPlan deleteToMealPlan = mealPlanList.stream().filter(mealPlan -> mealPlan.getId().equals(mealPlanId)).findFirst().orElse(null);
+
+        assert deleteToMealPlan != null;
+        mealPlanRepository.delete(deleteToMealPlan);
+
+        return MealPlanResponse.builder().id(deleteToMealPlan.getId()).title(deleteToMealPlan.getTitle()).description(deleteToMealPlan.getDescription()).recipes(deleteToMealPlan.getRecipes()).nutritional(deleteToMealPlan.getNutritional()).information(deleteToMealPlan.getInformation()).portionSizes(deleteToMealPlan.getPortionSizes()).creationDate(deleteToMealPlan.getCreationDate()).build();
     }
+
+
 }

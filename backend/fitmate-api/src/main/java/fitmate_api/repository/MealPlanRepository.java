@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface MealPlanRepository extends JpaRepository<MealPlan,Long> {
 
-    List<MealPlanResponse> findMealPlanByUser(User user);
+//    List<MealPlanResponse> findMealPlanByUser(User user);
+
+    MealPlan findMealPlanByUserId(Long userId);
 }

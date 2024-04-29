@@ -1,6 +1,7 @@
 package fitmate_api.service;
 
 import fitmate_api.DTO.MealPlanDTO;
+import fitmate_api.exception.MealPlanNotFoundException;
 import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.response.MealPlanResponse;
 
@@ -15,5 +16,6 @@ public interface MealPlanService {
 
    List<MealPlanResponse> getAllMealPlan();
 
-   void deleteSpecificMealPlanForUser(Long userId, Long mealPlanId)throws UserNotFoundException;
+
+   MealPlanResponse deleteSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
 }

@@ -1,30 +1,22 @@
-package fitmate_api.model;
+package fitmate_api.response;
 
-
-import jakarta.persistence.*;
+import jdk.jshell.Snippet;
+import lombok.Builder;
 import lombok.Data;
-
 
 import java.time.LocalTime;
 import java.util.Date;
+
 @Data
-@Entity
-@Table(name = "work_out_status")
-public class WorkoutStatus {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-
-
+@Builder
+public class WorkoutStatusResponse {
+    private Long id;
     private String typeOfWorkout;
     private Date date;
     private LocalTime time;
     private Integer numberOfPushUp;
-    private Integer weightLifted;
     private String duration;
     private String description;
     private Float distanceRan;
-
 
 }
