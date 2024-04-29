@@ -38,14 +38,10 @@ public class User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "followers")
-    @ManyToMany
-    @JoinTable(
-            name = "user_follower",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "follower_id")
-    )
-    private List<User> followers = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "followed_user_id", joinColumns = @JoinColumn(name = "follower_id"))
+    @Column(name = "followed_by_user_id")
+    private List<Long> followedUsers = new ArrayList<>();
 
     @Column(name = "bio")
     private String bio;

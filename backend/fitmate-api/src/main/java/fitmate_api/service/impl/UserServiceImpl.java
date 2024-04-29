@@ -136,20 +136,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
-    @Override
-    public void addFollower(Long uId, Long fId) {
-        User user = userRepository.findById(uId).orElseThrow(
-                () -> new EntityNotFoundException("user not found")
-        );
-
-        User follower = userRepository.findById(fId).orElseThrow(
-                () -> new EntityNotFoundException("Follower Not Found!")
-        );
-
-        user.getFollowers().add(follower);
-
-        userRepository.save(user);
-    }
 
 
     @Override

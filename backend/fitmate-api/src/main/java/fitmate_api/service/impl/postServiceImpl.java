@@ -1,11 +1,16 @@
 package fitmate_api.service.impl;
 
 import fitmate_api.DTO.PostDTO;
+import fitmate_api.model.User;
+import fitmate_api.repository.UserRepository;
 import fitmate_api.response.PostResponse;
 import fitmate_api.model.Post;
 import fitmate_api.repository.PostRepository;
 import fitmate_api.service.PostService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +23,19 @@ import java.util.List;
 public class postServiceImpl implements PostService {
 
     private PostRepository postRepository;
+    private UserRepository userRepository;
+    private ModelMapper modelMapper;
     @Override
     public Post savePost(PostDTO postDTO) {
 
+        User user = userRepository.findById(postDTO.getUserId()).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
+
         Post post = new Post();
-        post.setPostType(postDTO.getPostType());
         post.setContent(postDTO.getContent());
+        post.setUser(user);
+        post.setUsername(user.getFirstName());
         post.setCreatedAt(LocalTime.now());
 
         return postRepository.save(post);
@@ -34,12 +46,7 @@ public class postServiceImpl implements PostService {
         List<Post> postList = postRepository.findAll();
         List<PostResponse> postResponseList = new ArrayList<>();
         for (Post post : postList) {
-            PostResponse response = PostResponse.builder()
-                    .postType(post.getPostType())
-                    .content(post.getContent())
-                    .user(post.getUser())
-                    .mediaList(post.getMediaList())
-                    .build();
+            PostResponse response = modelMapper.map(post, PostResponse.class);
             postResponseList.add(response);
         }
         return postResponseList;
@@ -50,19 +57,46 @@ public class postServiceImpl implements PostService {
         Post post = postRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User Not Found")
         );
-
-        PostResponse postResponse = PostResponse.builder()
-                .postType(post.getPostType())
-                .mediaList(post.getMediaList())
-                .user(post.getUser())
-                .content(post.getContent())
-                .build();
-
-        return  postResponse;
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(post, PostResponse.class);
     }
 
     @Override
     public void deletePost(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
+
+        postRepository.deleteById(post.getId());
+    }
+
+
+    @Override
+    public ResponseEntity<String> setLikedUser(Long uId, Long pId) {
+
+        User user = userRepository.findById(uId).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
+
+        Post post = postRepository.findById(pId).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
+
+        try {
+            if (post.getLikedUsers().contains(uId)){
+                post.getLikedUsers().remove(uId);
+                post.setLikeCount(post.getLikeCount()-1);
+                postRepository.save(post);
+                return new ResponseEntity<>("Post Unliked Successfully! ", HttpStatus.OK);
+            }
+            post.getLikedUsers().add(uId);
+            post.setLikeCount(post.getLikeCount()+1);
+            postRepository.save(post);
+            return new ResponseEntity<>("Post Liked Successfully! ", HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>("Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
 
     }
 }

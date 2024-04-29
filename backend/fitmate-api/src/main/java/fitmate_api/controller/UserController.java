@@ -31,13 +31,6 @@ public class UserController {
     }
 
 
-    @PostMapping("/users/{user_id}/follow/{follower_id}")
-    public ResponseEntity<String> addFollowers(@PathVariable("user_id") Long uId, @PathVariable("follower_id")  Long fId) {
-        userService.addFollower(uId,fId);
-        return ResponseEntity.ok("Followed");
-    }
-
-
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> userList = userService.getAllUsers();
