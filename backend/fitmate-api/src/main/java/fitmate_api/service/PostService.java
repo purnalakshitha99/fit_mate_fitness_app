@@ -3,6 +3,7 @@ package fitmate_api.service;
 import fitmate_api.DTO.PostDTO;
 import fitmate_api.response.PostResponse;
 import fitmate_api.model.Post;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface PostService {
     PostResponse getPostById(Long id);
 
     void deletePost(Long id);
+
+    ResponseEntity<String> setLikedUser(Long uId, Long pId);
 }

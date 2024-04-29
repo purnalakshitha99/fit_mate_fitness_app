@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import DashBoard from "../pages/Register";
 import Home from "../pages/Home";
+import ImageUpload from "../pages/ImageUpload";
+import Profile from "../pages/Profile";
 
 const UserRoute = () => {
   return (
@@ -12,6 +14,8 @@ const UserRoute = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<DashBoard />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/imageUpload" element={<ImageUpload />} />
+        <Route path="/profile" element={<Profile />} />
         
      
       </Routes>

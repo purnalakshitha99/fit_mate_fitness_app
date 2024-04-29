@@ -12,11 +12,8 @@ class UserService {
     return axios.get(BASE_URL + "/" + userId);
   }
 
-
-
   saveUser(user) {
     return axios.post(BASE_URL, user);
-    console.log(user)
   }
 
   loginUser(user) {
