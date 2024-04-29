@@ -6,6 +6,7 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [openNav, setOpenNav] = React.useState(false);
@@ -25,7 +26,8 @@ const NavBar = () => {
         color="blue-gray"
         className="p-1 font-normal"
       >
-        <a className="flex items-center">Pages</a>
+        <Link className="flex items-center" to="/imageUpload">Images</Link>
+        {/* <a className="flex items-center">Pages</a> */}
       </Typography>
       <Typography
         as="li"
