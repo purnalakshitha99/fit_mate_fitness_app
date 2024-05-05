@@ -3,9 +3,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "../pages/Login";
 import DashBoard from "../pages/Register";
 import Home from "../pages/Home";
-import ImageUpload from "../pages/ImageUpload";
 import Profile from "../pages/Profile";
 import FormMeal from "../components/models/FormMeal";
+import SignIn from "../pages/SignIn";
+import AllUsers from "../pages/AllUsers";
+import OneUserProfile from "../pages/OneUserProfile";
 
 const UserRoute = () => {
   return (
@@ -15,14 +17,17 @@ const UserRoute = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<DashBoard />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/imageUpload" element={<ImageUpload />} />
+        <Route path="/peoples" element={<AllUsers />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/mealPlan" element={<FormMeal />} />
         
      
+        <Route path="/SignIn" element={<SignIn/>} />
+        <Route path="/oneuser/:id" element={<OneUserProfile />} />
       </Routes>
     </BrowserRouter>
   );
+  
 };
 
 export default UserRoute;

@@ -41,7 +41,7 @@ const Post = () => {
             />
             <h3 className="font-bold text-sm sm:text-base">Sasida Dilhan</h3>
           </div>
-          <p className="text-xs sm:text-sm">
+          <span className="text-xs sm:text-sm">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
@@ -51,7 +51,7 @@ const Post = () => {
             with the release of Letraset sheets containing Lorem Ipsum passages,
             and more recently with desktop publishing software like Aldus
             PageMaker including versions of Lorem Ipsum.
-          </p>
+          </span>
           <img className="p-2 m-auto" src={Image1} alt="Gym" />
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
