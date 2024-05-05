@@ -1,6 +1,17 @@
 import React, { useState } from "react";
-import { Card, Typography, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
-import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from "@heroicons/react/24/solid";
+import {
+  Card,
+  Typography,
+  List,
+  ListItem,
+  ListItemPrefix,
+} from "@material-tailwind/react";
+import {
+  PresentationChartBarIcon,
+  ShoppingBagIcon,
+  UserCircleIcon,
+  PowerIcon,
+} from "@heroicons/react/24/solid";
 import WorkOutStatus from "./models/WorkOutStatus";
 import MealPlan from "./models/MealPlan";
 import WorkOutPost from "./models/WorkOutPost";
@@ -36,7 +47,7 @@ const SideBar = ({
 
   return (
     <>
-      <Card className="w-full md:w-[20rem] h-full p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white left-0">
+      <Card className="w-full mt-8 md:w-[20rem] h-full p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white left-0">
         <Link to="/profile">
           <div className="mb-2 p-4 flex flex-col items-center md:items-start ">
             <img
@@ -50,12 +61,14 @@ const SideBar = ({
           </div>
         </Link>
         <List className="">
-          <ListItem className="hover:bg-hoverBackground p-3">
-            <ListItemPrefix>
-              <PresentationChartBarIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Home
-          </ListItem>
+          <Link to="/home">
+            <ListItem className="hover:bg-hoverBackground p-3">
+              <ListItemPrefix>
+                <PresentationChartBarIcon className="h-5 w-5" />
+              </ListItemPrefix>
+              Home
+            </ListItem>
+          </Link>
           <ListItem
             className="hover:bg-hoverBackground p-3"
             onClick={() => setIsMyActivitiesOpen(true)}
@@ -140,9 +153,13 @@ const SideBar = ({
         </List>
       </Card>
       {isMealPlanOpen && <MealPlan closeMealPlan={closeMealPlan} />}
-      {isMyActivitiesOpen && <MyActivities closeMyActivities={closeMyActivities} />}
+      {isMyActivitiesOpen && (
+        <MyActivities closeMyActivities={closeMyActivities} />
+      )}
       {isWorkOutPostOpen && <WorkOutPost closeWorkOutPost={closeWorkOutPost} />}
-      {isWorkOutStatusOpen && <WorkOutStatus closeWorkOutStatus={closeWorkOutStatus} />}
+      {isWorkOutStatusOpen && (
+        <WorkOutStatus closeWorkOutStatus={closeWorkOutStatus} />
+      )}
     </>
   );
 };
