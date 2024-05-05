@@ -17,7 +17,11 @@ const Tabs = () => {
           data-tabs="tabs"
           role="list"
         >
-          <li className={` flex-auto text-center ${activeTab === "app" ? "" : ""}`}>
+          <li
+            className={` flex-auto text-center ${
+              activeTab === "app" ? "bg-red-300" : ""
+            }`}
+          >
             <a
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
@@ -29,44 +33,70 @@ const Tabs = () => {
               <span className="ml-1">Feed</span>
             </a>
           </li>
-          <li className={` flex-auto text-center ${activeTab === "message" ? "" : ""}`}>
+          <li
+            className={` flex-auto text-center ${
+              activeTab === "mealPlan" ? "" : ""
+            }`}
+          >
             <a
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
-              aria-selected={activeTab === "message"}
-              aria-controls="message"
-              onClick={() => handleTabClick("message")}
+              aria-selected={activeTab === "mealPlan"}
+              aria-controls="mealPlan"
+              onClick={() => handleTabClick("mealPlan")}
             >
-              <span className="ml-1">Messages</span>
+              <span className="ml-1">Meal Plan</span>
             </a>
           </li>
-          <li className={`z-30 flex-auto text-center ${activeTab === "settings" ? "" : ""}`}>
+          <li
+            className={`z-30 flex-auto text-center ${
+              activeTab === "workOutPlan" ? "" : ""
+            }`}
+          >
             <Link
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
-              aria-selected={activeTab === "settings"}
-              aria-controls="settings"
-              onClick={() => handleTabClick("settings")}
+              aria-selected={activeTab === "workOutPlan"}
+              aria-controls="workOutPlan"
+              onClick={() => handleTabClick("workOutPlan")}
             >
-              <span className="ml-1"></span>
+              <span className="ml-1">Workout Plan</span>
             </Link>
           </li>
         </ul>
         <div data-tab-content=" " className="p-5">
-          <div className={`block ${activeTab === "app" ? "opacity-100" : "hidden"}`} id="app" role="tabpanel">
+          <div
+            className={`block ${
+              activeTab === "app" ? "opacity-100" : "hidden"
+            }`}
+            id="app"
+            role="tabpanel"
+          >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-            <Post />
-             <Post />
+              <Post />
+              <Post />
             </span>
           </div>
-          <div className={`block ${activeTab === "message" ? "opacity-100" : "hidden"}`} id="message" role="tabpanel">
+          <div
+            className={`block ${
+              activeTab === "mealPlan" ? "opacity-100" : "hidden"
+            }`}
+            id="mealPlan"
+            role="tabpanel"
+          >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-             asdad
+              asdad
             </span>
           </div>
-          <div className={`block ${activeTab === "settings" ? "opacity-100" : "hidden"}`} id="settings" role="tabpanel">
+          <div
+            className={`block ${
+              activeTab === "workOutPlan" ? "opacity-100" : "hidden"
+            }`}
+            id="workOutPlan"
+            role="tabpanel"
+          >
             <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
               Content for Settings tab
             </p>

@@ -21,20 +21,20 @@ public class WorkoutStatusServiceImpl implements WorkoutStatusService {
     private final ModelMapper modelMapper;
     private final WorkoutStatusRepository workoutStatusRepository;
 
-    public WorkoutStatusResponse createWorkoutStatus (WorkoutStatusDTO workoutStatusDTO){
+    public WorkoutStatusResponse createWorkoutStatus(WorkoutStatusDTO workoutStatusDTO) {
 
 
-        System.out.printf("workout status+++++++++++++++++++++++"+workoutStatusDTO.getTypeOfWorkout());
+        System.out.printf("workout status+++++++++++++++++++++++" + workoutStatusDTO.getTypeOfWorkout());
         System.out.println("===========");
-        System.out.printf("workout status+++++++++++++++++++++"+workoutStatusDTO.getNumberOfPushUp());
+        System.out.printf("workout status+++++++++++++++++++++" + workoutStatusDTO.getNumberOfPushUp());
 
-      WorkoutStatus workoutStatus = new WorkoutStatus();
+        WorkoutStatus workoutStatus = new WorkoutStatus();
 
-      workoutStatus.setTypeOfWorkout(workoutStatusDTO.getTypeOfWorkout());
-      workoutStatus.setNumberOfPushUp(workoutStatusDTO.getNumberOfPushUp());
-      workoutStatus.setDuration(workoutStatusDTO.getDuration());
-      workoutStatus.setDistanceRan(workoutStatusDTO.getDistanceRan());
-      workoutStatus.setDescription(workoutStatusDTO.getDescription());
+        workoutStatus.setTypeOfWorkout(workoutStatusDTO.getTypeOfWorkout());
+        workoutStatus.setNumberOfPushUp(workoutStatusDTO.getNumberOfPushUp());
+        workoutStatus.setDuration(workoutStatusDTO.getDuration());
+        workoutStatus.setDistanceRan(workoutStatusDTO.getDistanceRan());
+        workoutStatus.setDescription(workoutStatusDTO.getDescription());
         workoutStatusRepository.save(workoutStatus);
 
         return WorkoutStatusResponse.builder().id(workoutStatus.getId())
@@ -48,11 +48,11 @@ public class WorkoutStatusServiceImpl implements WorkoutStatusService {
 
     @Override
     public List<WorkoutStatusResponse> getAllWorkoutStatus() {
-         List<WorkoutStatus> workoutStatusList = workoutStatusRepository.findAll();
+        List<WorkoutStatus> workoutStatusList = workoutStatusRepository.findAll();
 
-         return workoutStatusList.stream().map(workoutStatus -> WorkoutStatusResponse.builder()
-                 .numberOfPushUp(workoutStatus.getNumberOfPushUp())
-                 .typeOfWorkout(workoutStatus.getTypeOfWorkout()).build()).toList();
+        return workoutStatusList.stream().map(workoutStatus -> WorkoutStatusResponse.builder()
+                .numberOfPushUp(workoutStatus.getNumberOfPushUp())
+                .typeOfWorkout(workoutStatus.getTypeOfWorkout()).build()).toList();
     }
 
     @Override
@@ -60,7 +60,7 @@ public class WorkoutStatusServiceImpl implements WorkoutStatusService {
 
         workoutStatusRepository.deleteById(workoutStatusId);
 
-        MassageResponse massageResponse = new  MassageResponse();
+        MassageResponse massageResponse = new MassageResponse();
         massageResponse.setMessage("Workout status deleted");
 
         return massageResponse;
