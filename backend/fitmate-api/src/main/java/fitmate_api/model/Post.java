@@ -40,7 +40,7 @@ public class Post {
     @ElementCollection
     @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
     @Column(name = "image")
-    private List<Long> postImages = new ArrayList<>();
+    private List<String> postImages = new ArrayList<>();
 
     @Column(name = "video")
     private String video;
