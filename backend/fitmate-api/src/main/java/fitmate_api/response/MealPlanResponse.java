@@ -1,5 +1,6 @@
 package fitmate_api.response;
 
+import fitmate_api.model.User;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,4 +24,5 @@ public class MealPlanResponse {
     private LocalTime creationTime;
 
     private String imagePath;
+    private Long userId;
 }

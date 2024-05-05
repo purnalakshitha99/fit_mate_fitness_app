@@ -12,18 +12,16 @@ import java.util.List;
 
 public interface MealPlanService {
 
-//   MealPlanResponse create(Long userId, MealPlanDTO mealPlanDTO)throws UserNotFoundException;
 
-   List<MealPlanResponse> getSpecificUserMealPlans(Long userId)throws UserNotFoundException;
+   MealPlanResponse createMealPlan(Long userId, MealPlanDTO mealPlanDTO, MultipartFile file)throws MealPlanNotFoundException,UserNotFoundException, IOException;
 
    List<MealPlanResponse> getAllMealPlan();
 
+   List<MealPlanResponse> getSpecificUserMealPlans(Long userId)throws UserNotFoundException,MealPlanNotFoundException;
 
-   MealPlanResponse deleteSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
+   MealPlanResponse getSpecificUserSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
 
-   MealPlanResponse updateSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO)throws MealPlanNotFoundException,UserNotFoundException;
+   MealPlanResponse deleteSpecificUserSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
 
-   MealPlanResponse getSpecificMealPlanInUser(Long userId, Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException;
-
-   MealPlanResponse createMealPlan(Long userId, MealPlanDTO mealPlanDTO, MultipartFile file)throws MealPlanNotFoundException,UserNotFoundException, IOException;
+   MealPlanResponse updateSpecificUserSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO, MultipartFile file) throws UserNotFoundException, MealPlanNotFoundException, IOException;
 }
