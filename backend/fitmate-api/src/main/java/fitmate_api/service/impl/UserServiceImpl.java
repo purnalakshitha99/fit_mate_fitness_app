@@ -1,7 +1,6 @@
 package fitmate_api.service.impl;
 
 
-
 import fitmate_api.DTO.LoginDTO;
 import fitmate_api.DTO.UserDTO;
 import fitmate_api.response.CommonResponse;
@@ -11,6 +10,7 @@ import fitmate_api.repository.UserRepository;
 import fitmate_api.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +33,12 @@ import java.util.Objects;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+    private ModelMapper modelMapper;
     public static String uploadDirecory = System.getProperty("user.dir") + "/src/main/images";
 
     @Override
     public ResponseEntity<Object> saveUser(UserDTO userDTO) throws IOException {
-        if(userDTO.getSource() == null){
+        if (userDTO.getSource() == null) {
 
             User user = new User();
             user.setFirstName(userDTO.getFirstName());
@@ -45,18 +46,19 @@ public class UserServiceImpl implements UserService {
             user.setUsername(userDTO.getUsername());
             user.setPhoneNumber(userDTO.getPhoneNumber());
             user.setPasswordHash(passwordEncoder.encode(userDTO.getPassword()));
+            user.setProfilePictureUrl(userDTO.getProfilePictureUrl());
             user.setBio(userDTO.getBio());
             user.setEmail(userDTO.getEmail());
 
-            userRepository.save(user);
+            return new ResponseEntity<>(userRepository.save(user), HttpStatus.CREATED);
 
         }
 
-        if(Objects.equals(userDTO.getSource(), "google")){
+        if (Objects.equals(userDTO.getSource(), "google")) {
             String email = userDTO.getEmail();
-            if(userRepository.existsByEmail(email)){
+            if (userRepository.existsByEmail(email)) {
                 User user = userRepository.findByEmail(email);
-                //send user response
+                return new ResponseEntity<>(user, HttpStatus.OK);
             }
 
             User googleUser = new User();
@@ -64,8 +66,8 @@ public class UserServiceImpl implements UserService {
             googleUser.setEmail(userDTO.getEmail());
             googleUser.setProfilePictureUrl(userDTO.getProfilePictureUrl());
             try {
-                userRepository.save(googleUser);
-            }catch (DataIntegrityViolationException e){
+                return new ResponseEntity<>(userRepository.save(googleUser), HttpStatus.CREATED);
+            } catch (DataIntegrityViolationException e) {
                 return new ResponseEntity<>("Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         }
@@ -83,7 +85,11 @@ public class UserServiceImpl implements UserService {
             User user1 = new User();
             user1.setId(user.getId());
             user1.setFirstName(user.getFirstName());
+            user1.setLastName(user.getLastName());
+            user1.setEmail(user.getEmail());
+            user1.setPhoneNumber(user.getPhoneNumber());
             user1.setUsername(user.getUsername());
+            user1.setProfilePictureUrl(user.getProfilePictureUrl());
 
             userResponseList.add(user1);
         }
@@ -96,13 +102,8 @@ public class UserServiceImpl implements UserService {
                 () -> new UsernameNotFoundException("User Not Found")
         );
 
-        UserResponse userResponse = UserResponse.builder()
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .bio(user.getBio())
-                .build();
+        UserResponse userResponse = modelMapper.map(user, UserResponse.class);
+
 
         return userResponse;
     }
@@ -117,7 +118,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserDTO userDTO,MultipartFile file, Long id) throws IOException {
+    public void updateUser(UserDTO userDTO, MultipartFile file, Long id) throws IOException {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User Not Found")
         );
@@ -137,29 +138,21 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public ResponseEntity<Object> loginUser(LoginDTO loginDTO) {
 
         User user = userRepository.findByEmail(loginDTO.getEmail());
 
-        if (user == null){
+        if (user == null) {
             return new ResponseEntity<>("Invalid email", HttpStatus.UNAUTHORIZED);
         }
-        if (passwordEncoder.matches( loginDTO.getPassword(), user.getPasswordHash())){
+        if (passwordEncoder.matches(loginDTO.getPassword(), user.getPasswordHash())) {
 
-            UserResponse userResponse = UserResponse.builder()
-                    .firstName(user.getFirstName())
-                    .lastName(user.getLastName())
-                    .email(user.getEmail())
-                    .bio(user.getBio())
-                    .username(user.getUsername())
-                    .phoneNumber(user.getPhoneNumber())
-                    .build();
+            UserResponse userResponse = modelMapper.map(user, UserResponse.class);
 
             return new ResponseEntity<>(userResponse, HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>("Invalid password!",HttpStatus.UNAUTHORIZED);
+        } else {
+            return new ResponseEntity<>("Invalid password!", HttpStatus.UNAUTHORIZED);
         }
 
     }

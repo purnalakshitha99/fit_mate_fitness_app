@@ -18,10 +18,10 @@ import java.util.List;
 public class PostController {
     private PostService postService;
 
-    @PostMapping("/posts")
-    public ResponseEntity<CommonResponse> createUser(@RequestBody PostDTO postDTO)  {
+    @PostMapping("/posts/{user_id}")
+    public ResponseEntity<CommonResponse> createUser(@RequestBody PostDTO postDTO, @PathVariable ("user_id")Long id)  {
 
-        postService.savePost(postDTO);
+        postService.savePost(postDTO, id);
         return ResponseEntity.ok(new CommonResponse("User Created"));
     }
 
