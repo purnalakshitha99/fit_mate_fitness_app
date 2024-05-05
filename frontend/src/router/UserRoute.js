@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import DashBoard from "../pages/Register";
 import Home from "../pages/Home";
 import Profile from "../pages/Profile";
+import SignIn from "../pages/SignIn";
 import AllUsers from "../pages/AllUsers";
 import OneUserProfile from "../pages/OneUserProfile";
 
@@ -17,6 +18,7 @@ const UserRoute = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/peoples" element={<AllUsers />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/SignIn" element={<SignIn/>} />
         <Route path="/oneuser/:id" element={<OneUserProfile />} />
       </Routes>
     </BrowserRouter>
