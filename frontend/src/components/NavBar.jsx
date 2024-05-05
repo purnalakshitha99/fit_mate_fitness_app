@@ -1,3 +1,4 @@
+// Navbar.js
 import React from "react";
 import {
   Navbar,
@@ -58,7 +59,7 @@ const NavBar = () => {
 
   return (
     <div className="max-h-max">
-      <Navbar className=" z-50 rounded-none top-0  w-full h-max px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
+      <Navbar className="z-40 fixed top-0 rounded-none w-full h-max px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
         <div className="flex items-center justify-between">
           <Typography as="a" className="mr-4 text-white cursor-pointer font-serif text-2xl py-1.5 font-medium">
             Fitmate

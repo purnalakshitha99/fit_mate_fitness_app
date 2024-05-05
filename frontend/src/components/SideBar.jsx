@@ -1,3 +1,4 @@
+// Sidebar.js
 import React, { useState } from "react";
 import { Card, Typography, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { PresentationChartBarIcon, ShoppingBagIcon, UserCircleIcon, PowerIcon } from "@heroicons/react/24/solid";
@@ -36,7 +37,7 @@ const SideBar = ({
 
   return (
     <>
-      <Card className="w-full md:w-[20rem] h-full p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white left-0">
+      <Card className="z-50 fixed top-0 left-0 w-full h-full md:w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white">
         <Link to="/profile">
           <div className="mb-2 p-4 flex flex-col items-center md:items-start ">
             <img

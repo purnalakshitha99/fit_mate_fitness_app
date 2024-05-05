@@ -5,6 +5,7 @@ import DashBoard from "../pages/Register";
 import Home from "../pages/Home";
 import ImageUpload from "../pages/ImageUpload";
 import Profile from "../pages/Profile";
+import SignIn from "../pages/SignIn";
 
 const UserRoute = () => {
   return (
@@ -16,6 +17,7 @@ const UserRoute = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/imageUpload" element={<ImageUpload />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/SignIn" element={<SignIn/>} />
         
      
       </Routes>
