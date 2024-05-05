@@ -15,6 +15,8 @@ import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -36,135 +38,6 @@ public class MealPlanServiceImpl implements MealPlanService {
     private Cloudinary cloudinary;
 
     private ModelMapper modelMapper;
-
-//    public MealPlanResponse create(Long userId, MealPlanDTO mealPlanDTO)throws UserNotFoundException {
-//
-//         User user = userRepository.findById(userId).orElseThrow(
-//                () -> new UserNotFoundException("User not found")
-//        );
-//
-//        MealPlan mealPlan = modelMapper.map(mealPlanDTO,MealPlan.class);
-//
-//        mealPlan.setUser(user);
-//
-//        mealPlanRepository.save(mealPlan);
-//
-//        return MealPlanResponse.builder().id(mealPlan.getId())
-//                .title(mealPlan.getTitle())
-//                .description(mealPlan.getDescription())
-//                .recipes(mealPlan.getRecipes())
-//                .creationDate(mealPlan.getCreationDate())
-//                .nutritional(mealPlan.getNutritional())
-//                .information(mealPlan.getInformation())
-//                .portionSizes(mealPlan.getPortionSizes())
-//                .build();
-//
-//    }
-
-    public List<MealPlanResponse> getSpecificUserMealPlans(Long userId)throws UserNotFoundException{
-
-      User user = userRepository.findById(userId).orElseThrow(
-              () -> new UserNotFoundException("that user not in a database")
-      );
-
-      List<MealPlan> mealPlanList = user.getMealPlanList();
-
-      return mealPlanList.stream().map(mealPlan -> MealPlanResponse.builder()
-              .id(mealPlan.getId())
-              .title(mealPlan.getTitle())
-              .description(mealPlan.getDescription())
-              .recipes(mealPlan.getRecipes())
-              .creationDate(mealPlan.getCreationDate())
-              .nutritional(mealPlan.getNutritional())
-              .information(mealPlan.getInformation())
-              .portionSizes(mealPlan.getPortionSizes()).build()).toList();
-    }
-
-    @Override
-    public List<MealPlanResponse> getAllMealPlan() {
-
-        List<MealPlan> mealPlanList = mealPlanRepository.findAll();
-
-        return mealPlanList.stream().map(mealPlan -> MealPlanResponse.builder()
-                .id(mealPlan.getId())
-                .title(mealPlan.getTitle())
-                .description(mealPlan.getDescription())
-                .recipes(mealPlan.getRecipes())
-                .creationDate(mealPlan.getCreationDate())
-                .nutritional(mealPlan.getNutritional())
-                .information(mealPlan.getInformation())
-                .portionSizes(mealPlan.getPortionSizes()).build()).toList();
-    }
-
-    @Override
-    public MealPlanResponse deleteSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException {
-
-        User user = userRepository.findById(userId).orElseThrow(
-                ()-> new UserNotFoundException("that user not in a database")
-        );
-
-
-        List<MealPlan> mealPlanList = user.getMealPlanList();
-
-        MealPlan deleteToMealPlan = mealPlanList.stream().filter(mealPlan -> mealPlan.getId().equals(mealPlanId)).findFirst().orElse(null);
-
-        assert deleteToMealPlan != null;
-        mealPlanRepository.delete(deleteToMealPlan);
-
-        return MealPlanResponse.builder().id(deleteToMealPlan.getId()).title(deleteToMealPlan.getTitle()).description(deleteToMealPlan.getDescription()).recipes(deleteToMealPlan.getRecipes()).nutritional(deleteToMealPlan.getNutritional()).information(deleteToMealPlan.getInformation()).portionSizes(deleteToMealPlan.getPortionSizes()).creationDate(deleteToMealPlan.getCreationDate()).build();
-    }
-
-    @Override
-    public MealPlanResponse updateSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO) throws MealPlanNotFoundException, UserNotFoundException {
-
-        User user = userRepository.findById(userId).orElseThrow(
-                ()-> new UserNotFoundException("that user not in a database")
-        );
-
-
-        List<MealPlan> mealPlanList = user.getMealPlanList();
-
-        MealPlan updateToMealPlan = mealPlanList.stream().filter(mealPlan -> mealPlan.getId().equals(mealPlanId)).findFirst().orElse(null);
-
-        assert updateToMealPlan != null;
-        updateToMealPlan.setUser(user);
-        updateToMealPlan.setTitle(mealPlanDTO.getTitle());
-        updateToMealPlan.setDescription(mealPlanDTO.getDescription());
-        updateToMealPlan.setRecipes(mealPlanDTO.getRecipes());
-        updateToMealPlan.setNutritional(mealPlanDTO.getNutritional());
-        updateToMealPlan.setInformation(mealPlanDTO.getInformation());
-        updateToMealPlan.setPortionSizes(mealPlanDTO.getPortionSizes());
-        updateToMealPlan.setCreationDate(mealPlanDTO.getCreationDate());
-
-        mealPlanRepository.save(updateToMealPlan);
-
-        return MealPlanResponse.builder().id(updateToMealPlan.getId())
-                .title(updateToMealPlan.getTitle())
-                .description(updateToMealPlan.getDescription())
-                .recipes(updateToMealPlan.getRecipes())
-                .creationDate(updateToMealPlan.getCreationDate())
-                .nutritional(updateToMealPlan.getNutritional())
-                .information(updateToMealPlan.getInformation())
-                .portionSizes(updateToMealPlan.getPortionSizes())
-                .build();
-
-    }
-
-    @Override
-    public MealPlanResponse getSpecificMealPlanInUser(Long userId, Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException {
-
-        User user = userRepository.findById(userId).orElseThrow(
-                ()-> new UserNotFoundException("that user not in a database")
-        );
-
-
-        List<MealPlan> mealPlanList = user.getMealPlanList();
-
-        MealPlan getToMealPlan = mealPlanList.stream().filter(mealPlan -> mealPlan.getId().equals(mealPlanId)).findFirst().orElse(null);
-
-        assert getToMealPlan != null;
-        return MealPlanResponse.builder().id(getToMealPlan.getId()).title(getToMealPlan.getTitle()).description(getToMealPlan.getDescription()).recipes(getToMealPlan.getRecipes()).nutritional(getToMealPlan.getNutritional()).information(getToMealPlan.getInformation()).portionSizes(getToMealPlan.getPortionSizes()).creationDate(getToMealPlan.getCreationDate()).build();
-    }
 
     @Override
     public MealPlanResponse createMealPlan(Long userId, MealPlanDTO mealPlanDTO, MultipartFile file) throws MealPlanNotFoundException, UserNotFoundException, IOException {
@@ -195,10 +68,93 @@ public class MealPlanServiceImpl implements MealPlanService {
 
         mealPlanRepository.save(mealPlan);
 
-        return MealPlanResponse.builder().id(mealPlan.getId()).title(mealPlan.getTitle()).description(mealPlan.getDescription()).recipes(mealPlan.getRecipes()).nutritional(mealPlan.getNutritional()).information(mealPlan.getInformation()).portionSizes(mealPlan.getPortionSizes()).imagePath(mealPlan.getImagePath()).creationDate(mealPlan.getCreationDate()).creationTime(mealPlan.getCreationTime()).build();
+        return MealPlanResponse.builder().id(mealPlan.getId()).title(mealPlan.getTitle()).description(mealPlan.getDescription()).recipes(mealPlan.getRecipes()).nutritional(mealPlan.getNutritional()).information(mealPlan.getInformation()).portionSizes(mealPlan.getPortionSizes()).imagePath(mealPlan.getImagePath()).creationDate(mealPlan.getCreationDate()).creationTime(mealPlan.getCreationTime()).userId(mealPlan.getUser().getId()).build();
 
 
+    }
 
+    @Override
+    public List<MealPlanResponse> getAllMealPlan()  {
+
+        List<MealPlan> mealPlanList = mealPlanRepository.findAll();
+
+        return mealPlanList.stream().map(mealPlan -> MealPlanResponse.builder().id(mealPlan.getId()).creationDate(mealPlan.getCreationDate()).creationTime(mealPlan.getCreationTime()).description(mealPlan.getDescription()).information(mealPlan.getInformation()).nutritional(mealPlan.getNutritional()).portionSizes(mealPlan.getPortionSizes()).recipes(mealPlan.getRecipes()).title(mealPlan.getTitle()).imagePath(mealPlan.getImagePath()).build()).toList();
+    }
+
+    @Override
+    public List<MealPlanResponse> getSpecificUserMealPlans(Long userId) throws UserNotFoundException, MealPlanNotFoundException {
+
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("that user not in a database")
+        );
+
+        List<MealPlan> specificMealPlanList = user.getMealPlanList();
+
+        return specificMealPlanList.stream().map(mealPlan -> MealPlanResponse.builder().id(mealPlan.getId()).creationDate(mealPlan.getCreationDate()).creationTime(mealPlan.getCreationTime()).description(mealPlan.getDescription()).information(mealPlan.getInformation()).nutritional(mealPlan.getNutritional()).portionSizes(mealPlan.getPortionSizes()).recipes(mealPlan.getRecipes()).title(mealPlan.getTitle()).imagePath(mealPlan.getImagePath()).build()).toList();
+
+
+    }
+
+    @Override
+    public MealPlanResponse getSpecificUserSpecificMealPlan(Long userId, Long mealPlanId) throws UserNotFoundException, MealPlanNotFoundException {
+
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("that user not found")
+        );
+
+        MealPlan specificMealPlan = user.getMealPlanList().stream().filter(mealPlan1 -> mealPlan1.getId().equals(mealPlanId)).findFirst().orElse(null);
+
+        if (specificMealPlan == null){
+            throw new MealPlanNotFoundException("that meal plan not in a database");
+        }
+        return MealPlanResponse.builder().id(specificMealPlan.getId()).creationTime(specificMealPlan.getCreationTime()).creationDate(specificMealPlan.getCreationDate()).description(specificMealPlan.getDescription()).information(specificMealPlan.getInformation()).nutritional(specificMealPlan.getNutritional()).portionSizes(specificMealPlan.getPortionSizes()).recipes(specificMealPlan.getRecipes()).title(specificMealPlan.getTitle()).imagePath(specificMealPlan.getImagePath()).userId(specificMealPlan.getUser().getId()).build();
+    }
+
+    @Override
+    public MealPlanResponse deleteSpecificUserSpecificMealPlan(Long userId, Long mealPlanId) throws UserNotFoundException, MealPlanNotFoundException {
+
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("that user not found")
+        );
+
+        MealPlan specificMealPlan = user.getMealPlanList().stream().filter(mealPlan1 -> mealPlan1.getId().equals(mealPlanId)).findFirst().orElse(null);
+
+
+        assert specificMealPlan != null;
+        mealPlanRepository.deleteById(specificMealPlan.getId());
+
+        return MealPlanResponse.builder().id(specificMealPlan.getId()).creationTime(specificMealPlan.getCreationTime()).creationDate(specificMealPlan.getCreationDate()).description(specificMealPlan.getDescription()).information(specificMealPlan.getInformation()).nutritional(specificMealPlan.getNutritional()).portionSizes(specificMealPlan.getPortionSizes()).recipes(specificMealPlan.getRecipes()).title(specificMealPlan.getTitle()).imagePath(specificMealPlan.getImagePath()).userId(specificMealPlan.getUser().getId()).build();
+
+
+    }
+
+    @Override
+    public MealPlanResponse updateSpecificUserSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO, MultipartFile file) throws UserNotFoundException, MealPlanNotFoundException, IOException {
+
+        MealPlan mealPlan = mealPlanRepository.findById(mealPlanId).orElseThrow(
+                ()-> new MealPlanNotFoundException("that meal not in a database")
+        );
+
+        modelMapper.map(mealPlanDTO,mealPlan);
+
+// Update date and time
+        mealPlan.setCreationDate(LocalDate.now());
+        mealPlan.setCreationTime(LocalTime.now());
+
+        if (file != null && !file.isEmpty()) {
+            // Upload file to Cloudinary if file is present
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), null);
+            String imageUrl = (String) uploadResult.get("url");
+            mealPlan.setImagePath(imageUrl);
+
+            System.out.println("image url  ================     ");
+            System.out.println(imageUrl);
+        }    
+        
+
+        mealPlanRepository.save(mealPlan);
+
+        return MealPlanResponse.builder().id(mealPlan.getId()).creationTime(mealPlan.getCreationTime()).creationDate(mealPlan.getCreationDate()).description(mealPlan.getDescription()).information(mealPlan.getInformation()).nutritional(mealPlan.getNutritional()).portionSizes(mealPlan.getPortionSizes()).recipes(mealPlan.getRecipes()).title(mealPlan.getTitle()).imagePath(mealPlan.getImagePath()).userId(mealPlan.getUser().getId()).build();
 
     }
 
