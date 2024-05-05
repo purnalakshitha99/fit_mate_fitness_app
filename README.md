@@ -3,10 +3,10 @@ Please go under edit and edit this file as needed for your project
 
 # Team Name - Fit Mate
 # Project Group - WE_JUNE_28
-### Group Leader - IT21185298 - Pramathilaka S.P.D.M
-### Member 2 - IT21185502 - Ekanayaka H.E.M.P.L
-### Member 3 - IT21158254 - Wijenandana S.D 
-### Member 4 - IT21157950 - Karunarathna J.H.H.N
+### Group Leader - IT21185298 - Pramathilaka S.P.D.M(dilshan-mp)
+### Member 2 - IT21185502 - Ekanayaka H.E.M.P.L(purnalakshitha99)
+### Member 3 - IT21158254 - Wijenandana S.D (SasidaDilhan)
+### Member 4 - IT21157950 - Karunarathna J.H.H.N(
 
 #### Brief Description of your Solution - 
 
