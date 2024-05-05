@@ -18,8 +18,6 @@ const NavBar = () => {
     setLoggedInUser(JSON.parse(userData));
   }, []);
 
-  
-
   const handleLogOut = async () => {
     window.location.href = "http://localhost:8080/logout";
     localStorage.removeItem("user");
@@ -60,13 +58,15 @@ const NavBar = () => {
     <div className="max-h-max">
       <Navbar className=" z-50 rounded-none top-0  w-full h-[108px] px-4 py-2 border-none lg:px-8 lg:py-4 bg-background text-blue-gray-900">
         <div className="flex items-center justify-between ">
-          <Typography
-            as="a"
-            className="mr-4 text-white cursor-pointer font-serif text-2xl py-1.5 font-medium "
-          >
-            Fitmate
-            <p className=" text-sm">Hello! {loggedInUser.username}</p>
-          </Typography>
+          <Link to="/home">
+            <Typography
+              as="a"
+              className="mr-4 text-white cursor-pointer font-serif text-2xl py-1.5 font-medium "
+            >
+              Fitmate
+              <p className=" text-sm">Hello! {loggedInUser.username}</p>
+            </Typography>
+          </Link>
 
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
