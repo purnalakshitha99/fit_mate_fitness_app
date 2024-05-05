@@ -8,12 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 @Data
 public class MealPlanDTO {
 
-    private String title;
+    private String mealPlanType;
     private String description;
     private String recipes;
     private String nutritional;
     private String information;
-    private Integer portionSizes;
+    private String portionSizes;
 
 
     private MultipartFile imagePath;
