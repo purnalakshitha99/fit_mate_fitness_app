@@ -68,7 +68,7 @@ public class MealPlanServiceImpl implements MealPlanService {
 
         mealPlanRepository.save(mealPlan);
 
-        return MealPlanResponse.builder().id(mealPlan.getId()).title(mealPlan.getTitle()).description(mealPlan.getDescription()).recipes(mealPlan.getRecipes()).nutritional(mealPlan.getNutritional()).information(mealPlan.getInformation()).portionSizes(mealPlan.getPortionSizes()).imagePath(mealPlan.getImagePath()).creationDate(mealPlan.getCreationDate()).creationTime(mealPlan.getCreationTime()).build();
+        return MealPlanResponse.builder().id(mealPlan.getId()).title(mealPlan.getTitle()).description(mealPlan.getDescription()).recipes(mealPlan.getRecipes()).nutritional(mealPlan.getNutritional()).information(mealPlan.getInformation()).portionSizes(mealPlan.getPortionSizes()).imagePath(mealPlan.getImagePath()).creationDate(mealPlan.getCreationDate()).creationTime(mealPlan.getCreationTime()).userId(mealPlan.getUser().getId()).build();
 
 
     }
