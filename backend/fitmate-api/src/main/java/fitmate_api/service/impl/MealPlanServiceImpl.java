@@ -134,9 +134,7 @@ public class MealPlanServiceImpl implements MealPlanService {
         }
         mealPlanRepository.deleteById(specificMealPlan.getId());
 
-
         return modelMapper.map(specificMealPlan, MealPlanResponse.class);
-
 
     }
 
