@@ -6,8 +6,12 @@ import fitmate_api.exception.UserNotFoundException;
 import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -17,12 +21,18 @@ public class MealPlanController {
 
     private MealPlanService mealPlanService;
 
+//    @PostMapping("/users/{user_id}/meal_plans")
+//    public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanDTO mealPlanDTO)throws UserNotFoundException {
+//
+//
+//
+//        return mealPlanService.create(userId, mealPlanDTO);
+//    }
+
     @PostMapping("/users/{user_id}/meal_plans")
-    public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanDTO mealPlanDTO)throws UserNotFoundException {
+    public MealPlanResponse createMealPlan(@PathVariable("user_id")Long userId,@ModelAttribute MealPlanDTO mealPlanDTO, @RequestParam("imagePath")MultipartFile file)throws MealPlanNotFoundException,UserNotFoundException, IOException {
 
-
-
-        return mealPlanService.create(userId, mealPlanDTO);
+        return mealPlanService.createMealPlan(userId,mealPlanDTO,file);
     }
 
 

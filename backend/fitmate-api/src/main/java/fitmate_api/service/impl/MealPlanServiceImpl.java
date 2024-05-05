@@ -1,5 +1,6 @@
 package fitmate_api.service.impl;
 
+import com.cloudinary.Cloudinary;
 import fitmate_api.DTO.MealPlanDTO;
 
 import fitmate_api.exception.MealPlanNotFoundException;
@@ -14,8 +15,15 @@ import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -25,32 +33,33 @@ public class MealPlanServiceImpl implements MealPlanService {
 
     private final MealPlanRepository mealPlanRepository;
     private final UserRepository userRepository;
+    private Cloudinary cloudinary;
 
     private ModelMapper modelMapper;
 
-    public MealPlanResponse create(Long userId, MealPlanDTO mealPlanDTO)throws UserNotFoundException {
-
-         User user = userRepository.findById(userId).orElseThrow(
-                () -> new UserNotFoundException("User not found")
-        );
-
-        MealPlan mealPlan = modelMapper.map(mealPlanDTO,MealPlan.class);
-
-        mealPlan.setUser(user);
-
-        mealPlanRepository.save(mealPlan);
-
-        return MealPlanResponse.builder().id(mealPlan.getId())
-                .title(mealPlan.getTitle())
-                .description(mealPlan.getDescription())
-                .recipes(mealPlan.getRecipes())
-                .creationDate(mealPlan.getCreationDate())
-                .nutritional(mealPlan.getNutritional())
-                .information(mealPlan.getInformation())
-                .portionSizes(mealPlan.getPortionSizes())
-                .build();
-
-    }
+//    public MealPlanResponse create(Long userId, MealPlanDTO mealPlanDTO)throws UserNotFoundException {
+//
+//         User user = userRepository.findById(userId).orElseThrow(
+//                () -> new UserNotFoundException("User not found")
+//        );
+//
+//        MealPlan mealPlan = modelMapper.map(mealPlanDTO,MealPlan.class);
+//
+//        mealPlan.setUser(user);
+//
+//        mealPlanRepository.save(mealPlan);
+//
+//        return MealPlanResponse.builder().id(mealPlan.getId())
+//                .title(mealPlan.getTitle())
+//                .description(mealPlan.getDescription())
+//                .recipes(mealPlan.getRecipes())
+//                .creationDate(mealPlan.getCreationDate())
+//                .nutritional(mealPlan.getNutritional())
+//                .information(mealPlan.getInformation())
+//                .portionSizes(mealPlan.getPortionSizes())
+//                .build();
+//
+//    }
 
     public List<MealPlanResponse> getSpecificUserMealPlans(Long userId)throws UserNotFoundException{
 
@@ -155,6 +164,42 @@ public class MealPlanServiceImpl implements MealPlanService {
 
         assert getToMealPlan != null;
         return MealPlanResponse.builder().id(getToMealPlan.getId()).title(getToMealPlan.getTitle()).description(getToMealPlan.getDescription()).recipes(getToMealPlan.getRecipes()).nutritional(getToMealPlan.getNutritional()).information(getToMealPlan.getInformation()).portionSizes(getToMealPlan.getPortionSizes()).creationDate(getToMealPlan.getCreationDate()).build();
+    }
+
+    @Override
+    public MealPlanResponse createMealPlan(Long userId, MealPlanDTO mealPlanDTO, MultipartFile file) throws MealPlanNotFoundException, UserNotFoundException, IOException {
+
+        User user = userRepository.findById(userId).orElseThrow(
+                ()-> new UserNotFoundException("that user not in a database")
+        );
+
+        MealPlan mealPlan = modelMapper.map(mealPlanDTO,MealPlan.class);
+
+        mealPlan.setCreationDate(LocalDate.now());
+
+        LocalTime time = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = time.format(formatter);
+
+        mealPlan.setCreationTime(LocalTime.parse(formattedTime));
+        mealPlan.setUser(user);
+
+
+        // Upload file to Cloudinary if file is present
+        Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), null);
+        String imageUrl = (String) uploadResult.get("url");
+        mealPlan.setImagePath(imageUrl);
+
+        System.out.println("image url  ================     ");
+        System.out.println(imageUrl);
+
+        mealPlanRepository.save(mealPlan);
+
+        return MealPlanResponse.builder().id(mealPlan.getId()).title(mealPlan.getTitle()).description(mealPlan.getDescription()).recipes(mealPlan.getRecipes()).nutritional(mealPlan.getNutritional()).information(mealPlan.getInformation()).portionSizes(mealPlan.getPortionSizes()).imagePath(mealPlan.getImagePath()).creationDate(mealPlan.getCreationDate()).creationTime(mealPlan.getCreationTime()).build();
+
+
+
+
     }
 
 
