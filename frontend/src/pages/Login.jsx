@@ -36,11 +36,12 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         navigate("/home");
-        alert(response.data);
+        alert("welcome!", response.data.firstName);
+        localStorage.setItem("user", JSON.stringify(response.data));
       })
       .catch((error) => {
         console.log(error);
-        alert(error?.response?.data);
+        alert("Wrong Creditials!");
       });
   };
 
@@ -91,7 +92,7 @@ const Login = () => {
             google login
           </button>
           <div className="flex flex-row">
-            <p className="mr-1">Don't have an Account?</p>
+            <span className="mr-1">Don't have an Account?</span>
 
             <Link to="/register">
               <p className="ml-1 text-blue-600 underline cursor-pointer">
