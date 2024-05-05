@@ -120,7 +120,9 @@ public class MealPlanServiceImpl implements MealPlanService {
         MealPlan specificMealPlan = user.getMealPlanList().stream().filter(mealPlan1 -> mealPlan1.getId().equals(mealPlanId)).findFirst().orElse(null);
 
 
-        assert specificMealPlan != null;
+        if (specificMealPlan == null){
+            throw new MealPlanNotFoundException("that meal plan not in a database");
+        }
         mealPlanRepository.deleteById(specificMealPlan.getId());
 
         return MealPlanResponse.builder().id(specificMealPlan.getId()).creationTime(specificMealPlan.getCreationTime()).creationDate(specificMealPlan.getCreationDate()).description(specificMealPlan.getDescription()).information(specificMealPlan.getInformation()).nutritional(specificMealPlan.getNutritional()).portionSizes(specificMealPlan.getPortionSizes()).recipes(specificMealPlan.getRecipes()).title(specificMealPlan.getTitle()).imagePath(specificMealPlan.getImagePath()).userId(specificMealPlan.getUser().getId()).build();
