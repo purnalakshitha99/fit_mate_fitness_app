@@ -16,7 +16,7 @@ const Tabs = () => {
           data-tabs="tabs"
           role="list"
         >
-          <li className={`z-30 flex-auto text-center ${activeTab === "app" ? "bg-red-50" : ""}`}>
+          <li className={`z-30 flex-auto text-center ${activeTab === "app" ? "" : ""}`}>
             <a
               className="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
@@ -28,7 +28,7 @@ const Tabs = () => {
               <span className="ml-1">Feed</span>
             </a>
           </li>
-          <li className={`z-30 flex-auto text-center ${activeTab === "message" ? "bg-red-50" : ""}`}>
+          <li className={`z-30 flex-auto text-center ${activeTab === "message" ? "" : ""}`}>
             <a
               className="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
@@ -40,7 +40,7 @@ const Tabs = () => {
               <span className="ml-1">Messages</span>
             </a>
           </li>
-          <li className={`z-30 flex-auto text-center ${activeTab === "settings" ? "bg-red-50" : ""}`}>
+          <li className={`z-30 flex-auto text-center ${activeTab === "settings" ? "" : ""}`}>
             <a
               className="z-30 flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""

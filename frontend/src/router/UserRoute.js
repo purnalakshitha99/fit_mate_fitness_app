@@ -16,8 +16,6 @@ const UserRoute = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/imageUpload" element={<ImageUpload />} />
         <Route path="/profile" element={<Profile />} />
-        
-     
       </Routes>
     </BrowserRouter>
   );

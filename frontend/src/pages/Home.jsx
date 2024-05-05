@@ -51,26 +51,16 @@ const Home = () => {
       <div className="fixed top-0 left-0 w-full z-10">
         <NavBar />
       </div>
+      <div className="fixed top-[75px] left-0 h-screen z-10">
+        <SideBar />
+      </div>
       <div className="flex">
-        <div className="fixed top-[75px] left-0 h-screen z-10">
-          <SideBar />
-        </div>
         <div className="ml-96 w-full">
           <div className=" space-y-10  mt-24  m-auto">
             <div>
               <Tabs />
             </div>
           </div>
-          {/* {isMealPlanOpen && <MealPlan closeMealPlan={closeMealPlan} />}
-          {isMyActivitiesOpen && (
-            <MyActivities closeMyActivities={closeMyActivities} />
-          )}
-          {isWorkOutPostOpen && (
-            <WorkOutPost closeWorkOutPost={closeWorkOutPost} />
-          )}
-          {isWorkOutStatusOpen && (
-            <WorkOutStatus closeWorkOutStatus={closeWorkOutStatus} />
-          )} */}
         </div>
       </div>
     </div>
