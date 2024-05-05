@@ -26,9 +26,9 @@ public class postServiceImpl implements PostService {
     private UserRepository userRepository;
     private ModelMapper modelMapper;
     @Override
-    public Post savePost(PostDTO postDTO) {
+    public Post savePost(PostDTO postDTO, Long id) {
 
-        User user = userRepository.findById(postDTO.getUserId()).orElseThrow(
+        User user = userRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User Not Found")
         );
 
@@ -36,6 +36,7 @@ public class postServiceImpl implements PostService {
         post.setContent(postDTO.getContent());
         post.setUser(user);
         post.setUsername(user.getFirstName());
+        post.setPostImages(postDTO.getImageUrls());
         post.setCreatedAt(LocalTime.now());
 
         return postRepository.save(post);

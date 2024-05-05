@@ -14,40 +14,33 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long Id;
 
-    @Column(name = "firstname")
+    private Long Id;
     private String firstName;
 
-    @Column(name = "lastname")
     private String lastName;
 
-    @Column(name = "username")
     private String username;
 
-    @Column(name = "email")
     private String email;
 
-    @Column(name = "password_hash")
     private String passwordHash;
 
-    @Column(name = "profile_picture_url")
     private String profilePictureUrl;
 
-    @Column(name = "phone_number")
     private String phoneNumber;
 
     @ElementCollection
     @CollectionTable(name = "followed_user_id", joinColumns = @JoinColumn(name = "follower_id"))
-    @Column(name = "followed_by_user_id")
     private List<Long> followedUsers = new ArrayList<>();
 
-    @Column(name = "bio")
     private String bio;
 
-    @Column(name = "account_created")
     private LocalTime accountCreated;
+
+    private Integer followingCount = 0;
+
+    private Integer followersCount = 0;
 
     @OneToMany(mappedBy = "user")
     private List<MealPlan> mealPlanList;

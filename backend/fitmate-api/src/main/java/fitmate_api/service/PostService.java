@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public interface PostService {
-    Post savePost(PostDTO postDTO);
+    Post savePost(PostDTO postDTO, Long id);
 
     List<PostResponse> getAllPosts();
 
