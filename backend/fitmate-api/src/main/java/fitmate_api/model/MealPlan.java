@@ -17,18 +17,15 @@ public class MealPlan {
     private Long id;
 
     private String mealPlanType;
-    private String description;
+    private String dietaryPreferences;
     private String recipes;
-    private String nutritional;
-    private String information;
+    private String nutritionalInformation;
+    private String ingredients;
     private String portionSizes;
+    private String cookingInstructions;
     private LocalDate creationDate;
     private LocalTime creationTime;
-
     private String imagePath;
-
-
-
 
     @ManyToOne
     private User user;
