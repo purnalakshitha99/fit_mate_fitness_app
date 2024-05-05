@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// Sidebar.js
+import React, { useState } from "react";
 import {
   Card,
   Typography,
