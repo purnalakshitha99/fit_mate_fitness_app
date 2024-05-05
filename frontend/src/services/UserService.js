@@ -18,11 +18,15 @@ class UserService {
   }
 
   loginUser(user) {
-    return axios.post(BASE_URL + "/login" ,user)
+    return axios.post(BASE_URL + "/login", user);
   }
 
-  savePost(post, userId){
-    return axios.post(BASE_URL_POST, post, userId)
+  savePost(post, userId) {
+    return axios.post(BASE_URL_POST, post, userId);
+  }
+
+  followUsers(userId, followerId) {
+    return axios.post(BASE_URL + "/" + userId + "/follow/" + followerId);
   }
 }
 

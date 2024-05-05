@@ -66,7 +66,7 @@ const SideBar = ({
               <ListItemPrefix>
                 <PresentationChartBarIcon className="h-5 w-5" />
               </ListItemPrefix>
-              Home
+              Create Post
             </ListItem>
           </Link>
           <ListItem

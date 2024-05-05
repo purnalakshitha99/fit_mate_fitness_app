@@ -1,7 +1,11 @@
 import React from "react";
 import NavBar from "../components/NavBar";
+import UserService from "../services/UserService";
 
 const Profile = ({ loggedInUser }) => {
+
+  
+
   return (
     <div className="w-[400px] h-full  flex flex-col  gap-4">
       <div className=" flex flex-col items-center w-full">

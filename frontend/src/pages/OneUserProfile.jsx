@@ -7,7 +7,13 @@ import SideBar from "../components/SideBar";
 const OneUserProfile = () => {
   const [user, setUser] = useState({});
   const { id } = useParams();
+  const [loggedInUser, setLoggedInUser] = useState({});
 
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    setLoggedInUser(JSON.parse(user));
+  }, []);
+  console.log("login user", loggedInUser.id);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -20,6 +26,15 @@ const OneUserProfile = () => {
 
   console.log("user id ", id);
 
+  const handleFollowClick = async (userId, logId) => {
+    try {
+      const response = await UserService.followUsers(userId, logId);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div>
       {" "}
@@ -30,8 +45,15 @@ const OneUserProfile = () => {
         <SideBar />
       </div>
       <div>
-        <div className=" flex justify-center">
-          <img src={user.profilePictureUrl} />
+        <div className=" flex justify-center mt-32 ml-[200px]">
+          <img
+            className=" w-[200px] h-[200px] rounded-full"
+            src={user.profilePictureUrl}
+          />
+          <button onClick={() => handleFollowClick(id, loggedInUser.id)}>
+            follow
+            {loggedInUser.id}
+          </button>
         </div>
       </div>
     </div>
