@@ -3,6 +3,8 @@ package fitmate_api.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +23,10 @@ public class MealPlan {
     private String nutritional;
     private String information;
     private Integer portionSizes;
-    private Date creationDate;
+    private LocalDate creationDate;
+    private LocalTime creationTime;
+
+    private String imagePath;
 
     @ManyToOne
     private User user;

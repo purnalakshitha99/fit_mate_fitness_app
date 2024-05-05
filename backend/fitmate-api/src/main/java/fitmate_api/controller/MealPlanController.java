@@ -3,12 +3,18 @@ package fitmate_api.controller;
 import fitmate_api.DTO.MealPlanDTO;
 import fitmate_api.exception.MealPlanNotFoundException;
 import fitmate_api.exception.UserNotFoundException;
+import fitmate_api.model.MealPlan;
 import fitmate_api.response.MealPlanResponse;
 import fitmate_api.service.MealPlanService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.*;
 
+import org.springframework.security.core.parameters.P;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
+
 
 @RestController
 @AllArgsConstructor
@@ -17,46 +23,48 @@ public class MealPlanController {
 
     private MealPlanService mealPlanService;
 
+
     @PostMapping("/users/{user_id}/meal_plans")
-    public MealPlanResponse create(@PathVariable("user_id")Long userId, @RequestBody MealPlanDTO mealPlanDTO)throws UserNotFoundException {
+    public MealPlanResponse createMealPlan(@PathVariable("user_id")Long userId,@ModelAttribute MealPlanDTO mealPlanDTO, @RequestParam("imagePath")MultipartFile file)throws MealPlanNotFoundException,UserNotFoundException, IOException {
 
-
-
-        return mealPlanService.create(userId, mealPlanDTO);
+        return mealPlanService.createMealPlan(userId,mealPlanDTO,file);
     }
 
+    @GetMapping("/users/meal_plans")
+   public List<MealPlanResponse> getAllMealPlan(){
+
+        return mealPlanService.getAllMealPlan();
+   }
 
     @GetMapping("/users/{user_id}/meal_plans")
-    public List<MealPlanResponse> getSpecificUserMealPlans(@PathVariable("user_id")Long userId)throws UserNotFoundException{
+    public List<MealPlanResponse> getSpecificUserMealPlans(@PathVariable("user_id")Long userId)throws UserNotFoundException,MealPlanNotFoundException{
 
         return mealPlanService.getSpecificUserMealPlans(userId);
+
     }
 
     @GetMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
-    public MealPlanResponse getSpecificMealPlanInUser(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException{
+    public MealPlanResponse getSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException{
 
-        return mealPlanService.getSpecificMealPlanInUser(userId,mealPlanId);
-    }
-
-
-    @GetMapping("/users/meal_plans")
-    public List<MealPlanResponse> getAllMealPlan(){
-
-        return mealPlanService.getAllMealPlan();
+        return mealPlanService.getSpecificUserSpecificMealPlan(userId,mealPlanId);
     }
 
     @DeleteMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
-    public MealPlanResponse deleteSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException{
+    public MealPlanResponse deleteSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException{
 
-        return mealPlanService.deleteSpecificMealPlan(userId,mealPlanId);
+        return mealPlanService.deleteSpecificUserSpecificMealPlan(userId,mealPlanId);
     }
 
 
     @PutMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
-    public MealPlanResponse updateSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId,@RequestBody MealPlanDTO mealPlanDTO)throws MealPlanNotFoundException,UserNotFoundException{
+    public MealPlanResponse updateSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId, @PathVariable("meal_plan_id")Long mealPlanId, @ModelAttribute MealPlanDTO mealPlanDTO, @RequestParam("imagePath")MultipartFile file)throws UserNotFoundException,MealPlanNotFoundException,IOException{
 
-        return mealPlanService.updateSpecificMealPlan(userId,mealPlanId,mealPlanDTO);
+        return mealPlanService.updateSpecificUserSpecificMealPlan(userId,mealPlanId,mealPlanDTO,file);
     }
+
+
+
+
 
 
 

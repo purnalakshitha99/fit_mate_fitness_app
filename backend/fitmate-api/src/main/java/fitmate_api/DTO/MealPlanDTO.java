@@ -1,8 +1,9 @@
 package fitmate_api.DTO;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
+
 
 @Data
 public class MealPlanDTO {
@@ -13,5 +14,7 @@ public class MealPlanDTO {
     private String nutritional;
     private String information;
     private Integer portionSizes;
-    private Date creationDate;
+
+
+    private MultipartFile imagePath;
 }
