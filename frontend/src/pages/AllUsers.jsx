@@ -87,7 +87,8 @@ const AllUsers = () => {
                   </div>
                   <button
                     onClick={() => handleFollowClick(u.id)}
-                    className="bg-blue-600 rounded-lg w-full"
+                    className="rounded-lg w-full p-2 text-white text-lg font-semibold bg-[#74779bf0]  hover:bg-blue-400 transition-colors"
+                  
                   >
                     {followStatus[u.userId] ? "Unfollow" : "Follow"}
                   </button>

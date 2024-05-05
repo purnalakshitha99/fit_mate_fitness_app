@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Card,
   Typography,
@@ -29,6 +29,18 @@ const SideBar = ({
   const [isWorkOutPostOpen, setIsWorkOutPostOpen] = useState(false);
   const [isWorkOutStatusOpen, setIsWorkOutStatusOpen] = useState(false);
 
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    setLoggedInUser(JSON.parse(userData));
+  }, []);
+
+  const handleLogOut = async () => {
+    window.location.href = "http://localhost:8080/logout";
+    localStorage.removeItem("user");
+  };
+
   const closeMealPlan = () => {
     setIsMealPlanOpen(false);
   };
@@ -47,20 +59,8 @@ const SideBar = ({
 
   return (
     <>
-      <Card className="w-full mt-8 md:w-[20rem] h-full p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white left-0">
-        <Link to="/profile">
-          <div className="mb-2 p-4 flex flex-col items-center md:items-start ">
-            <img
-              className="h-20 w-20 rounded-full"
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-              alt=""
-            />
-            <Typography className="text-2xl font-bold">
-              Sasida Dilhan
-            </Typography>
-          </div>
-        </Link>
-        <List className="">
+      <Card className="w-full mt-8 md:w-[20rem]  h-full p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white left-0">
+        <List className=" space-y-8 text-xl flex flex-col mt-12 ">
           <Link to="/home">
             <ListItem className="hover:bg-hoverBackground p-3">
               <ListItemPrefix>
@@ -144,7 +144,9 @@ const SideBar = ({
             </ListItemPrefix>
             Profile
           </ListItem>
-          <ListItem className="hover:bg-hoverBackground p-3">
+          <br></br>
+          <br></br>
+          <ListItem className="hover:bg-hoverBackground bg-red-400 p-3" onClick={handleLogOut}>
             <ListItemPrefix>
               <PowerIcon className="h-5 w-5" />
             </ListItemPrefix>
