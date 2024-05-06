@@ -23,7 +23,7 @@ public interface UserService {
 
     void deleteUser(Long id);
 
-    void updateUser(UserDTO userDTO,MultipartFile file, Long id) throws IOException;
+    void updateUser(UserDTO userDTO, Long id) throws IOException;
 
 
 

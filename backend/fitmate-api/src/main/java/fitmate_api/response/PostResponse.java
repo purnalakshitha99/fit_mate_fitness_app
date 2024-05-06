@@ -17,7 +17,8 @@ import java.util.List;
 @Data
 public class PostResponse {
 
-    private Long userId;
+    private Long postId;
+    private User user;
 
     private String username;
 
@@ -29,7 +30,7 @@ public class PostResponse {
 
     private Integer likeCount = 0;
 
-    private List<Long> postImages;
+    private List<String> postImages;
 
     private String video;
 
