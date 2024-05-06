@@ -12,6 +12,7 @@ const storage = getStorage(app);
 
 const CreatePost = () => {
   const [loggedIn, setLoggedIn] = useState({});
+  const [previewUrl, setPreviewUrl] = useState(null);
   const [post, setPost] = useState({
     content: "",
     imageUrls: [],
@@ -41,6 +42,7 @@ const CreatePost = () => {
     }
 
     const files = e.target.photo.files;
+
     if (files.length === 0) {
       toast.error("Please select at least one image");
       return;
@@ -54,6 +56,7 @@ const CreatePost = () => {
     for (const file of e.target.photo.files) {
       const imageRef = ref(storage, `/images/${file.name}`);
       await uploadBytes(imageRef, file);
+      setPreviewUrl(URL.createObjectURL(files));
       const imageUrl = await getDownloadURL(imageRef);
       imageUrls.push(imageUrl);
     }
@@ -84,7 +87,7 @@ const CreatePost = () => {
         </div>
       </div>
       <div className="flex">
-      
+       
         <div className="m-auto mt-32 mr-[400px] bg-gray-300">
           <div className="border shadow-xl p-8 rounded-lg  w-[800px]">
             <h2 className="text-center text-2xl font-bold mb-4">
@@ -117,6 +120,7 @@ const CreatePost = () => {
                   accept="image/*"
                   multiple // Allow multiple file selection
                 />
+                
               </div>
               {error && <p className="text-red-500">{error}</p>}
               <button
