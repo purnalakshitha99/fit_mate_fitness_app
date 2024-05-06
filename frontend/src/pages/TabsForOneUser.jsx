@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import Post from "./Post";
 import { Link } from "react-router-dom";
 import LoggedInsUserPost from "./LoggedInUserPosts";
+import UserService from "../services/UserService";
+import FriendsPosts from "./FriendsPosts";
 
-const TabsForOneUser = () => {
+const TabsForOneUser = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
 
   const [loggedInUser, setLoggedInUser] = useState({});
-
-
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
     setLoggedInUser(JSON.parse(userData));
   }, []);
+
+  
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -72,7 +74,7 @@ const TabsForOneUser = () => {
               aria-controls="workOutPlan"
               onClick={() => handleTabClick("workOutPlan")}
             >
-              <span className="ml-1">Workout Plan</span>
+              <span className="ml-1">Workout sad</span>
             </Link>
           </li>
         </ul>
@@ -85,7 +87,7 @@ const TabsForOneUser = () => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-            <LoggedInsUserPost loggedIn={loggedInUser} />
+              <FriendsPosts loggedIn= {userId} />
             </span>
           </div>
           <div

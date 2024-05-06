@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import CommentService from "../services/CommentService";
+import UserService from "../services/UserService";
+
 
 const CommentPopup = ({ postId, onClose }) => {
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editedCommentText, setEditedCommentText] = useState("");
+  const [refetch, setReFetch] = useState(false);
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -17,8 +20,8 @@ const CommentPopup = ({ postId, onClose }) => {
       }
     };
     fetchComments();
-  }, [postId]);
-
+  }, [refetch]);
+  console.log("post id:", postId);
   const handleChange = (e) => {
     setComment(e.target.value);
   };
@@ -28,20 +31,23 @@ const CommentPopup = ({ postId, onClose }) => {
     try {
       const loggedInUserId = JSON.parse(localStorage.getItem("user")).id;
 
-      await CommentService.saveComment(postId, {
+      await CommentService.saveComment( {
+        postId,
         userId: loggedInUserId,
-        commentText: comment
+        commentText: comment,
       });
-
+      setReFetch(true);
       const response = await CommentService.getComments(postId);
       setComments(response.data);
+      console.log(response)
 
       setComment("");
-      onClose();
     } catch (error) {
       console.error("Error adding comment:", error);
     }
   };
+
+  
 
   const handleDelete = async (commentId) => {
     try {
@@ -138,11 +144,8 @@ const CommentPopup = ({ postId, onClose }) => {
                   <button
                     className="text-blue-500 mr-2"
                     onClick={(e) =>
-                      handleStartEditing(
-                        comment.id,
-                        comment.commentText,
-                        e
-                      )}
+                      handleStartEditing(comment.id, comment.commentText, e)
+                    }
                   >
                     Edit
                   </button>
