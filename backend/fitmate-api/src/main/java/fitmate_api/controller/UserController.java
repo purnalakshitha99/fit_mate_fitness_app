@@ -45,8 +45,8 @@ public class UserController {
     }
 
     @PutMapping("/users/{user_id}")
-    public ResponseEntity<?> updateUser(@ModelAttribute UserDTO userDTO,@RequestParam("image") MultipartFile file, @PathVariable("user_id") Long id) throws IOException {
-        userService.updateUser(userDTO,file, id);
+    public ResponseEntity<?> updateUser(@RequestBody UserDTO userDTO, @PathVariable("user_id") Long id) throws IOException {
+        userService.updateUser(userDTO, id);
         return ResponseEntity.ok("User Updated!");
     }
 

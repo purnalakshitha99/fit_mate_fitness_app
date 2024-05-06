@@ -59,11 +59,12 @@ const SideBar = ({
     setIsWorkOutStatusOpen(false);
   };
 
+
   return (
     <>
       <Card className="w-full mt-8 md:w-[20rem]  h-full p-4 shadow-xl shadow-blue-gray-900/5 rounded-none bg-background text-white left-0">
         <List className=" space-y-8 text-xl flex flex-col mt-12 ">
-          <Link to="/home">
+          <Link to="/post">
             <ListItem className="hover:bg-hoverBackground p-3">
               <ListItemPrefix>
                 <PresentationChartBarIcon className="h-5 w-5" />
