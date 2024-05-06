@@ -17,6 +17,10 @@ class CommentService {
   editComment(commentId, comment) {
     return axios.put(BASE_URL + "/" + commentId, comment);
   }
+
+  deleteComment(commentId){
+    return axios.delete(BASE_URL + "/users/" + commentId)
+  }
 }
 
 export default new CommentService();
