@@ -5,7 +5,7 @@ import LoggedInsUserPost from "./LoggedInUserPosts";
 import UserService from "../services/UserService";
 import FriendsPosts from "./FriendsPosts";
 
-const TabsForOneUser = ({ userId }) => {
+const TabsForFriendsProfile = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
 
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -31,7 +31,7 @@ const TabsForOneUser = ({ userId }) => {
         >
           <li
             className={` flex-auto text-center ${
-              activeTab === "app" ? "bg-red-300" : ""
+              activeTab === "app" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <a
@@ -47,7 +47,7 @@ const TabsForOneUser = ({ userId }) => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "mealPlan" ? "" : ""
+              activeTab === "mealPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <a
@@ -63,7 +63,7 @@ const TabsForOneUser = ({ userId }) => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "workOutPlan" ? "" : ""
+              activeTab === "workOutPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <Link
@@ -98,7 +98,7 @@ const TabsForOneUser = ({ userId }) => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              asdad
+              mel plan for my profile
             </span>
           </div>
           <div
@@ -118,4 +118,4 @@ const TabsForOneUser = ({ userId }) => {
   );
 };
 
-export default TabsForOneUser;
+export default TabsForFriendsProfile;

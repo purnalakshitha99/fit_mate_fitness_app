@@ -7,15 +7,18 @@ export default function GetWorkOutStatus() {
     const user = localStorage.getItem("user");
     setLoggedInUser(JSON.parse(user));
   }, []);
-  console.log("log",loggedInUser)
+  console.log("log", loggedInUser);
   return (
     <div className="mt-5 text-black rounded-xl bg-background space-y-10">
       <div className="w-full sm:max-w-[1200px] p-4 space-y-5 bg-gray-300 rounded-md m-auto">
         <div className=" flex flex-row gap-x-5">
-        <img className=" w-[40px] h-[40px] rounded-full" src={loggedInUser.profilePictureUrl} />
-        <div className=" text-xl font-bold">
-          {loggedInUser.firstName} {loggedInUser.lastName}
-        </div>
+          <img
+            className=" w-[40px] h-[40px] rounded-full"
+            src={loggedInUser.profilePictureUrl}
+          />
+          <div className=" text-xl font-bold">
+            {loggedInUser.firstName} {loggedInUser.lastName}
+          </div>
         </div>
         <div className="flex flex-col sm:flex-row items-center juc space-y-3 sm:space-y-0 sm:space-x-3">
           <div className="flex flex-row">
@@ -104,52 +107,50 @@ export default function GetWorkOutStatus() {
         </div>
 
         <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4  w-full justify-center">
-                <button
-                  className="w-1/2 flex justify-center p-3 border gap-5 cursor-pointer"
-                  // onClick={() => handleLikeClick(index, post.postId)}
-                >
-                 
-                    <img
-                      className={`w-7 h-7`}
-                      src="https://img.icons8.com/emoji/48/red-heart.png"
-                      alt="red-heart"
-                    />
-                  
-                  Like
-                </button>
-                <div
-                  className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"
-                  // onClick={() => handleOpenPopup(post.postId)}
-                >
-                  <button>
-                    <img
-                      className="w-6 h-6 filter"
-                      src="https://img.icons8.com/ios/50/000000/speech-bubble--v1.png"
-                      alt="speech-bubble--v1"
-                    />
-                  </button>
-                  Comment
-                </div>
-                <div
-                  className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"
-                  // onClick={() => handleOpenPopup(post.postId)}
-                >
-                  <button>
-                    <img
-                      className="w-6 h-6 filter"
-                      src="https://img.icons8.com/ios/50/share-3.png"
-                      alt="share-3"
-                      // onClick={() => {
-                      //   setShareModel(true);
-                      //   setSharePostId(post.postId);
-                      // }}
-                    />
-                  </button>
-                  Share
-                </div>
-              </div>
+          <div className="flex items-center space-x-4  w-full justify-center">
+            <button
+              className="w-1/2 flex justify-center p-3 border gap-5 cursor-pointer"
+              // onClick={() => handleLikeClick(index, post.postId)}
+            >
+              <img
+                className={`w-7 h-7`}
+                src="https://img.icons8.com/emoji/48/red-heart.png"
+                alt="red-heart"
+              />
+              Like
+            </button>
+            <div
+              className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"
+              // onClick={() => handleOpenPopup(post.postId)}
+            >
+              <button>
+                <img
+                  className="w-6 h-6 filter"
+                  src="https://img.icons8.com/ios/50/000000/speech-bubble--v1.png"
+                  alt="speech-bubble--v1"
+                />
+              </button>
+              Comment
             </div>
+            <div
+              className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"
+              // onClick={() => handleOpenPopup(post.postId)}
+            >
+              <button>
+                <img
+                  className="w-6 h-6 filter"
+                  src="https://img.icons8.com/ios/50/share-3.png"
+                  alt="share-3"
+                  // onClick={() => {
+                  //   setShareModel(true);
+                  //   setSharePostId(post.postId);
+                  // }}
+                />
+              </button>
+              Share
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
