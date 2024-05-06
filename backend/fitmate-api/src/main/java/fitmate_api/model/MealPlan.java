@@ -5,8 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
+
 
 @Data
 @Entity
@@ -17,17 +16,19 @@ public class MealPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-    private String description;
+    private String mealPlanType;
+    private String dietaryPreferences;
     private String recipes;
-    private String nutritional;
-    private String information;
-    private Integer portionSizes;
+    private String nutritionalInformation;
+    private String ingredients;
+    private String portionSizes;
+    private String cookingInstructions;
     private LocalDate creationDate;
     private LocalTime creationTime;
-
     private String imagePath;
 
     @ManyToOne
     private User user;
+
+
 }
