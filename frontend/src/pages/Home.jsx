@@ -11,11 +11,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
-
   const [loggedInUser, setLoggedInUser] = useState({});
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (!userData) {
@@ -40,12 +39,12 @@ const Home = () => {
   return (
     <>
       <div>
-      <div className="fixed top-0 left-0 w-full z-10">
-        <NavBar  />
-      </div>
-      <div className="fixed top-[75px] left-0 h-screen z-10">
-        <SideBar />
-      </div>
+        <div className="fixed top-0 left-0 w-full z-10">
+          <NavBar />
+        </div>
+        <div className="fixed top-[75px] left-0 h-screen z-10">
+          <SideBar />
+        </div>
       </div>
       <div className="flex m-auto justify-center items-center">
         <div className=" w-full">
