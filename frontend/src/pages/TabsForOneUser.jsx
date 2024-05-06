@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import { Link } from "react-router-dom";
+import LoggedInsUserPost from "./LoggedInUserPosts";
 
-const Tabs = () => {
+const TabsForOneUser = () => {
   const [activeTab, setActiveTab] = useState("app");
+
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    setLoggedInUser(JSON.parse(userData));
+  }, []);
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -75,7 +85,7 @@ const Tabs = () => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              <Post />
+            <LoggedInsUserPost loggedIn={loggedInUser} />
             </span>
           </div>
           <div
@@ -106,4 +116,4 @@ const Tabs = () => {
   );
 };
 
-export default Tabs;
+export default TabsForOneUser;

@@ -1,11 +1,9 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import UserService from "../services/UserService";
+import { Link } from "react-router-dom";
 
 const Profile = ({ loggedInUser }) => {
-
-  
-
   return (
     <div className="w-[400px] h-full  flex flex-col  gap-4">
       <div className=" flex flex-col items-center w-full">
@@ -59,6 +57,13 @@ const Profile = ({ loggedInUser }) => {
           {loggedInUser.phoneNumber}
         </div>
       </div>
+
+      <Link to="/loggedinUser">
+        {" "}
+        <button className="rounded-lg w-full p-2 text-white text-lg font-semibold bg-[#74779bf0]  hover:bg-blue-400 transition-colors">
+          View Profile
+        </button>
+      </Link>
     </div>
   );
 };

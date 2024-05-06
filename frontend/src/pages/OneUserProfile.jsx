@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import UserService from "../services/UserService";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
+import TabsForOneUser from "./TabsForOneUser";
 
 const OneUserProfile = () => {
   const [user, setUser] = useState({});
@@ -56,6 +57,7 @@ const OneUserProfile = () => {
           </button>
         </div>
       </div>
+      <TabsForOneUser />
     </div>
   );
 };
