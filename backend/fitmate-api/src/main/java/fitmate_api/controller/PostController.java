@@ -33,9 +33,9 @@ public class PostController {
     }
 
     @GetMapping("/posts/{post_id}")
-    public ResponseEntity<PostResponse> getUserById(@PathVariable("post_id") Long id){
-        PostResponse postResponse = postService.getPostById(id);
-        return ResponseEntity.ok(postResponse);
+    public List<PostResponse> getUserById(@PathVariable("post_id") Long id){
+        List<PostResponse> postResponse = postService.getPostById(id);
+        return postResponse;
     }
 
     @DeleteMapping("/posts/{post_id}")
@@ -49,5 +49,10 @@ public class PostController {
     public ResponseEntity<String> setLike(@PathVariable ("user_id") Long uId, @PathVariable ("post_id") Long pId){
         return postService.setLikedUser(uId, pId);
 
+    }
+
+    @PutMapping("/posts/{post_id}")
+    public ResponseEntity<Object> updatePost(@RequestBody PostDTO postDTO, @PathVariable("post_id")Long id){
+        return postService.updatePost(postDTO, id);
     }
 }

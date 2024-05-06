@@ -14,9 +14,11 @@ public interface PostService {
 
     List<PostResponse> getAllPosts();
 
-    PostResponse getPostById(Long id);
+    List<PostResponse> getPostById(Long id);
 
     void deletePost(Long id);
 
     ResponseEntity<String> setLikedUser(Long uId, Long pId);
+
+    ResponseEntity<Object> updatePost(PostDTO postDTO, Long id);
 }
