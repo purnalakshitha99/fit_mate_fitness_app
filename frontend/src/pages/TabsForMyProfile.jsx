@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import Post from "./Post";
 import { Link } from "react-router-dom";
-import MealPlansFeed from "./MealPlansFeed";
-import GetWorkOutStatus from "./GetWorkOutStatus";
+import LoggedInsUserPost from "./LoggedInUserPosts";
+import UserService from "../services/UserService";
+import FriendsPosts from "./FriendsPosts";
+import UploadedPosts from "./LoggedInUserPosts";
 
-const Tabs = () => {
+const TabsForMyProfile = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
+
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    setLoggedInUser(JSON.parse(userData));
+  }, []);
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -21,7 +30,7 @@ const Tabs = () => {
         >
           <li
             className={` flex-auto text-center ${
-              activeTab === "app" ? "bg-gray-300 p-2 rounded-xl" : ""
+              activeTab === "app" ? "bg-red-300" : ""
             }`}
           >
             <a
@@ -37,7 +46,7 @@ const Tabs = () => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "mealPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
+              activeTab === "mealPlan" ? "" : ""
             }`}
           >
             <a
@@ -53,7 +62,7 @@ const Tabs = () => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "workOutPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
+              activeTab === "workOutPlan" ? "" : ""
             }`}
           >
             <Link
@@ -64,7 +73,7 @@ const Tabs = () => {
               aria-controls="workOutPlan"
               onClick={() => handleTabClick("workOutPlan")}
             >
-              <span className="ml-1">Workout Plan</span>
+              <span className="ml-1">my profile</span>
             </Link>
           </li>
         </ul>
@@ -77,7 +86,7 @@ const Tabs = () => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              <Post />
+              <UploadedPosts loggedIn={userId} />
             </span>
           </div>
           <div
@@ -88,8 +97,7 @@ const Tabs = () => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              <MealPlansFeed/>
-              <GetWorkOutStatus />
+              mel plan for my profile
             </span>
           </div>
           <div
@@ -109,4 +117,4 @@ const Tabs = () => {
   );
 };
 
-export default Tabs;
+export default TabsForMyProfile;

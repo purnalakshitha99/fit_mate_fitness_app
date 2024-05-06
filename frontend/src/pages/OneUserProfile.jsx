@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import UserService from "../services/UserService";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
-import TabsForOneUser from "./TabsForOneUser";
+import TabsForOneUser from "./TabsForFriendsProfile";
 
 const OneUserProfile = () => {
   const [user, setUser] = useState({});
@@ -14,7 +14,6 @@ const OneUserProfile = () => {
     const user = localStorage.getItem("user");
     setLoggedInUser(JSON.parse(user));
   }, []);
-  console.log("login user", loggedInUser.id);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,7 +24,7 @@ const OneUserProfile = () => {
     fetchData();
   }, [id]);
 
-  console.log("user id ", id);
+  console.log("user id ", loggedInUser);
 
   const handleFollowClick = async (userId, logId) => {
     try {
@@ -45,15 +44,48 @@ const OneUserProfile = () => {
       <div className="fixed top-[75px] left-0 h-screen z-10">
         <SideBar />
       </div>
-      <div>
-        <div className=" flex justify-center mt-32 ml-[200px]">
+      <div className=" bg-gray-300 rounded-xl max-w-[1200px] ml-[500px] m-auto">
+        <div className=" flex  mt-32 p-4">
           <img
             className=" w-[200px] h-[200px] rounded-full"
             src={user.profilePictureUrl}
           />
-          <button onClick={() => handleFollowClick(id, loggedInUser.id)}>
-            follow
-            {loggedInUser.id}
+          <div className=" flex flex-col ml-[140px] mt-10 text-xl font-semibold gap-3">
+           <div>
+           {user.firstName} {user.lastName}
+           </div>
+            <div>
+            {user.email}
+            </div>
+            <div>
+              {user.phoneNumber}
+            </div>
+            <div>
+              {user.bio}
+            </div>
+          </div>
+        </div>
+        <div className=" flex justify-center  mt-[50px] mb-[50px]  items-center flex-col gap-y-5">
+          <div className=" flex flex-row space-x-8 w-[500px] ">
+            <div className=" w-full ">
+              <div className="rounded-lg p-2 w-full  text-white text-lg font-semibold bg-[#74779bf0] ">
+                Followers
+                {loggedInUser.followersCount}
+              </div>
+            </div>
+            <div className=" w-full ">
+              <div className="rounded-lg  p-2  text-white text-lg font-semibold bg-[#74779bf0] ">
+                Following
+                {loggedInUser.followingCount}
+              </div>
+            </div>
+          </div>
+          <button
+            className="rounded-lg  p-2 w-[500px] mb-[50px] text-white text-lg font-semibold bg-[#74779bf0]  hover:bg-blue-400 transition-colors"
+            onClick={() => handleFollowClick(id, loggedInUser.id)}
+          >
+            Follow
+          
           </button>
         </div>
       </div>
