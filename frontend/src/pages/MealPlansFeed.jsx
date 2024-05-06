@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MealPlanService from "../services/MealPlanFeedServices";
-import Slider from "react-slick";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShare, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 const MealPlan = () => {
   const [mealPlans, setMealPlans] = useState([]);
@@ -21,44 +22,72 @@ const MealPlan = () => {
     fetchMealPlans();
   }, []);
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+  const handleShare = (mealPlanId) => {
+    // Add your share functionality here
+    console.log("Share meal plan with ID:", mealPlanId);
+  };
+
+  const handleLike = (mealPlanId) => {
+    // Add your like functionality here
+    console.log("Like meal plan with ID:", mealPlanId);
   };
 
   return (
-    <div>
+    <div className="container mx-auto px-4 py-8 font-serif">
       {loading ? (
-        <p>Loading meal plans...</p>
+        <p className="text-center text-lg font-semibold">Loading meal plans...</p>
       ) : (
         <div>
           {mealPlans.map((mealPlan) => (
             <div
-              className="mt-5 text-black rounded-xl bg-background space-y-10"
               key={mealPlan.id}
+              className="bg-white shadow-lg rounded-lg overflow-hidden mb-8 relative"
             >
-              <div className="w-full sm:max-w-[1200px] p-4 space-y-5 bg-gray-300 rounded-md m-auto">
-                <h2>{mealPlan.mealPlanType}</h2>
-                <p>Dietary Preferences: {mealPlan.dietaryPreferences}</p>
-                <p>Recipes: {mealPlan.recipes}</p>
-                <p>Nutritional Information: {mealPlan.nutritionalInformation}</p>
-                <p>Ingredients: {mealPlan.ingredients}</p>
-                <p>Portion Sizes: {mealPlan.portionSizes}</p>
-                <p>Cooking Instructions: {mealPlan.cookingInstructions}</p>
-                <p>Creation Date: {mealPlan.creationDate}</p>
-                <p>Creation Time: {mealPlan.creationTime}</p>
-                {mealPlan.imagePath && (
-                  <Slider {...sliderSettings}>
-                    <img
-                      className="p-2 max-h-[600px] max-w-full m-auto"
-                      src={mealPlan.imagePath}
-                      alt="Meal Plan"
-                    />
-                  </Slider>
-                )}
+              {mealPlan.imagePath && (
+                <img
+                  className="w-full h-64 object-cover object-center"
+                  src={mealPlan.imagePath}
+                  alt="Meal Plan"
+                />
+              )}
+              <div className="p-6">
+                <h2 className="text-xl font-bold mb-2">{mealPlan.mealPlanType}</h2>
+                <p className="text-gray-700 mb-4">
+                  <span className="font-semibold">Dietary Preferences:</span>{" "}
+                  {mealPlan.dietaryPreferences}
+                </p>
+                <p className="text-gray-700 mb-4">
+                  <span className="font-semibold">Recipes:</span> {mealPlan.recipes}
+                </p>
+                <p className="text-gray-700 mb-4">
+                  <span className="font-semibold">Nutritional Information:</span>{" "}
+                  {mealPlan.nutritionalInformation}
+                </p>
+                <p className="text-gray-700 mb-4">
+                  <span className="font-semibold">Ingredients:</span> {mealPlan.ingredients}
+                </p>
+                <p className="text-gray-700 mb-4">
+                  <span className="font-semibold">Portion Sizes:</span>{" "}
+                  {mealPlan.portionSizes}
+                </p>
+                <p className="text-gray-700 mb-4">
+                  <span className="font-semibold">Cooking Instructions:</span>{" "}
+                  {mealPlan.cookingInstructions}
+                </p>
+                <div className="flex justify-between items-center absolute bottom-0 right-0 p-4">
+                  <button
+                    className="text-blue-500 hover:text-blue-700 mr-4"
+                    onClick={() => handleShare(mealPlan.id)}
+                  >
+                    <FontAwesomeIcon icon={faShare} />
+                  </button>
+                  <button
+                    className="text-red-500 hover:text-red-700"
+                    onClick={() => handleLike(mealPlan.id)}
+                  >
+                    <FontAwesomeIcon icon={faHeart} />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
