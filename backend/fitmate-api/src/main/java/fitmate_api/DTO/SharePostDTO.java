@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SharePostDTO {
 
-    private Long user_id;
-    private Long post_id;
+    private Long userId;
+    private Long postId;
     private String content;
 }

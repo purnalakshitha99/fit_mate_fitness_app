@@ -1,10 +1,8 @@
 package fitmate_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Generated;
 
 @Data
 @Entity
@@ -12,9 +10,10 @@ import lombok.Data;
 public class SharePost {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private User use;
+    private User user;
     @ManyToOne
     private Post post;
     private String content;

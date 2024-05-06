@@ -57,7 +57,7 @@ const OneUserProfile = () => {
           </button>
         </div>
       </div>
-      <TabsForOneUser />
+      <TabsForOneUser userId={id} />
     </div>
   );
 };
