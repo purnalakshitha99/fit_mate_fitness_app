@@ -7,6 +7,7 @@ import Profile from "../pages/Profile";
 import SignIn from "../pages/SignIn";
 import AllUsers from "../pages/AllUsers";
 import OneUserProfile from "../pages/OneUserProfile";
+import GetWorkOutStatus from "../components/models/GetWorkOutStatus";
 
 const UserRoute = () => {
   return (
@@ -20,6 +21,7 @@ const UserRoute = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/SignIn" element={<SignIn/>} />
         <Route path="/oneuser/:id" element={<OneUserProfile />} />
+        <Route path="/GetWorkoutStatus" element={<GetWorkOutStatus/>}/>
       </Routes>
     </BrowserRouter>
   );
