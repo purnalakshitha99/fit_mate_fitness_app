@@ -2,11 +2,21 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/api/comments";
 
+class CommentService {
+  saveComment(data) {
+    // console.log(userId, postId, comment);
+    return axios.post(BASE_URL + "/" + data.userId + "/post/" + data.postId, {
+      commentText: data.commentText,
+    });
+  }
 
-class UserService {
-    saveComment(userId, postId, comment) {
-        return axios.post(BASE_URL + "/" + userId + "/post/" + postId , comment);
-      }
+  getComments() {
+    return axios.get(BASE_URL + "/");
+  }
+
+  editComment(commentId, comment) {
+    return axios.put(BASE_URL + "/" + commentId, comment);
+  }
 }
 
-export default new UserService();
+export default new CommentService();
