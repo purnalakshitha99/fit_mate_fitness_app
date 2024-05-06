@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Post from "./Post";
 import { Link } from "react-router-dom";
 import MealPlansFeed from "./MealPlansFeed";
+import GetWorkOutStatus from "./GetWorkOutStatus";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("app");
@@ -88,6 +89,7 @@ const Tabs = () => {
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
               <MealPlansFeed/>
+              <GetWorkOutStatus />
             </span>
           </div>
           <div
