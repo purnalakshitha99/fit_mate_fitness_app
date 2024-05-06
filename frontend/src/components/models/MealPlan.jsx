@@ -1,153 +1,214 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import MealPlanImage from '../../assets/mealPlan.png';
 
 const MealPlan = ({ closeMealPlan }) => {
+  const [loggedInUser, setLoggedInUser] = useState({});
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    setLoggedInUser(JSON.parse(userData));
+  }, []);
+
   const [formData, setFormData] = useState({
-    title: 'halo',
-    description: '',
+    mealPlanType: '',
+    dietaryPreferences: '',
+    portionSizes: '',
+    ingredients: '',
+    cookingInstructions: '',
+    nutritionalInformation: '',
     recipes: '',
-    nutritional: '',
-    information: '',
-    portionSizes: 0,
-    creationDate: ''
+    images: null,
+    videos: null
   });
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setFormData({
       ...formData,
-      [name]: value
+      [name]: files || value
     });
   };
-
-  const userid = 5;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/users/${userid}/meal_plans`, formData);
+      const formDataToSend = new FormData();
+      Object.entries(formData).forEach(([key, value]) => {
+        if (key === 'images' || key === 'videos') {
+          if (value) {
+            for (let i = 0; i < value.length; i++) {
+              formDataToSend.append('imagePath', value[i]);
+            }
+          }
+        } else {
+          formDataToSend.append(key, value);
+        }
+      });
+
+      const response = await axios.post(`http://localhost:8080/users/${parseInt(loggedInUser.id)}/meal_plans`, formDataToSend);
       console.log('Response:', response.data);
-      
+      setSuccessMessage('Data added successfully!');
+      setErrorMessage('');
+      // Display success alert using SweetAlert
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Data added successfully!'
+      });
       // Close modal or do any other necessary action
       closeMealPlan();
     } catch (error) {
       console.error('Error:', error);
+      setErrorMessage('Error adding data. Please try again.');
+      setSuccessMessage('');
     }
   };
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center'>
-      <div className='w-[600px]'>
-        <button className='text-white text-xl place-self-end' onClick={closeMealPlan}>
-          X
-        </button>
-        <div className='bg-white p-10 rounded' style={{ maxHeight: '80vh', overflowY: 'auto' }}>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-                Title
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="title"
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                required
-              />
+      <div className='w-[1200px]'>
+        <button className='text-white text-xl place-self-end' onClick={closeMealPlan}>X</button>
+        <div className='bg-white rounded' style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+          <div className='flex flex-row'>
+            <div className='bg-red-400'>
+              <img className='h-full' src={MealPlanImage} alt='Meal Plan' />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-                Description
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="description"
-                type="text"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-              />
+            <div className='w-1/2 p-5'>
+              {successMessage && <div className='bg-green-200 text-green-800 p-3 mb-4'>{successMessage}</div>}
+              {errorMessage && <div className='bg-red-200 text-red-800 p-3 mb-4'>{errorMessage}</div>}
+              <form onSubmit={handleSubmit}>
+                <div className='mb-4'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='mealPlanType'>Meal Plan Type</label>
+                  <div className='relative'>
+                    <select
+                      id='mealPlanType'
+                      name='mealPlanType'
+                      value={formData.mealPlanType}
+                      onChange={handleChange}
+                      className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                      required
+                    >
+                      <option value=''>Select meal plan type</option>
+                      <option value='breakfast'>Breakfast</option>
+                      <option value='lunch'>Lunch</option>
+                      <option value='dinner'>Dinner</option>
+                    </select>
+                    <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
+                      <FontAwesomeIcon icon={faChevronDown} className='text-gray-600' />
+                    </div>
+                  </div>
+                </div>
+                <div className='mb-4 relative'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='dietaryPreferences'>Dietary Preferences</label>
+                  <div className='relative'>
+                    <select
+                      id='dietaryPreferences'
+                      name='dietaryPreferences'
+                      value={formData.dietaryPreferences}
+                      onChange={handleChange}
+                      className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                      required
+                    >
+                      <option value=''>Select dietary preferences</option>
+                      <option value='vegetarian'>Vegetarian</option>
+                      <option value='vegan'>Vegan</option>
+                      <option value='keto'>Keto</option>
+                    </select>
+                    <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
+                      <FontAwesomeIcon icon={faChevronDown} className='text-gray-600' />
+                    </div>
+                  </div>
+                </div>
+                <div className='mb-4 relative'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='portionSizes'>Portion Sizes</label>
+                  <div className='relative'>
+                    <select
+                      id='portionSizes'
+                      name='portionSizes'
+                      value={formData.portionSizes}
+                      onChange={handleChange}
+                      className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                      required
+                    >
+                      <option value=''>Select portion sizes</option>
+                      <option value='half'>Half</option>
+                      <option value='full'>Full</option>
+                    </select>
+                    <div className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
+                      <FontAwesomeIcon icon={faChevronDown} className='text-gray-600' />
+                    </div>
+                  </div>
+                </div>
+                <div className='mb-4'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='ingredients'>Ingredients</label>
+                  <textarea
+                    id='ingredients'
+                    name='ingredients'
+                    value={formData.ingredients}
+                    onChange={handleChange}
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    required
+                  />
+                </div>
+                <div className='mb-4'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='cookingInstructions'>Cooking Instructions</label>
+                  <textarea
+                    id='cookingInstructions'
+                    name='cookingInstructions'
+                    value={formData.cookingInstructions}
+                    onChange={handleChange}
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    required
+                  />
+                </div>
+                <div className='mb-4'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='nutritionalInformation'>Nutritional information</label>
+                  <textarea
+                    id='nutritionalInformation'
+                    name='nutritionalInformation'
+                    value={formData.nutritionalInformation}
+                    onChange={handleChange}
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    required
+                  />
+                </div>
+                <div className='mb-4'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='recipes'>Recipes</label>
+                  <textarea
+                    id='recipes'
+                    name='recipes'
+                    value={formData.recipes}
+                    onChange={handleChange}
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                    required
+                  />
+                </div>
+                <div className='mb-4'>
+                  <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor='images'>Upload Images/Videos</label>
+                  <input
+                    type='file'
+                    id='images'
+                    name='images'
+                    multiple
+                    accept='image/*'
+                    onChange={handleChange}
+                    className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                  />
+                </div>
+                <button
+                  type='submit'
+                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                >
+                  Submit
+                </button>
+              </form>
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="recipes">
-                Recipes
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="recipes"
-                type="text"
-                name="recipes"
-                value={formData.recipes}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="nutritional">
-                Nutritional
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="nutritional"
-                type="text"
-                name="nutritional"
-                value={formData.nutritional}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="information">
-                Information
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="information"
-                type="text"
-                name="information"
-                value={formData.information}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="portionSizes">
-                Portion Sizes
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="portionSizes"
-                type="number"
-                name="portionSizes"
-                value={formData.portionSizes}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="creationDate">
-                Creation Date
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="creationDate"
-                type="date"
-                name="creationDate"
-                value={formData.creationDate}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Submit
-            </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
