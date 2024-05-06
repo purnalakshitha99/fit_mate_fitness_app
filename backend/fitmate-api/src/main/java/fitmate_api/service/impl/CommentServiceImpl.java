@@ -46,23 +46,22 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentDTO> getAllComments() {
+    public List<Comment> getAllComments() {
 
-        List<Comment> commentList = commentRepository.findAll();
-        List<CommentDTO> commentDTOList = new ArrayList<>();
+        //        List<CommentDTO> commentDTOList = new ArrayList<>();
+//
+//        for (Comment comment : commentList
+//        ) {
+//            CommentDTO commentDTO = new CommentDTO();
+//            commentDTO.setCommentText(comment.getCommentText());
+//            commentDTO.setUserId(comment.getUser().getId());
+//            commentDTO.setPostId(comment.getPost().getId());
+//            commentDTO.setCreatedAt(comment.getCreatedAt());
+//
+//            commentDTOList.add(commentDTO);
+//        }
 
-        for (Comment comment : commentList
-        ) {
-            CommentDTO commentDTO = new CommentDTO();
-            commentDTO.setCommentText(comment.getCommentText());
-            commentDTO.setUserId(comment.getUser().getId());
-            commentDTO.setPostId(comment.getPost().getId());
-            commentDTO.setCreatedAt(comment.getCreatedAt());
-
-            commentDTOList.add(commentDTO);
-        }
-
-        return commentDTOList;
+        return commentRepository.findAll();
     }
 
     @Override

@@ -2,6 +2,7 @@ package fitmate_api.controller;
 
 
 import fitmate_api.DTO.CommentDTO;
+import fitmate_api.model.Comment;
 import fitmate_api.service.CommentService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,8 @@ public class CommentController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<CommentDTO>> getAllComment() {
-        List<CommentDTO> commentDTOList = commentService.getAllComments();
+    public ResponseEntity<List<Comment>> getAllComment() {
+        List<Comment> commentDTOList = commentService.getAllComments();
 
         return ResponseEntity.ok(commentDTOList);
     }
