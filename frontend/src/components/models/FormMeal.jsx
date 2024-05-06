@@ -4,8 +4,19 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import MealPlan from '../../assets/mealPlan.png';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useEffect } from 'react';
 
 function FormMeal() {
+
+  const [loggedInUser, setLoggedInUser] = useState({});
+
+  useEffect(() => {
+    const userData = localStorage.getItem("user");
+    
+    setLoggedInUser(JSON.parse(userData));
+  }, []);
+  
+
   const [formData, setFormData] = useState({
     mealPlanType: '',
     dietaryPreferences: '',
@@ -44,7 +55,7 @@ function FormMeal() {
         }
       });
     
-      const response = await axios.post('http://localhost:8080/users/6/meal_plans', formDataToSend);
+      const response = await axios.post(`http://localhost:8080/users/${parseInt(loggedInUser.id)}/meal_plans`, formDataToSend);
       console.log('Response:', response.data);
       setSuccessMessage('Data added successfully!');
       setErrorMessage('');
