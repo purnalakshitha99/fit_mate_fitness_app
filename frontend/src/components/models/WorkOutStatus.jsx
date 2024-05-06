@@ -28,7 +28,7 @@ const WorkOutStatus = ({ closeWorkOutStatus,userId }) => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        `/api/users/${userId}/work_out_statues`,
+        `http://localhost:8080/api/users/5/work_out_statues`,
         formData
       );
       console.log("Response:", response.data);

@@ -11,6 +11,7 @@ import OneUserProfile from "../pages/OneUserProfile";
 import CreatePost from "../pages/CreatePost";
 import LoggedInsUserProfile from "../pages/LoggedInsUserProfile";
 import EditUserDetails from "../pages/EditUserDetails";
+import GetWorkOutStatus from "../pages/GetWorkOutStatus";
 
 const UserRoute = () => {
   return (
@@ -24,12 +25,13 @@ const UserRoute = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/mealPlan" element={<FormMeal />} />
         
-     
         <Route path="/SignIn" element={<SignIn/>} />
         <Route path="/oneuser/:id" element={<OneUserProfile />} />
         <Route path="/post" element={<CreatePost />} />
         <Route path="/loggedinUser" element={<LoggedInsUserProfile />} />
         <Route path="/editUserDetails/:id" element={<EditUserDetails />} />
+
+        <Route path="/GetWorkoutStatus" element={<GetWorkOutStatus/>} />
       </Routes>
     </BrowserRouter>
   );
