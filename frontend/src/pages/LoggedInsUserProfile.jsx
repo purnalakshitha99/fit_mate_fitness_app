@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
-import TabsForOneUser from "./TabsForOneUser";
+import TabsForOneUser from "./TabsForFriendsProfile";
 import { useNavigate } from "react-router-dom";
+import TabsForMyProfile from "./TabsForMyProfile";
 
 const LoggedInsUserProfile = () => {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -36,7 +37,7 @@ const LoggedInsUserProfile = () => {
             {loggedInUser.username}
           </span>
           <button
-             onClick={(e, id )=> handleEditProfile(e, loggedInUser.id)}
+            onClick={(e, id) => handleEditProfile(e, loggedInUser.id)}
             className="rounded-lg  p-2 w-[500px] text-white text-lg font-semibold bg-[#74779bf0]  hover:bg-blue-400 transition-colors"
           >
             Edit Profile
@@ -44,7 +45,7 @@ const LoggedInsUserProfile = () => {
         </div>
       </div>
       <div className=" mt-24">
-        <TabsForOneUser />
+        <TabsForMyProfile  userId={loggedInUser}/>
       </div>
     </div>
   );

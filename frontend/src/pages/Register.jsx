@@ -24,7 +24,7 @@ const Register = () => {
     setUser({ ...user, [e.target.name]: value });
   };
 
-  //upload image
+  //upload image 
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedUrls, setUploadedUrls] = useState([]);

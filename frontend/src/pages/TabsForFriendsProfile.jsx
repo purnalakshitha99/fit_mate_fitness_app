@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 import LoggedInsUserPost from "./LoggedInUserPosts";
 import UserService from "../services/UserService";
 import FriendsPosts from "./FriendsPosts";
-import MealPlan from "./MealPlansFeed";
 
-const TabsForOneUser = ({ userId }) => {
+const TabsForFriendsProfile = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
 
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -16,8 +15,6 @@ const TabsForOneUser = ({ userId }) => {
     setLoggedInUser(JSON.parse(userData));
   }, []);
 
-
-
   
 
   const handleTabClick = (tabId) => {
@@ -25,10 +22,7 @@ const TabsForOneUser = ({ userId }) => {
   };
 
   return (
-
     <div className=" w-[1000px] m-auto ml-[600px] ">
-
-      
       <div className="relative right-0">
         <ul
           className="relative  flex flex-wrap p-5 list-none rounded-xl bg-blue-gray-50/60 border" // Removed border class
@@ -37,7 +31,7 @@ const TabsForOneUser = ({ userId }) => {
         >
           <li
             className={` flex-auto text-center ${
-              activeTab === "app" ? "bg-red-300" : ""
+              activeTab === "app" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <a
@@ -53,7 +47,7 @@ const TabsForOneUser = ({ userId }) => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "mealPlan" ? "" : ""
+              activeTab === "mealPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <a
@@ -69,7 +63,7 @@ const TabsForOneUser = ({ userId }) => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "workOutPlan" ? "" : ""
+              activeTab === "workOutPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <Link
@@ -104,8 +98,7 @@ const TabsForOneUser = ({ userId }) => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-            {loggedInUser.id}
-              <MealPlan userId={loggedInUser.id}/>
+              mel plan for my profile
             </span>
           </div>
           <div
@@ -125,4 +118,4 @@ const TabsForOneUser = ({ userId }) => {
   );
 };
 
-export default TabsForOneUser;
+export default TabsForFriendsProfile;

@@ -26,10 +26,6 @@ console.log(props.userId)
   }, []);
 
 
-  if(props.userId){
-    // alert("ok");
-    setMealPlans( mealPlans.filter((mealPlan) => mealPlan.user_id === props.userId));
-  }
 
   const handleShare = (mealPlanId) => {
     // Add your share functionality here

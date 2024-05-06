@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CommentService from "../services/CommentService";
 import UserService from "../services/UserService";
-
+import toast from "react-hot-toast";
 
 const CommentPopup = ({ postId, onClose }) => {
   const [comment, setComment] = useState("");
@@ -31,7 +31,7 @@ const CommentPopup = ({ postId, onClose }) => {
     try {
       const loggedInUserId = JSON.parse(localStorage.getItem("user")).id;
 
-      await CommentService.saveComment( {
+      await CommentService.saveComment({
         postId,
         userId: loggedInUserId,
         commentText: comment,
@@ -39,7 +39,7 @@ const CommentPopup = ({ postId, onClose }) => {
       setReFetch(true);
       const response = await CommentService.getComments(postId);
       setComments(response.data);
-      console.log(response)
+      console.log(response);
 
       setComment("");
     } catch (error) {
@@ -47,46 +47,15 @@ const CommentPopup = ({ postId, onClose }) => {
     }
   };
 
-  
-
   const handleDelete = async (commentId) => {
     try {
-      await CommentService.deleteComment(commentId);
-      const response = await CommentService.getComments(postId);
-      setComments(response.data);
+      const response = await CommentService.deleteComment(commentId);
+      console.log(response)
+      //   const response = await CommentService.getComments(postId);
+      //   setComments(response.data);
+      toast.remove(`Comment ${commentId}`)
     } catch (error) {
       console.error("Error deleting comment:", error);
-    }
-  };
-
-  const handleEdit = async (commentId, editedComment) => {
-    try {
-      await CommentService.editComment(commentId, editedComment);
-      const response = await CommentService.getComments(postId);
-      setComments(response.data);
-    } catch (error) {
-      console.error("Error editing comment:", error);
-    }
-  };
-
-  const handleStartEditing = (commentId, initialCommentText, e) => {
-    e.stopPropagation();
-    setEditingCommentId(commentId);
-    setEditedCommentText(initialCommentText);
-  };
-
-  const handleCancelEditing = () => {
-    setEditingCommentId(null);
-    setEditedCommentText("");
-  };
-
-  const handleSaveEditing = async (commentId) => {
-    try {
-      await handleEdit(commentId, editedCommentText);
-      setEditingCommentId(null);
-      setEditedCommentText("");
-    } catch (error) {
-      console.error("Error saving edited comment:", error);
     }
   };
 
@@ -112,6 +81,7 @@ const CommentPopup = ({ postId, onClose }) => {
                   />
                   <span className="font-bold">
                     {comment.user.firstName} {comment.user.lastName}
+                    {comment.id}
                   </span>
                 </div>
                 {editingCommentId === comment.id ? (
@@ -125,13 +95,13 @@ const CommentPopup = ({ postId, onClose }) => {
                     <div className="mt-2">
                       <button
                         className="text-blue-500 mr-2"
-                        onClick={() => handleSaveEditing(comment.id)}
+                        // onClick={() => handleSaveEditing(comment.id)}
                       >
                         Save
                       </button>
                       <button
                         className="text-gray-500"
-                        onClick={handleCancelEditing}
+                        // onClick={handleCancelEditing}
                       >
                         Cancel
                       </button>
@@ -143,9 +113,9 @@ const CommentPopup = ({ postId, onClose }) => {
                 <div className="mt-2">
                   <button
                     className="text-blue-500 mr-2"
-                    onClick={(e) =>
-                      handleStartEditing(comment.id, comment.commentText, e)
-                    }
+                    // onClick={(e) =>
+                    //   handleStartEditing(comment.id, comment.commentText, e)
+                    // }
                   >
                     Edit
                   </button>

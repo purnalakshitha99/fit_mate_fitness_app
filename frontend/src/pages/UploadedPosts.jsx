@@ -4,8 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import PostService from "../services/PostService";
-import CommentPopup from "./CommentPopup";
-import ShareService from "../services/ShareService";
+import CommentPopup from "./CommentPopup ";
 
 const UploadedPosts = ({ loggedIn }) => {
   const [clicked, setClicked] = useState(false);
@@ -14,7 +13,6 @@ const UploadedPosts = ({ loggedIn }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [likedPosts, setLikedPosts] = useState([]);
-  const [sharedPosts, setSharedPosts] = useState([]);
   const handleClick = () => {
     setClicked(!clicked);
   };
@@ -39,27 +37,6 @@ const UploadedPosts = ({ loggedIn }) => {
     };
     fetchData();
   }, [loggedIn]); // Include loggedInUser in the dependency array
-
-  console.log(loggedIn);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await ShareService.getSharePostByUser(loggedIn.id);
-        if (Array.isArray(response.data)) {
-          setSharedPosts(response.data);
-        } else {
-          console.error("Response data is not an array:", response);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, []);
-
   console.log(posts);
   const sliderSettings = {
     dots: true,
@@ -113,13 +90,14 @@ const UploadedPosts = ({ loggedIn }) => {
               <h3 className="font-bold text-sm sm:text-base first-letter:capitalize">
                 {loggedIn.firstName} {loggedIn.lastName}
               </h3>
+              
             </div>
             <div>
               <h2>{post.content}</h2>
             </div>
-            {post.postImages && post.postImages.length > 1 ? (
+            {post.mediaList && post.mediaList.length > 1 ? (
               <Slider {...sliderSettings}>
-                {post.postImages.map((media, index) => (
+                {post.mediaList.map((media, index) => (
                   <img
                     className="p-2 w-fit h-[600px] m-auto+
                     "
@@ -129,10 +107,10 @@ const UploadedPosts = ({ loggedIn }) => {
                   />
                 ))}
               </Slider>
-            ) : post.postImages && post.postImages.length === 1 ? (
+            ) : post.mediaList && post.mediaList.length === 1 ? (
               <img
                 className="p-2 w-fit h-[600px] m-auto"
-                src={post.postImages[0]}
+                src={post.mediaList[0]}
                 alt="Gym"
               />
             ) : null}
@@ -166,55 +144,7 @@ const UploadedPosts = ({ loggedIn }) => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      ))}
-      {sharedPosts?.map((sharepost, index) => (
-        <div
-          className="mt-5 text-black rounded-xl bg-background space-y-10"
-          key={index}
-        >
-          <div className="w-full sm:max-w-[1200px] p-4 space-y-5 bg-gray-300 rounded-md m-auto">
-            <div className="flex flex-col sm:flex-row items-center juc space-y-3 sm:space-y-0 sm:space-x-3">
-              <img
-                className="h-10 w-10 rounded-full"
-                src={sharepost.user.profilePictureUrl}
-                alt=""
-              />
-              <h3 className="font-bold text-sm sm:text-base first-letter:capitalize">
-                {sharepost.user.firstName} {sharepost.user.lastName}
-              </h3>
-            </div>
-            <h2>{sharepost.content}</h2>
-            <div className=" border p-4 rounded-lg border-black">
-              <img
-                className="h-10 w-10 rounded-full"
-                src={sharepost.post.user.profilePictureUrl}
-                alt=""
-              />
-              <h2>{sharepost.post.content}</h2>
-
-              {sharepost.post.postImages &&
-              sharepost.post.postImages.length > 1 ? (
-                <Slider {...sliderSettings}>
-                  {sharepost.post.postImages.map((media, index) => (
-                    <img
-                      className="p-2 max-h-[600px] max-w-full m-auto"
-                      src={media}
-                      alt="Gym"
-                      key={index}
-                    />
-                  ))}
-                </Slider>
-              ) : sharepost.post.postImages &&
-                sharepost.post.postImages.length === 1 ? (
-                <img
-                  className="p-2 w-full h-[600px] m-auto"
-                  src={sharepost.post.postImages[0]}
-                  alt="Gym"
-                />
-              ) : null}
-            </div>
+            
           </div>
         </div>
       ))}
