@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserDTO userDTO, MultipartFile file, Long id) throws IOException {
+    public void updateUser(UserDTO userDTO, Long id) throws IOException {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User Not Found")
         );
@@ -127,12 +127,9 @@ public class UserServiceImpl implements UserService {
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
         user.setBio(userDTO.getBio());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
+        user.setProfilePictureUrl(userDTO.getProfilePictureUrl());
         user.setUsername(userDTO.getUsername());
-
-        String originalFilename = file.getOriginalFilename();
-        Path fileNameAndPath = Paths.get(uploadDirecory, originalFilename);
-        Files.write(fileNameAndPath, file.getBytes());
-        user.setProfilePictureUrl(originalFilename);
 
         userRepository.save(user);
     }

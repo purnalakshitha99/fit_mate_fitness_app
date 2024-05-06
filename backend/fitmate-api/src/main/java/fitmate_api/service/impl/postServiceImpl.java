@@ -35,7 +35,6 @@ public class postServiceImpl implements PostService {
         Post post = new Post();
         post.setContent(postDTO.getContent());
         post.setUser(user);
-        post.setUsername(user.getFirstName());
         post.setPostImages(postDTO.getImageUrls());
         post.setCreatedAt(LocalTime.now());
 
@@ -54,12 +53,14 @@ public class postServiceImpl implements PostService {
     }
 
     @Override
-    public PostResponse getPostById(Long id) {
-        Post post = postRepository.findById(id).orElseThrow(
-                () -> new UsernameNotFoundException("User Not Found")
-        );
-        ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(post, PostResponse.class);
+    public List<PostResponse> getPostById(Long id) {
+        List<Post> postList = postRepository.findPostsByUserId(id);
+        List<PostResponse> postResponseList = new ArrayList<>();
+        for (Post post : postList) {
+            PostResponse response = modelMapper.map(post, PostResponse.class);
+            postResponseList.add(response);
+        }
+        return postResponseList;
     }
 
     @Override
@@ -99,5 +100,10 @@ public class postServiceImpl implements PostService {
         }
 
 
+    }
+
+    @Override
+    public ResponseEntity<Object> updatePost(PostDTO postDTO, Long id) {
+        return null;
     }
 }
