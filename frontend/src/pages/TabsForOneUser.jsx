@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import LoggedInsUserPost from "./LoggedInUserPosts";
 import UserService from "../services/UserService";
 import FriendsPosts from "./FriendsPosts";
+import MealPlan from "./MealPlansFeed";
 
 const TabsForOneUser = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
@@ -15,6 +16,8 @@ const TabsForOneUser = ({ userId }) => {
     setLoggedInUser(JSON.parse(userData));
   }, []);
 
+
+
   
 
   const handleTabClick = (tabId) => {
@@ -22,7 +25,10 @@ const TabsForOneUser = ({ userId }) => {
   };
 
   return (
+
     <div className=" w-[1000px] m-auto ml-[600px] ">
+
+      
       <div className="relative right-0">
         <ul
           className="relative  flex flex-wrap p-5 list-none rounded-xl bg-blue-gray-50/60 border" // Removed border class
@@ -98,7 +104,8 @@ const TabsForOneUser = ({ userId }) => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              asdad
+            {loggedInUser.id}
+              <MealPlan userId={loggedInUser.id}/>
             </span>
           </div>
           <div
