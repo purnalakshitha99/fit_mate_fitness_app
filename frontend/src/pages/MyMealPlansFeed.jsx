@@ -3,7 +3,8 @@ import MealPlanService from "../services/MealPlanFeedServices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faHeart, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import UpdateMealPlanForm from "../components/models/UpdateMealPlanForm";// Import the update form component
-
+import axios from "axios";
+import Swal from 'sweetalert2';
 const MyMealPlansFeed = (props) => {
   const [mealPlans, setMealPlans] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,8 +40,40 @@ const MyMealPlansFeed = (props) => {
     setShowUpdateForm(true); // Show the update form
   };
 
-  const handleDelete = (mealPlanId) => {
-    console.log("Delete meal plan with ID:", mealPlanId);
+  const handleDelete = (mealPlan) => {
+    // Show a confirmation dialog before deleting
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won\'t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // Make a DELETE request to delete the meal plan
+          const response = await axios.delete(
+            `http://localhost:8080/users/${mealPlan.userId}/meal_plans/${mealPlan.id}`
+          );
+          if (response.status === 200) {
+            // If deletion is successful, show success message
+            Swal.fire({
+              icon: 'success',
+              title: 'Success!',
+              text: 'Meal plan deleted successfully',
+              timer: 2000
+            });
+            // You can update the UI by refreshing the meal plans or removing the deleted meal plan from the list
+          } else {
+            console.error('Failed to delete meal plan');
+          }
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    });
   };
 
   return (
@@ -107,7 +140,7 @@ const MyMealPlansFeed = (props) => {
                   </button>
                   <button
                     className="text-gray-500 hover:text-gray-700"
-                    onClick={() => handleDelete(mealPlan.id)}
+                    onClick={() => handleDelete(mealPlan)}
                   >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
