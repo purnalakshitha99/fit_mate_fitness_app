@@ -9,8 +9,8 @@ class MealPlanFeedServices {
     return axios.get(BASE_URL+"/users/meal_plans");
   }
 
-  getPostByUser(userid) {
-    return axios.get(BASE_URL +"/" + userid);
+  getMealPlansByUser(userid) {
+    return axios.get(BASE_URL +"/users/"+userid+"/meal_plans");
   }
 }
 

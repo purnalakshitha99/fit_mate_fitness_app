@@ -3,7 +3,7 @@ import MealPlanService from "../services/MealPlanFeedServices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faHeart } from "@fortawesome/free-solid-svg-icons";
 
-const MealPlan = () => {
+const MealPlan = (props) => {
   const [mealPlans, setMealPlans] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,6 +12,9 @@ const MealPlan = () => {
       setLoading(true);
       try {
         const response = await MealPlanService.getMealPlans(); // Assume this function fetches meal plans from the specified endpoint
+console.log(props.userId)
+
+       
         setMealPlans(response.data);
       } catch (error) {
         console.error("Error fetching meal plans:", error);
@@ -21,6 +24,8 @@ const MealPlan = () => {
     };
     fetchMealPlans();
   }, []);
+
+
 
   const handleShare = (mealPlanId) => {
     // Add your share functionality here
