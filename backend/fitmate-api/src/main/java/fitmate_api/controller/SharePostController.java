@@ -26,4 +26,9 @@ public class SharePostController {
     public List<SharePost> getAllSharedPosts(){
         return sharePostService.getAll();
     }
+
+    @GetMapping("/share/{user_id}")
+    public  List<SharePost> getSharedPostById(@PathVariable ("user_id") Long id){
+        return sharePostService.getByUserId(id);
+    }
 }

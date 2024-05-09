@@ -13,4 +13,6 @@ public class UserResponse {
     private String phoneNumber;
     private String bio;
     private String profilePictureUrl;
+    private Long followingCount;
+    private Long followerCount;
 }

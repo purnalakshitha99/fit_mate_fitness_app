@@ -32,6 +32,6 @@ public class PostResponse {
 
     private List<String> postImages;
 
-    private String video;
+    private String videoUrl;
 
 }

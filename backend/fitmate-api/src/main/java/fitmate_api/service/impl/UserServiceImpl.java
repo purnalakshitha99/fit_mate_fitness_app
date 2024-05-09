@@ -90,6 +90,8 @@ public class UserServiceImpl implements UserService {
             user1.setPhoneNumber(user.getPhoneNumber());
             user1.setUsername(user.getUsername());
             user1.setProfilePictureUrl(user.getProfilePictureUrl());
+            user1.setFollowingCount(user.getFollowingCount());
+            user1.setFollowersCount(user.getFollowersCount());
 
             userResponseList.add(user1);
         }
@@ -102,10 +104,8 @@ public class UserServiceImpl implements UserService {
                 () -> new UsernameNotFoundException("User Not Found")
         );
 
-        UserResponse userResponse = modelMapper.map(user, UserResponse.class);
 
-
-        return userResponse;
+        return modelMapper.map(user, UserResponse.class);
     }
 
 

@@ -12,5 +12,6 @@ public class PostDTO {
     private Long userId;
     private String content;
     private List<String> imageUrls;
+    private String videoUrl;
 
 }
