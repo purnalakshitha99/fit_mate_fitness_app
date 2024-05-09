@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import MealPlanService from "../services/MealPlanFeedServices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShare, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faShare, faHeart, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import UpdateMealPlanForm from "../components/models/UpdateMealPlanForm";// Import the update form component
 
 const MyMealPlansFeed = (props) => {
   const [mealPlans, setMealPlans] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showUpdateForm, setShowUpdateForm] = useState(false); // State to control visibility of the update form
+  const [selectedMealPlan, setSelectedMealPlan] = useState(null); // State to track the selected meal plan ID for update
 
   useEffect(() => {
     const fetchMealPlans = async () => {
       setLoading(true);
       try {
-        const response = await MealPlanService.getMealPlansByUser(props.userId); // Assume this function fetches meal plans from the specified endpoint
-console.log(props.userId)
-console.log(response.data)
-
-       
+        const response = await MealPlanService.getMealPlansByUser(props.userId);
         setMealPlans(response.data);
       } catch (error) {
         console.error("Error fetching meal plans:", error);
@@ -26,16 +25,22 @@ console.log(response.data)
     fetchMealPlans();
   }, [props.userId]);
 
-
-
   const handleShare = (mealPlanId) => {
-    // Add your share functionality here
     console.log("Share meal plan with ID:", mealPlanId);
   };
 
   const handleLike = (mealPlanId) => {
-    // Add your like functionality here
     console.log("Like meal plan with ID:", mealPlanId);
+  };
+
+  const handleUpdate = (mealPlan) => {
+    console.log("Update meal plan ", mealPlan);
+    setSelectedMealPlan(mealPlan); 
+    setShowUpdateForm(true); // Show the update form
+  };
+
+  const handleDelete = (mealPlanId) => {
+    console.log("Delete meal plan with ID:", mealPlanId);
   };
 
   return (
@@ -62,6 +67,7 @@ console.log(response.data)
                   <span className="font-semibold">Dietary Preferences:</span>{" "}
                   {mealPlan.dietaryPreferences}
                 </p>
+                {/* Add more details about the meal plan */}
                 <p className="text-gray-700 mb-4">
                   <span className="font-semibold">Recipes:</span> {mealPlan.recipes}
                 </p>
@@ -88,16 +94,35 @@ console.log(response.data)
                     <FontAwesomeIcon icon={faShare} />
                   </button>
                   <button
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-700 mr-4"
                     onClick={() => handleLike(mealPlan.id)}
                   >
                     <FontAwesomeIcon icon={faHeart} />
+                  </button>
+                  <button
+                    className="text-gray-500 hover:text-gray-700 mr-4"
+                    onClick={() => handleUpdate(mealPlan)}
+                  >
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button
+                    className="text-gray-500 hover:text-gray-700"
+                    onClick={() => handleDelete(mealPlan.id)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </div>
               </div>
             </div>
           ))}
         </div>
+      )}
+      {/* Render the update form if showUpdateForm is true */}
+      {showUpdateForm && (
+        <UpdateMealPlanForm
+        setShowUpdateForm={setShowUpdateForm} // Pass a function to close the update form
+          mealPlan={selectedMealPlan} // Pass the selected meal plan ID to the update form
+        />
       )}
     </div>
   );

@@ -7,6 +7,7 @@ import FriendsPosts from "./FriendsPosts";
 import MealPlan from "./MealPlansFeed";
 import UploadedPosts from "./LoggedInUserPosts";
 import MyMealPlansFeed from "./MyMealPlansFeed";
+import UpdateMealPlanForm from "../components/models/UpdateMealPlanForm";
 
 const TabsForMyProfile = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
@@ -105,6 +106,7 @@ const TabsForMyProfile = ({ userId }) => {
             {loggedInUser.id}
               {/* <MealPlan userId={loggedInUser.id}/> */}
               <MyMealPlansFeed userId={loggedInUser.id}/>
+              {/* <UpdateMealPlanForm/> */}
               mel plan for my profile
             </span>
           </div>
