@@ -13,6 +13,7 @@ import LoggedInsUserProfile from "../pages/LoggedInsUserProfile";
 import EditUserDetails from "../pages/EditUserDetails";
 import GetWorkOutStatus from "../pages/GetWorkOutStatus";
 import WorkoutPlanForm from "../pages/WorkoutPlanForm";
+import CreatPostTab from "../pages/CreatePostTabs";
 
 const UserRoute = () => {
   return (
@@ -28,7 +29,7 @@ const UserRoute = () => {
         
         <Route path="/SignIn" element={<SignIn/>} />
         <Route path="/oneuser/:id" element={<OneUserProfile />} />
-        <Route path="/post" element={<CreatePost />} />
+        <Route path="/post" element={<CreatPostTab />} />
         <Route path="/loggedinUser" element={<LoggedInsUserProfile />} />
         <Route path="/editUserDetails/:id" element={<EditUserDetails />} />
         <Route path="/workoutform" element={<WorkoutPlanForm/>} />

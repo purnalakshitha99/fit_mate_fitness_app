@@ -24,7 +24,7 @@ const OneUserProfile = () => {
     fetchData();
   }, [id]);
 
-  console.log("user id ", loggedInUser);
+  console.log("user id  sad", user);
 
   const handleFollowClick = async (userId, logId) => {
     try {
@@ -51,18 +51,12 @@ const OneUserProfile = () => {
             src={user.profilePictureUrl}
           />
           <div className=" flex flex-col ml-[140px] mt-10 text-xl font-semibold gap-3">
-           <div>
-           {user.firstName} {user.lastName}
-           </div>
             <div>
-            {user.email}
+              {user.firstName} {user.lastName}
             </div>
-            <div>
-              {user.phoneNumber}
-            </div>
-            <div>
-              {user.bio}
-            </div>
+            <div>{user.email}</div>
+            <div>{user.phoneNumber}</div>
+            <div>{user.bio}</div>
           </div>
         </div>
         <div className=" flex justify-center  mt-[50px] mb-[50px]  items-center flex-col gap-y-5">
@@ -85,7 +79,6 @@ const OneUserProfile = () => {
             onClick={() => handleFollowClick(id, loggedInUser.id)}
           >
             Follow
-          
           </button>
         </div>
       </div>

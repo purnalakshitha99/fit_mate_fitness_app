@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserService from "../services/UserService";
 import { app } from "../config/Config";
 import { ref, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
+import RegisterImage from "../assets/young-fitness-man-studio.jpg";
 
 const storage = getStorage(app);
 
@@ -23,8 +24,6 @@ const Register = () => {
     const value = e.target.value;
     setUser({ ...user, [e.target.name]: value });
   };
-
-  //upload image 
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadedUrls, setUploadedUrls] = useState([]);
@@ -225,6 +224,9 @@ const Register = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="">
+          <img className=" h-screen " src={RegisterImage} alt="Login Image" />
         </div>
       </div>
     </div>
