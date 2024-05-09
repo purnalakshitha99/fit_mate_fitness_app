@@ -13,7 +13,6 @@ const EditUserDetails = () => {
     email: "",
     username: "",
     phoneNumber: "",
-    profilePictureUrl: "",
     bio: "",
   });
 
@@ -93,17 +92,6 @@ const EditUserDetails = () => {
           <h2 className="text-xl font-semibold mb-4">Edit User Details</h2>
           <form className=" space-y-10">
             <div className=" flex flex-col ">
-              <div className=" m-auto flex">
-                {user.profilePictureUrl && (
-                  <img
-                    src={user.profilePictureUrl}
-                    className=" rounded-full w-[100px] h-[100px] "
-                    alt="Selected"
-                  />
-                )}
-              </div>
-              <label>Profile Picture</label>
-              <input type="file" />
             </div>
             <div className="flex flex-row gap-3">
               <label htmlFor="firstname" className="block text-gray-700">

@@ -48,6 +48,7 @@ const Post = () => {
   const [sharePostId, setSharePostId] = useState(null);
 
   console.log(posts);
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);

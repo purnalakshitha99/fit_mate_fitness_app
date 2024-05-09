@@ -1,15 +1,40 @@
 import React, { useEffect, useState } from "react";
 import Status from "../assets/status.jpg";
+import StatusService from "../services/StatusService";
 
 export default function GetWorkOutStatus() {
   const [loggedInUser, setLoggedInUser] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState([]);
   useEffect(() => {
     const user = localStorage.getItem("user");
     setLoggedInUser(JSON.parse(user));
   }, []);
   console.log("log", loggedInUser);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await StatusService.getAllStatus();
+        if (Array.isArray(response.data)) {
+          setStatus(response.data);
+          console.log("status",response)
+        } else {
+          console.error("Response data is not an array:", response);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
   return (
-    <div className="mt-5 text-black rounded-xl bg-background space-y-10">
+    <>
+    {status?.map((stat, index) => (
+    <div className="mt-5 text-black rounded-xl bg-background space-y-10" key={index}>
+  
       <div className="w-full sm:max-w-[1200px] p-4 space-y-5 bg-gray-300 rounded-md m-auto">
         <div className=" flex flex-row gap-x-5">
           <img
@@ -20,7 +45,8 @@ export default function GetWorkOutStatus() {
             {loggedInUser.firstName} {loggedInUser.lastName}
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row items-center juc space-y-3 sm:space-y-0 sm:space-x-3">
+        
+          <div className="flex flex-col sm:flex-row items-center juc space-y-3 sm:space-y-0 sm:space-x-3">
           <div className="flex flex-row">
             <div className="w-1/2 h-full">
               <img src={Status} />
@@ -36,7 +62,7 @@ export default function GetWorkOutStatus() {
                       Duration:
                     </h3>
                     <div className="bg-gray-200 px-3 py-2 rounded-md">
-                      <p className="text-gray-800">60 minutes</p>
+                      <p className="text-gray-800">{stat.duration} minutes</p>
                     </div>
                   </div>
                   <div className="mx-3 mb-4 w-full">
@@ -44,7 +70,7 @@ export default function GetWorkOutStatus() {
                       Distance:
                     </h3>
                     <div className="bg-gray-200 px-3 py-2 rounded-md">
-                      <p className="text-gray-800">5 miles</p>
+                      <p className="text-gray-800">{stat.distance} miles</p>
                     </div>
                   </div>
                 </div>
@@ -54,7 +80,7 @@ export default function GetWorkOutStatus() {
                       Weight Lifted:
                     </h3>
                     <div className="bg-gray-200 px-3 py-2 rounded-md">
-                      <p className="text-gray-800">100 kg</p>
+                      <p className="text-gray-800">{stat.weightLifted} kg</p>
                     </div>
                   </div>
                   <div className="mx-3 mb-4 w-full">
@@ -62,7 +88,7 @@ export default function GetWorkOutStatus() {
                       Calories Burned:
                     </h3>
                     <div className="bg-gray-200 px-3 py-2 rounded-md">
-                      <p className="text-gray-800">500 kcal</p>
+                      <p className="text-gray-800">{stat.caloriesBurned} kcal</p>
                     </div>
                   </div>
                 </div>
@@ -71,7 +97,7 @@ export default function GetWorkOutStatus() {
                     Number Of Pushups:
                   </h3>
                   <div className="bg-gray-200 px-3 py-2 rounded-md">
-                    <p className="text-gray-800">50</p>
+                    <p className="text-gray-800">{stat.numOfPushUps}</p>
                   </div>
                 </div>
                 <div className="mx-3 mb-4">
@@ -79,13 +105,13 @@ export default function GetWorkOutStatus() {
                     Load/Resistance:
                   </h3>
                   <div className="bg-gray-200 px-3 py-2 rounded-md">
-                    <p className="text-gray-800">Heavy</p>
+                    <p className="text-gray-800">{stat.loadResistance}</p>
                   </div>
                 </div>
                 <div className="mx-3 mb-4">
                   <h3 className="text-lg font-semibold text-blue-700">Date:</h3>
                   <div className="bg-gray-200 px-3 py-2 rounded-md">
-                    <p className="text-gray-800">2024-05-06</p>
+                    <p className="text-gray-800">{stat.date}</p>
                   </div>
                 </div>
                 <div className="mx-3 mb-4">
@@ -105,53 +131,13 @@ export default function GetWorkOutStatus() {
             </div>
           </div>
         </div>
+     
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4  w-full justify-center">
-            <button
-              className="w-1/2 flex justify-center p-3 border gap-5 cursor-pointer"
-              // onClick={() => handleLikeClick(index, post.postId)}
-            >
-              <img
-                className={`w-7 h-7`}
-                src="https://img.icons8.com/emoji/48/red-heart.png"
-                alt="red-heart"
-              />
-              Like
-            </button>
-            <div
-              className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"
-              // onClick={() => handleOpenPopup(post.postId)}
-            >
-              <button>
-                <img
-                  className="w-6 h-6 filter"
-                  src="https://img.icons8.com/ios/50/000000/speech-bubble--v1.png"
-                  alt="speech-bubble--v1"
-                />
-              </button>
-              Comment
-            </div>
-            <div
-              className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"
-              // onClick={() => handleOpenPopup(post.postId)}
-            >
-              <button>
-                <img
-                  className="w-6 h-6 filter"
-                  src="https://img.icons8.com/ios/50/share-3.png"
-                  alt="share-3"
-                  // onClick={() => {
-                  //   setShareModel(true);
-                  //   setSharePostId(post.postId);
-                  // }}
-                />
-              </button>
-              Share
-            </div>
-          </div>
-        </div>
+        
       </div>
+        
     </div>
+  ))}
+  </>
   );
 }
