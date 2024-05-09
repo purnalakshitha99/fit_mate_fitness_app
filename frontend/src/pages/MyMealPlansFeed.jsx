@@ -3,7 +3,7 @@ import MealPlanService from "../services/MealPlanFeedServices";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare, faHeart } from "@fortawesome/free-solid-svg-icons";
 
-const MealPlan = (props) => {
+const MyMealPlansFeed = (props) => {
   const [mealPlans, setMealPlans] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,8 +11,9 @@ const MealPlan = (props) => {
     const fetchMealPlans = async () => {
       setLoading(true);
       try {
-        const response = await MealPlanService.getMealPlans(); // Assume this function fetches meal plans from the specified endpoint
+        const response = await MealPlanService.getMealPlansByUser(props.userId); // Assume this function fetches meal plans from the specified endpoint
 console.log(props.userId)
+console.log(response.data)
 
        
         setMealPlans(response.data);
@@ -23,7 +24,7 @@ console.log(props.userId)
       }
     };
     fetchMealPlans();
-  }, []);
+  }, [props.userId]);
 
 
 
@@ -102,4 +103,4 @@ console.log(props.userId)
   );
 };
 
-export default MealPlan;
+export default MyMealPlansFeed;
