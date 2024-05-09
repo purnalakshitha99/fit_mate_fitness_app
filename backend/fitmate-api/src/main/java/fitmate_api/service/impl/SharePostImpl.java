@@ -47,4 +47,14 @@ public class SharePostImpl implements SharePostService {
 
         return sharePostRepository.findAll();
     }
+
+    @Override
+    public List<SharePost> getByUserId(Long id) {
+
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
+
+        return sharePostRepository.findSharePostByUser(user);
+    }
 }

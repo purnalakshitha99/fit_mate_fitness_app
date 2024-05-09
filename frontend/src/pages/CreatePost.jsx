@@ -56,7 +56,7 @@ const CreatePost = () => {
     for (const file of e.target.photo.files) {
       const imageRef = ref(storage, `/images/${file.name}`);
       await uploadBytes(imageRef, file);
-      setPreviewUrl(URL.createObjectURL(files));
+      
       const imageUrl = await getDownloadURL(imageRef);
       imageUrls.push(imageUrl);
     }
@@ -89,10 +89,11 @@ const CreatePost = () => {
       <div className="flex">
        
         <div className="m-auto mt-32 mr-[400px] bg-gray-300">
-          <div className="border shadow-xl p-8 rounded-lg  w-[800px]">
+          <div className="border shadow-xl p-8 rounded-lg  w-[800px] ">
             <h2 className="text-center text-2xl font-bold mb-4">
               Create a New Post(Photo)
             </h2>
+            hello
             <form className="space-y-9" onSubmit={handleSubmit}>
               <div className=" flex flex-row space-x-4">
                 <img

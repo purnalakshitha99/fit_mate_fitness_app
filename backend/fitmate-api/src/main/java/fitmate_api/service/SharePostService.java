@@ -12,4 +12,6 @@ public interface SharePostService {
     ResponseEntity<Object> sharePost(SharePostDTO sharePostDTO);
 
     List<SharePost> getAll();
+
+    List<SharePost> getByUserId(Long id);
 }

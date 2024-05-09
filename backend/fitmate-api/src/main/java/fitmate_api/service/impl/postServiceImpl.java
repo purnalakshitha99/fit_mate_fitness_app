@@ -37,6 +37,7 @@ public class postServiceImpl implements PostService {
         post.setUser(user);
         post.setPostImages(postDTO.getImageUrls());
         post.setCreatedAt(LocalTime.now());
+        post.setVideoUrl(postDTO.getVideoUrl());
 
         return postRepository.save(post);
     }
