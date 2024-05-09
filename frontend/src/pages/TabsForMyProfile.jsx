@@ -7,6 +7,7 @@ import FriendsPosts from "./FriendsPosts";
 import MealPlan from "./MealPlansFeed";
 import UploadedPosts from "./LoggedInUserPosts";
 import MyMealPlansFeed from "./MyMealPlansFeed";
+import UpdateMealPlanForm from "../components/models/UpdateMealPlanForm";
 
 const TabsForMyProfile = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
@@ -35,7 +36,7 @@ const TabsForMyProfile = ({ userId }) => {
         >
           <li
             className={` flex-auto text-center ${
-              activeTab === "app" ? "bg-red-300" : ""
+              activeTab === "app" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <a
@@ -51,7 +52,7 @@ const TabsForMyProfile = ({ userId }) => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "mealPlan" ? "" : ""
+              activeTab === "mealPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <a
@@ -67,7 +68,7 @@ const TabsForMyProfile = ({ userId }) => {
           </li>
           <li
             className={` flex-auto text-center ${
-              activeTab === "workOutPlan" ? "" : ""
+              activeTab === "myprofile" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
             <Link
@@ -102,10 +103,11 @@ const TabsForMyProfile = ({ userId }) => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-            {loggedInUser.id}
+            {/* {loggedInUser.id} */}
               {/* <MealPlan userId={loggedInUser.id}/> */}
               <MyMealPlansFeed userId={loggedInUser.id}/>
-              mel plan for my profile
+              {/* <UpdateMealPlanForm/> */}
+              {/* mel plan for my profile */}
             </span>
           </div>
           <div
