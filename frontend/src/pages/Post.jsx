@@ -47,6 +47,7 @@ const Post = () => {
   const [shareDescription, setShareDescription] = useState("");
   const [sharePostId, setSharePostId] = useState(null);
 
+  console.log(posts);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -184,6 +185,16 @@ const Post = () => {
                 alt="Gym"
               />
             ) : null}
+            {post.videoUrl && (
+              <video
+                controls
+                className="p-2 w-full h-[600px] m-auto"
+                key={index}
+              >
+                <source src={post.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4  w-full justify-center">
                 <button
@@ -206,6 +217,7 @@ const Post = () => {
                     />
                   )}
                   Like
+                  {post.likeCount}
                 </button>
                 <div
                   className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"

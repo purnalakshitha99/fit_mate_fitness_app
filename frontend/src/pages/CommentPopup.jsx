@@ -63,7 +63,7 @@ const CommentPopup = ({ postId, onClose }) => {
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-lg">
         <h2 className="text-lg font-bold mb-4 w-[500px]">Add Comment</h2>
-        <form onSubmit={handleSubmit}>
+        <form >
           <textarea
             value={comment}
             onChange={handleChange}
@@ -139,7 +139,7 @@ const CommentPopup = ({ postId, onClose }) => {
               Cancel
             </button>
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="bg-blue-500 text-white px-4 py-2 rounded-md"
             >
               Submit
