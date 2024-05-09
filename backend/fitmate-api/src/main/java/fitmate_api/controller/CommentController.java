@@ -42,7 +42,7 @@ public class CommentController {
     public ResponseEntity<?> deleteComment(@PathVariable("com_id") Long id) {
         commentService.deleteComment(id);
 
-        return ResponseEntity.ok("User Deleted!");
+        return ResponseEntity.ok("Comment Deleted!");
     }
 
 

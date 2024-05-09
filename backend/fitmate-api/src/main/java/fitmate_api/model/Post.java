@@ -33,5 +33,5 @@ public class Post {
     @CollectionTable(name = "post_images", joinColumns = @JoinColumn(name = "post_id"))
     private List<String> postImages;
 
-    private String video;
+    private String videoUrl;
 }
