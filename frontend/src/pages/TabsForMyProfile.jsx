@@ -6,6 +6,7 @@ import UserService from "../services/UserService";
 import FriendsPosts from "./FriendsPosts";
 import MealPlan from "./MealPlansFeed";
 import UploadedPosts from "./LoggedInUserPosts";
+import MyMealPlansFeed from "./MyMealPlansFeed";
 
 const TabsForMyProfile = ({ userId }) => {
   const [activeTab, setActiveTab] = useState("app");
@@ -102,7 +103,8 @@ const TabsForMyProfile = ({ userId }) => {
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
             {loggedInUser.id}
-              <MealPlan userId={loggedInUser.id}/>
+              {/* <MealPlan userId={loggedInUser.id}/> */}
+              <MyMealPlansFeed userId={loggedInUser.id}/>
               mel plan for my profile
             </span>
           </div>
