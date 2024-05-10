@@ -9,6 +9,7 @@ import fitmate_api.response.UserResponse;
 import fitmate_api.model.User;
 import fitmate_api.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -64,5 +65,12 @@ public class UserController {
 
 
         return  userService.loginUser(loginDTO);
+    }
+
+    @DeleteMapping("/users/notifications/{user_id}")
+    public ResponseEntity<String> clearNotifications(@PathVariable ("user_id")Long id){
+        userService.clearNotifications(id);
+
+        return new ResponseEntity<>("Notification cleared!", HttpStatus.OK);
     }
 }

@@ -9,12 +9,12 @@ public class WorkOutStatusResponse {
 
 
     private Long id;
-    private String duration;
+    private Double duration;
     private Integer distance;
     private Double weightLifted;
     private Double caloriesBurned;
     private Integer numOfPushUps;
-    private Double loadResistance;
+    private String loadResistance;
     private LocalDate date;
     private String description;
 }

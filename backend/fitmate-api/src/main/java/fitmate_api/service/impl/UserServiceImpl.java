@@ -103,9 +103,10 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(
                 () -> new UsernameNotFoundException("User Not Found")
         );
+        UserResponse userResponse = modelMapper.map(user, UserResponse.class);
+        userResponse.setNotifications(user.getNotifications());
 
-
-        return modelMapper.map(user, UserResponse.class);
+        return userResponse;
     }
 
 
@@ -152,6 +153,16 @@ public class UserServiceImpl implements UserService {
             return new ResponseEntity<>("Invalid password!", HttpStatus.UNAUTHORIZED);
         }
 
+    }
+
+    @Override
+    public void clearNotifications(Long id) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("User Not Found")
+        );
+
+        user.getNotifications().clear();
+        userRepository.save(user);
     }
 
 }
