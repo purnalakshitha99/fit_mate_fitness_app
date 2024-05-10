@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SigninImage from "../../assets/signin.jpg";
 import StatusService from "../../services/StatusService";
+import { useNavigate } from "react-router-dom";
 
 const WorkOutStatus = ({ closeWorkOutStatus, userId }) => {
-
   const [loggedInUser, setLoggedInUser] = useState({});
   const [formData, setFormData] = useState({
     duration: "",
@@ -17,13 +17,13 @@ const WorkOutStatus = ({ closeWorkOutStatus, userId }) => {
     description: "",
   });
 
+
+
   useEffect(() => {
     const userData = localStorage.getItem("user");
     setLoggedInUser(JSON.parse(userData));
     console.log("logged in user", loggedInUser);
   }, []);
-
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,12 +33,13 @@ const WorkOutStatus = ({ closeWorkOutStatus, userId }) => {
     });
   };
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await StatusService.createStatus(loggedInUser.id, formData);
+      const response = await StatusService.createStatus(
+        loggedInUser.id,
+        formData
+      );
       console.log("Response:", response.data);
 
       // Close modal or do any other necessary action
@@ -53,8 +54,12 @@ const WorkOutStatus = ({ closeWorkOutStatus, userId }) => {
     }
   };
 
+  
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
+    <div
+      className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center"
+    >
       <div className="w-[1200px]">
         <button
           className="text-white text-xl place-self-end"

@@ -14,6 +14,7 @@ import EditUserDetails from "../pages/EditUserDetails";
 import GetWorkOutStatus from "../pages/GetWorkOutStatus";
 import WorkoutPlanForm from "../pages/WorkoutPlanForm";
 import CreatPostTab from "../pages/CreatePostTabs";
+import EditWorkoutStatus from "../pages/workoutStatus/EditWorkoutStatus";
 
 const UserRoute = () => {
   return (
@@ -26,19 +27,19 @@ const UserRoute = () => {
         <Route path="/peoples" element={<AllUsers />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/mealPlan" element={<FormMeal />} />
-        
-        <Route path="/SignIn" element={<SignIn/>} />
+
+        <Route path="/SignIn" element={<SignIn />} />
         <Route path="/oneuser/:id" element={<OneUserProfile />} />
         <Route path="/post" element={<CreatPostTab />} />
         <Route path="/loggedinUser" element={<LoggedInsUserProfile />} />
         <Route path="/editUserDetails/:id" element={<EditUserDetails />} />
-        <Route path="/workoutform" element={<WorkoutPlanForm/>} />
+        <Route path="/workoutform" element={<WorkoutPlanForm />} />
+        <Route path="/editStatus/:id" element={<EditWorkoutStatus />} />
 
-        <Route path="/GetWorkoutStatus" element={<GetWorkOutStatus/>} />
+        <Route path="/GetWorkoutStatus" element={<GetWorkOutStatus />} />
       </Routes>
     </BrowserRouter>
   );
-  
 };
 
 export default UserRoute;

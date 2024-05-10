@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/users/status";
+const BASE_URL_2 = "http://localhost:8080/status";
 
 class StatusService {
   createStatus(userId, status) {
@@ -12,7 +13,11 @@ class StatusService {
   }
 
   getByUserId(userId) {
-    return axios.get(BASE_URL + "/" + userId);
+    return axios.get(BASE_URL_2 + "/" + userId);
+  }
+
+  getByStatusId(statIs) {
+    return axios.get(BASE_URL + "/" + statIs);
   }
 
   updateStatus(userId, status) {
