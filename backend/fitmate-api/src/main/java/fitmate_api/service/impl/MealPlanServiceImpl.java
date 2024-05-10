@@ -106,6 +106,54 @@ public class MealPlanServiceImpl implements MealPlanService {
         return mealPlanResponseList;
     }
 
+    public MealPlanResponse getSpecificUserSpecificMealPlan(Long mealPlanId)throws MealPlanNotFoundException{
+
+        MealPlan mealPlan = mealPlanRepository.findById(mealPlanId).orElseThrow(
+                ()-> new MealPlanNotFoundException("that meal plan not found")
+        );
+
+        return modelMapper.map(mealPlan,MealPlanResponse.class);
+    }
+
+    @Override
+    public MealPlanResponse deleteSpecificUserSpecificMealPlan(Long mealPlanId) throws MealPlanNotFoundException {
+
+        MealPlan mealPlan = mealPlanRepository.findById(mealPlanId).orElseThrow(
+                ()-> new MealPlanNotFoundException("that meal plan not in a database")
+        );
+
+        mealPlanRepository.deleteById(mealPlan.getId());
+
+        return modelMapper.map(mealPlan,MealPlanResponse.class);
+    }
+
+    @Override
+    public MealPlanResponse updateSpecificUserSpecificMealPlan(Long mealPlanId,MealPlanDTO mealPlanDTO,MultipartFile file) throws MealPlanNotFoundException,IOException {
+
+                MealPlan mealPlan = mealPlanRepository.findById(mealPlanId).orElseThrow(
+                () -> new MealPlanNotFoundException("that meal not in a database")
+        );
+
+        modelMapper.map(mealPlanDTO, mealPlan);
+
+// Update date and time
+        mealPlan.setCreationDate(LocalDate.now());
+        mealPlan.setCreationTime(LocalTime.now());
+
+        if (file != null && !file.isEmpty()) {
+            // Upload file to Cloudinary if file is present
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), null);
+            String imageUrl = (String) uploadResult.get("url");
+            mealPlan.setImagePath(imageUrl);
+
+            System.out.println("image url  ================     ");
+            System.out.println(imageUrl);
+        }
+
+        mealPlanRepository.save(mealPlan);
+
+        return modelMapper.map(mealPlan, MealPlanResponse.class);
+    }
 
 
 //    @Override
@@ -142,33 +190,33 @@ public class MealPlanServiceImpl implements MealPlanService {
 //
 //    }
 
-    @Override
-    public MealPlanResponse updateSpecificUserSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO, MultipartFile file) throws UserNotFoundException, MealPlanNotFoundException, IOException {
-
-        MealPlan mealPlan = mealPlanRepository.findById(mealPlanId).orElseThrow(
-                () -> new MealPlanNotFoundException("that meal not in a database")
-        );
-
-        modelMapper.map(mealPlanDTO, mealPlan);
-
-// Update date and time
-        mealPlan.setCreationDate(LocalDate.now());
-        mealPlan.setCreationTime(LocalTime.now());
-
-        if (file != null && !file.isEmpty()) {
-            // Upload file to Cloudinary if file is present
-            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), null);
-            String imageUrl = (String) uploadResult.get("url");
-            mealPlan.setImagePath(imageUrl);
-
-            System.out.println("image url  ================     ");
-            System.out.println(imageUrl);
-        }
-
-        mealPlanRepository.save(mealPlan);
-
-        return modelMapper.map(mealPlan, MealPlanResponse.class);
-    }
+//    @Override
+//    public MealPlanResponse updateSpecificUserSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO, MultipartFile file) throws UserNotFoundException, MealPlanNotFoundException, IOException {
+//
+//        MealPlan mealPlan = mealPlanRepository.findById(mealPlanId).orElseThrow(
+//                () -> new MealPlanNotFoundException("that meal not in a database")
+//        );
+//
+//        modelMapper.map(mealPlanDTO, mealPlan);
+//
+//// Update date and time
+//        mealPlan.setCreationDate(LocalDate.now());
+//        mealPlan.setCreationTime(LocalTime.now());
+//
+//        if (file != null && !file.isEmpty()) {
+//            // Upload file to Cloudinary if file is present
+//            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), null);
+//            String imageUrl = (String) uploadResult.get("url");
+//            mealPlan.setImagePath(imageUrl);
+//
+//            System.out.println("image url  ================     ");
+//            System.out.println(imageUrl);
+//        }
+//
+//        mealPlanRepository.save(mealPlan);
+//
+//        return modelMapper.map(mealPlan, MealPlanResponse.class);
+//    }
 
 
 }

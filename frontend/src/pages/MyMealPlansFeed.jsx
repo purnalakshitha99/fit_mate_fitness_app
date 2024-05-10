@@ -55,7 +55,7 @@ const MyMealPlansFeed = (props) => {
         try {
           // Make a DELETE request to delete the meal plan
           const response = await axios.delete(
-            `http://localhost:8080/users/${mealPlan.userId}/meal_plans/${mealPlan.id}`
+            `http://localhost:8080/meal_plans/${mealPlan.id}`
           );
           if (response.status === 200) {
             // If deletion is successful, show success message
