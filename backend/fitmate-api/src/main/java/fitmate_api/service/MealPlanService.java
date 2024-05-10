@@ -19,9 +19,9 @@ public interface MealPlanService {
 
    List<MealPlanResponse> getSpecificUserMealPlans(Long userId)throws UserNotFoundException,MealPlanNotFoundException;
 
-   MealPlanResponse getSpecificUserSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
+//   MealPlanResponse getSpecificUserSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
 
-   MealPlanResponse deleteSpecificUserSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
+//   MealPlanResponse deleteSpecificUserSpecificMealPlan(Long userId, Long mealPlanId)throws UserNotFoundException,MealPlanNotFoundException;
 
    MealPlanResponse updateSpecificUserSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO, MultipartFile file) throws UserNotFoundException, MealPlanNotFoundException, IOException;
 }

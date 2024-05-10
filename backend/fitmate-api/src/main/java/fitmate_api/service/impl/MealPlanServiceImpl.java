@@ -93,7 +93,9 @@ public class MealPlanServiceImpl implements MealPlanService {
                 () -> new UserNotFoundException("that user not in a database")
         );
 
-        List<MealPlan> specificMealPlanList = user.getMealPlanList();
+//        List<MealPlan> specificMealPlanList = user.getMealPlanList();
+
+        List<MealPlan> specificMealPlanList = mealPlanRepository.findMealPlanByUser(user);
 
         List<MealPlanResponse> mealPlanResponseList=new ArrayList<>();
 
@@ -104,39 +106,41 @@ public class MealPlanServiceImpl implements MealPlanService {
         return mealPlanResponseList;
     }
 
-    @Override
-    public MealPlanResponse getSpecificUserSpecificMealPlan(Long userId, Long mealPlanId) throws UserNotFoundException, MealPlanNotFoundException {
-
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new UserNotFoundException("that user not found")
-        );
-
-        MealPlan specificMealPlan = user.getMealPlanList().stream().filter(mealPlan1 -> mealPlan1.getId().equals(mealPlanId)).findFirst().orElse(null);
-
-        if (specificMealPlan == null) {
-            throw new MealPlanNotFoundException("that meal plan not in a database");
-        }
-        return modelMapper.map(specificMealPlan, MealPlanResponse.class);
-    }
-
-    @Override
-    public MealPlanResponse deleteSpecificUserSpecificMealPlan(Long userId, Long mealPlanId) throws UserNotFoundException, MealPlanNotFoundException {
-
-        User user = userRepository.findById(userId).orElseThrow(
-                () -> new UserNotFoundException("that user not found")
-        );
-
-        MealPlan specificMealPlan = user.getMealPlanList().stream().filter(mealPlan1 -> mealPlan1.getId().equals(mealPlanId)).findFirst().orElse(null);
 
 
-        if (specificMealPlan == null) {
-            throw new MealPlanNotFoundException("that meal plan not in a database");
-        }
-        mealPlanRepository.deleteById(specificMealPlan.getId());
+//    @Override
+//    public MealPlanResponse getSpecificUserSpecificMealPlan(Long userId, Long mealPlanId) throws UserNotFoundException, MealPlanNotFoundException {
+//
+//        User user = userRepository.findById(userId).orElseThrow(
+//                () -> new UserNotFoundException("that user not found")
+//        );
+//
+//        MealPlan specificMealPlan = user.getMealPlanList().stream().filter(mealPlan1 -> mealPlan1.getId().equals(mealPlanId)).findFirst().orElse(null);
+//
+//        if (specificMealPlan == null) {
+//            throw new MealPlanNotFoundException("that meal plan not in a database");
+//        }
+//        return modelMapper.map(specificMealPlan, MealPlanResponse.class);
+//    }
 
-        return modelMapper.map(specificMealPlan, MealPlanResponse.class);
-
-    }
+//    @Override
+//    public MealPlanResponse deleteSpecificUserSpecificMealPlan(Long userId, Long mealPlanId) throws UserNotFoundException, MealPlanNotFoundException {
+//
+//        User user = userRepository.findById(userId).orElseThrow(
+//                () -> new UserNotFoundException("that user not found")
+//        );
+//
+//        MealPlan specificMealPlan = user.getMealPlanList().stream().filter(mealPlan1 -> mealPlan1.getId().equals(mealPlanId)).findFirst().orElse(null);
+//
+//
+//        if (specificMealPlan == null) {
+//            throw new MealPlanNotFoundException("that meal plan not in a database");
+//        }
+//        mealPlanRepository.deleteById(specificMealPlan.getId());
+//
+//        return modelMapper.map(specificMealPlan, MealPlanResponse.class);
+//
+//    }
 
     @Override
     public MealPlanResponse updateSpecificUserSpecificMealPlan(Long userId, Long mealPlanId, MealPlanDTO mealPlanDTO, MultipartFile file) throws UserNotFoundException, MealPlanNotFoundException, IOException {
