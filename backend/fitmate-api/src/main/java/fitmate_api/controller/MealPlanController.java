@@ -43,24 +43,44 @@ public class MealPlanController {
 
     }
 
-    @GetMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
-    public MealPlanResponse getSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException{
 
-        return mealPlanService.getSpecificUserSpecificMealPlan(userId,mealPlanId);
+    @GetMapping("/meal_plans/{meal_plan_id}")
+
+    public MealPlanResponse getSpecificUserSpecificMealPlan(@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException{
+
+        return mealPlanService.getSpecificUserSpecificMealPlan(mealPlanId);
     }
 
-    @DeleteMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
-    public MealPlanResponse deleteSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException{
+    @DeleteMapping("/meal_plans/{meal_plan_id}")
+    public MealPlanResponse deleteSpecificUserSpecificMealPlan(@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException{
 
-        return mealPlanService.deleteSpecificUserSpecificMealPlan(userId,mealPlanId);
+        return mealPlanService.deleteSpecificUserSpecificMealPlan(mealPlanId);
     }
 
+    @PutMapping("/meal_plans/{meal_plan_id}")
+    public MealPlanResponse updateSpecificUserSpecificMealPlan(@PathVariable("meal_plan_id")Long mealPlanId, @ModelAttribute MealPlanDTO mealPlanDTO, @RequestParam("imagePath")MultipartFile file)throws MealPlanNotFoundException,IOException{
 
-    @PutMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
-    public MealPlanResponse updateSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId, @PathVariable("meal_plan_id")Long mealPlanId, @ModelAttribute MealPlanDTO mealPlanDTO, @RequestParam("imagePath")MultipartFile file)throws UserNotFoundException,MealPlanNotFoundException,IOException{
-
-        return mealPlanService.updateSpecificUserSpecificMealPlan(userId,mealPlanId,mealPlanDTO,file);
+        return mealPlanService.updateSpecificUserSpecificMealPlan(mealPlanId,mealPlanDTO,file);
     }
+
+//    @GetMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
+//    public MealPlanResponse getSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException{
+//
+//        return mealPlanService.getSpecificUserSpecificMealPlan(userId,mealPlanId);
+//    }
+
+//    @DeleteMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
+//    public MealPlanResponse deleteSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId,@PathVariable("meal_plan_id")Long mealPlanId)throws MealPlanNotFoundException,UserNotFoundException{
+//
+//        return mealPlanService.deleteSpecificUserSpecificMealPlan(userId,mealPlanId);
+//    }
+
+
+//    @PutMapping("/users/{user_id}/meal_plans/{meal_plan_id}")
+//    public MealPlanResponse updateSpecificUserSpecificMealPlan(@PathVariable("user_id")Long userId, @PathVariable("meal_plan_id")Long mealPlanId, @ModelAttribute MealPlanDTO mealPlanDTO, @RequestParam("imagePath")MultipartFile file)throws UserNotFoundException,MealPlanNotFoundException,IOException{
+//
+//        return mealPlanService.updateSpecificUserSpecificMealPlan(userId,mealPlanId,mealPlanDTO,file);
+//    }
 
 
 
