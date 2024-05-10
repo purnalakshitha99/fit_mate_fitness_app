@@ -12,6 +12,10 @@ class MealPlanFeedServices {
   getMealPlansByUser(userid) {
     return axios.get(BASE_URL +"/users/"+userid+"/meal_plans");
   }
+
+  updateMealPlan(mealId, melplan){
+    return axios.put(BASE_URL + "/meal_plans/" + mealId, melplan);
+  }
 }
 
 export default new MealPlanFeedServices();

@@ -45,8 +45,8 @@ public class User {
 
     private Integer followersCount = 0;
 
-    @OneToMany(mappedBy = "user")
-    private List<MealPlan> mealPlanList;
+//    @OneToMany(mappedBy = "user")
+//    private List<MealPlan> mealPlanList;
 
 
 

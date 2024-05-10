@@ -46,7 +46,7 @@ const handleChange = (e) => {
     e.preventDefault();
     console.log("vade hari",formData);
     try {
-      const response = await axios.put(`http://localhost:8080/users/${mealPlan.userId}/meal_plans/${mealPlan.id}`, formData, {
+      const response = await axios.put(`http://localhost:8080/meal_plans/${mealPlan.id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
