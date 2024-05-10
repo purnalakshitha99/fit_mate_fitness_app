@@ -3,6 +3,7 @@ import Google from "../assets/search.png"; // Use default import
 import React, { useState } from "react";
 import UserService from "../services/UserService";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const colors = {
   primary: "#060606",
@@ -10,17 +11,9 @@ const colors = {
   disabaled: "#D9D9D9",
 };
 
+
 const SignIn = () => {
-  const [inputFocused, setInputFocused] = useState(false);
-
-  const handleInputFocus = () => {
-    setInputFocused(true);
-  };
-
-  const handleInputBlur = () => {
-    setInputFocused(false);
-  };
-
+const [loading, setLoading] = useState(false);
   const handleGoogleLogin = async () => {
     window.location.href = "http://localhost:8080/oauth2/authorization/google";
   };
@@ -36,20 +29,20 @@ const SignIn = () => {
     setUser({ ...user, [e.target.name]: value });
   };
   const loginUser = async (e) => {
-    console.log(user);
-
     e.preventDefault();
+    setLoading(true)
     UserService.loginUser(user)
       .then((response) => {
         console.log(response);
         navigate("/home");
-        alert("welcome!", response.data.firstName);
+        toast.success("welcome!");
         localStorage.setItem("user", JSON.stringify(response.data));
       })
       .catch((error) => {
         console.log(error);
-        alert("Wrong Creditials!");
+        toast.error("Wrong Creditials!");
       });
+      setLoading(false);
   };
 
   return (
