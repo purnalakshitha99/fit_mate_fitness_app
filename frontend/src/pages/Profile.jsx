@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import UserService from "../services/UserService";
 import { Link } from "react-router-dom";
 
 const Profile = ({ loggedInUser }) => {
+
+  const [user, setUser] = useState({})
+  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await UserService.getUserById(loggedInUser.id);
+        setUser(response.data);
+      } catch (error) {}
+    };
+    fetchData();
+  }, [loggedInUser.id]);
+
+  console.log("one user",user)
+
+
   return (
     <div className="w-[400px] h-full  flex flex-col  gap-4">
       <div className=" flex flex-col items-center w-full">
         <img
-          src={loggedInUser.profilePictureUrl}
+          src={user.profilePictureUrl}
           className=" rounded-full w-[100px] h-[100px]"
         />
 
@@ -16,7 +33,7 @@ const Profile = ({ loggedInUser }) => {
           Hello!
           <span className="first-letter:capitalize font-bold">
             {" "}
-            {loggedInUser.firstName} {loggedInUser.lastName}
+            {user.firstName} {user.lastName}
           </span>
         </div>
       </div>
@@ -24,11 +41,11 @@ const Profile = ({ loggedInUser }) => {
         {" "}
         <div className=" bg-green-300 w-1/2 items-start p-2 rounded-l-lg">
           {" "}
-          Followers
+          Followers : {user.followersCount}
         </div>
         <div className=" bg-red-300 w-1/2 items-start p-2 rounded-r-lg">
           {" "}
-          Following
+          Following : {user.followingCount}
         </div>
       </div>
 
@@ -36,25 +53,25 @@ const Profile = ({ loggedInUser }) => {
       <div>
         <span className=" text-sm">Name :</span>
         <div className=" first-letter:capitalize font-semibold">
-          {loggedInUser.firstName} {loggedInUser.lastName}
+          {user.firstName} {user.lastName}
         </div>
       </div>
       <div>
         <span className=" text-sm">Email :</span>
         <div className=" first-letter:capitalize font-semibold">
-          {loggedInUser.email}
+          {user.email}
         </div>
       </div>
       <div>
         <span className=" text-sm">Address :</span>
         <div className=" first-letter:capitalize font-semibold">
-          {loggedInUser.bio}
+          {user.bio}
         </div>
       </div>
       <div>
         <span className=" text-sm">Phone Number :</span>
         <div className=" first-letter:capitalize font-semibold">
-          {loggedInUser.phoneNumber}
+          {user.phoneNumber}
         </div>
       </div>
 
