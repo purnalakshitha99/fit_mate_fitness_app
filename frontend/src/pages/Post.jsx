@@ -202,6 +202,7 @@ const Post = () => {
                   className="w-1/2 flex justify-center p-3 border gap-5 cursor-pointer"
                   onClick={() => handleLikeClick(index, post.postId)}
                 >
+                   {post.likeCount}
                   {post?.likedUsers?.includes(loggedIn.id) ? (
                     <img
                       className={`w-7 h-7`}
@@ -218,7 +219,7 @@ const Post = () => {
                     />
                   )}
                   Like
-                  {post.likeCount}
+                 
                 </button>
                 <div
                   className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"

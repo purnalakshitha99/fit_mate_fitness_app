@@ -89,7 +89,7 @@ const Tabs = () => {
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
               <MealPlansFeed/>
-              <GetWorkOutStatus />
+             
             </span>
           </div>
           <div
@@ -100,7 +100,7 @@ const Tabs = () => {
             role="tabpanel"
           >
             <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              Content for Settings tab
+            <GetWorkOutStatus />
             </p>
           </div>
         </div>
