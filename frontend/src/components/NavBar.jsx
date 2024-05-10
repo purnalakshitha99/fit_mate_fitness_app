@@ -7,10 +7,12 @@ import {
 } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 import Profile from "../pages/Profile";
+import Notification from "../pages/notifications/Notification";
 
 const NavBar = () => {
   const [openNav, setOpenNav] = useState(false);
   const [showUserDetails, setShowUserDetails] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [loggedInUser, setLoggedInUser] = useState({});
 
   useEffect(() => {
@@ -18,7 +20,6 @@ const NavBar = () => {
     setLoggedInUser(JSON.parse(userData));
   }, []);
 
-  console.log("Logged", loggedInUser)
 
   const handleLogOut = async () => {
     window.location.href = "http://localhost:8080/logout";
@@ -27,6 +28,12 @@ const NavBar = () => {
 
   const toggleUserDetails = () => {
     setShowUserDetails(!showUserDetails);
+    setShowNotifications(false);
+  };
+
+  const toggleNotification = () => {
+    setShowNotifications(!showUserDetails);
+    setShowUserDetails(false);
   };
 
   const navList = (
@@ -70,8 +77,17 @@ const NavBar = () => {
             </Typography>
           </Link>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <div className="mr-4 hidden lg:block">{navList}</div>
+            <img
+              width="30"
+              height="30"
+              className=" cursor-pointer"
+              src="https://img.icons8.com/ios-filled/50/FFFFFF/appointment-reminders--v1.png"
+              alt="appointment-reminders--v1"
+              onClick={toggleNotification}
+            />
+
             <div className="  relative">
               {/* {loggedInUser.provider === "google" ? (
                 <img
@@ -86,6 +102,7 @@ const NavBar = () => {
                   onClick={toggleUserDetails}
                 />
               )} */}
+
               <img
                 className=" rounded-full cursor-pointer h-[50px] w-[50px]"
                 src={loggedInUser.profilePictureUrl}
@@ -95,6 +112,12 @@ const NavBar = () => {
                 <div className="absolute  top-full right-0  bg-white shadow-lg p-4 rounded-lg z-10">
                   {/* Popup content */}
                   <Profile loggedInUser={loggedInUser} />
+                </div>
+              )}
+              {showNotifications && (
+                <div className="absolute  top-full right-0  bg-white shadow-lg p-4 rounded-lg z-10">
+                  {/* Popup content */}
+                  <Notification loggedInUser={loggedInUser} />
                 </div>
               )}
             </div>

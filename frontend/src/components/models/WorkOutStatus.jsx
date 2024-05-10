@@ -3,6 +3,7 @@ import axios from "axios";
 import SigninImage from "../../assets/signin.jpg";
 import StatusService from "../../services/StatusService";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const WorkOutStatus = ({ closeWorkOutStatus, userId }) => {
   const [loggedInUser, setLoggedInUser] = useState({});
@@ -22,7 +23,7 @@ const WorkOutStatus = ({ closeWorkOutStatus, userId }) => {
   useEffect(() => {
     const userData = localStorage.getItem("user");
     setLoggedInUser(JSON.parse(userData));
-    console.log("logged in user", loggedInUser);
+
   }, []);
 
   const handleChange = (e) => {
@@ -40,17 +41,17 @@ const WorkOutStatus = ({ closeWorkOutStatus, userId }) => {
         loggedInUser.id,
         formData
       );
-      console.log("Response:", response.data);
+  
 
       // Close modal or do any other necessary action
       closeWorkOutStatus();
 
       // Display success alert
-      alert("Workout status submitted successfully!");
+      toast.success("Workout status submitted successfully!");
     } catch (error) {
-      console.error("Error:", error);
+  
       // Display error alert
-      alert("Failed to submit workout status. Please try again later.");
+      toast.error("Failed to submit workout status. Please try again later.");
     }
   };
 

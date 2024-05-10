@@ -29,8 +29,6 @@ const UploadedPosts = ({ loggedIn }) => {
           // Check if loggedInUser and its id are defined
           const response = await PostService.getPostByUser(loggedIn.id);
           setPosts(Array.isArray(response.data) ? response.data : []);
-
-          console.log(response);
         }
       } catch (error) {
         console.error(error);
@@ -39,8 +37,6 @@ const UploadedPosts = ({ loggedIn }) => {
     };
     fetchData();
   }, [loggedIn]); // Include loggedInUser in the dependency array
-
-  console.log(loggedIn);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,8 +55,6 @@ const UploadedPosts = ({ loggedIn }) => {
     };
     fetchData();
   }, []);
-
-  console.log(posts);
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -76,7 +70,6 @@ const UploadedPosts = ({ loggedIn }) => {
   };
 
   const handleOpenPopup = (postId) => {
-    console.log(postId);
     setSelectedPostId(postId);
     setShowPopup(true);
   };
@@ -84,16 +77,6 @@ const UploadedPosts = ({ loggedIn }) => {
   const handleClosePopup = () => {
     setShowPopup(false);
     setSelectedPostId(null);
-  };
-
-  const handleEditClick = (postId) => {
-    // Handle edit functionality here
-    console.log(`Editing post with ID: ${postId}`);
-  };
-
-  const handleDeleteClick = (postId) => {
-    // Handle delete functionality here
-    console.log(`Deleting post with ID: ${postId}`);
   };
 
   return (

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "http://localhost:8080/users/status";
-const BASE_URL_2 = "http://localhost:8080/status";
+const BASE_URL_2 = "http://localhost:8080/users";
 
 class StatusService {
   createStatus(userId, status) {
@@ -25,7 +25,7 @@ class StatusService {
   }
 
   deleteStatus(statusId) {
-    return axios.delete(BASE_URL + "/" + statusId)
+    return axios.delete(BASE_URL + "/" + statusId);
   }
 }
 export default new StatusService();

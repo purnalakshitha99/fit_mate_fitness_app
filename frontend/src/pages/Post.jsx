@@ -47,8 +47,6 @@ const Post = () => {
   const [shareDescription, setShareDescription] = useState("");
   const [sharePostId, setSharePostId] = useState(null);
 
-  console.log(posts);
-  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -86,8 +84,6 @@ const Post = () => {
     fetchData();
   }, []);
 
-  console.log("shared post", sharedPosts);
-
   useEffect(() => {
     const userData = localStorage.getItem("user");
     setLoggedIn(JSON.parse(userData));
@@ -119,8 +115,6 @@ const Post = () => {
       content: shareDescription,
     };
     const response = await ShareService.sharePost(sharePost);
-    console.log(response);
-
     if (response) {
       toast.success("shared");
       setShareModel(false);
@@ -136,9 +130,6 @@ const Post = () => {
 
       const response = await LikeService.setLike(loggedIn.id, pId);
       setReFetch(true);
-      if (response) {
-        console.log("res");
-      }
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -202,7 +193,7 @@ const Post = () => {
                   className="w-1/2 flex justify-center p-3 border gap-5 cursor-pointer"
                   onClick={() => handleLikeClick(index, post.postId)}
                 >
-                   {post.likeCount}
+                  {post.likeCount}
                   {post?.likedUsers?.includes(loggedIn.id) ? (
                     <img
                       className={`w-7 h-7`}
@@ -219,7 +210,6 @@ const Post = () => {
                     />
                   )}
                   Like
-                 
                 </button>
                 <div
                   className="w-1/2 flex flex-row justify-center gap-5 p-3 border cursor-pointer"

@@ -24,7 +24,7 @@ const Tabs = () => {
               activeTab === "app" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
-            <a
+            <Link
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
@@ -33,14 +33,14 @@ const Tabs = () => {
               onClick={() => handleTabClick("app")}
             >
               <span className="ml-1">Feed</span>
-            </a>
+            </Link>
           </li>
           <li
             className={` flex-auto text-center ${
               activeTab === "mealPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
-            <a
+            <Link
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
@@ -49,7 +49,7 @@ const Tabs = () => {
               onClick={() => handleTabClick("mealPlan")}
             >
               <span className="ml-1">Meal Plan</span>
-            </a>
+            </Link>
           </li>
           <li
             className={` flex-auto text-center ${
@@ -88,8 +88,7 @@ const Tabs = () => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              <MealPlansFeed/>
-             
+              <MealPlansFeed />
             </span>
           </div>
           <div
@@ -100,7 +99,7 @@ const Tabs = () => {
             role="tabpanel"
           >
             <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-            <GetWorkOutStatus />
+              <GetWorkOutStatus />
             </p>
           </div>
         </div>

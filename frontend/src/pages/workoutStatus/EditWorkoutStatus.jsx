@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SigninImage from "../../assets/signin.jpg";
 import StatusService from "../../services/StatusService";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const EditWorkoutStatus = () => {
   const [user, setUser] = useState({});
@@ -33,9 +34,8 @@ const EditWorkoutStatus = () => {
       const statusData = {
         ...formData,
       };
-
       const response = await StatusService.updateStatus(id, statusData);
-      console.log(response);
+      toast.success(response.data)
       navigate("/home");
     } catch (error) {
       console.error(error);

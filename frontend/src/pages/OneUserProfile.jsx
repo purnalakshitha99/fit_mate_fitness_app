@@ -4,6 +4,7 @@ import UserService from "../services/UserService";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import TabsForOneUser from "./TabsForFriendsProfile";
+import toast from "react-hot-toast";
 
 const OneUserProfile = () => {
   const [user, setUser] = useState({});
@@ -24,12 +25,12 @@ const OneUserProfile = () => {
     fetchData();
   }, [id]);
 
-  console.log("user id  sad", user);
 
   const handleFollowClick = async (userId, logId) => {
     try {
       const response = await UserService.followUsers(userId, logId);
       console.log(response);
+      toast.success(response.data);
     } catch (error) {
       console.error(error);
     }

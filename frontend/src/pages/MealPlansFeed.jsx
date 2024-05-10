@@ -12,7 +12,7 @@ const MealPlan = (props) => {
       setLoading(true);
       try {
         const response = await MealPlanService.getMealPlans(); // Assume this function fetches meal plans from the specified endpoint
-console.log(props.userId)
+
 
        
         setMealPlans(response.data);
