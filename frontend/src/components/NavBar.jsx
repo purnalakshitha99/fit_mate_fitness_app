@@ -18,6 +18,8 @@ const NavBar = () => {
     setLoggedInUser(JSON.parse(userData));
   }, []);
 
+  console.log("Logged", loggedInUser)
+
   const handleLogOut = async () => {
     window.location.href = "http://localhost:8080/logout";
     localStorage.removeItem("user");
@@ -71,6 +73,19 @@ const NavBar = () => {
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
             <div className="  relative">
+              {/* {loggedInUser.provider === "google" ? (
+                <img
+                  className=" w-[40px] h-[40px] rounded-full "
+                  src={loggedInUser.imageUrl}
+                  onClick={toggleUserDetails}
+                />
+              ) : (
+                <img
+                  className=" w-[40px] h-[40px] rounded-full "
+                  src={loggedInUser.profilePictureUrl}
+                  onClick={toggleUserDetails}
+                />
+              )} */}
               <img
                 className=" rounded-full cursor-pointer h-[50px] w-[50px]"
                 src={loggedInUser.profilePictureUrl}

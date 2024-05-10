@@ -63,14 +63,14 @@ const OneUserProfile = () => {
           <div className=" flex flex-row space-x-8 w-[500px] ">
             <div className=" w-full ">
               <div className="rounded-lg p-2 w-full  text-white text-lg font-semibold bg-[#74779bf0] ">
-                Followers
-                {loggedInUser.followersCount}
+                Followers : 
+                {user.followersCount}
               </div>
             </div>
             <div className=" w-full ">
               <div className="rounded-lg  p-2  text-white text-lg font-semibold bg-[#74779bf0] ">
-                Following
-                {loggedInUser.followingCount}
+                Following : 
+                 {user.followingCount}
               </div>
             </div>
           </div>
