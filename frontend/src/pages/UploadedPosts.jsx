@@ -63,16 +63,6 @@ const UploadedPosts = ({ loggedIn }) => {
     setSelectedPostId(null);
   };
 
-  const handleEditClick = (postId) => {
-    // Handle edit functionality here
-    console.log(`Editing post with ID: ${postId}`);
-  };
-
-  const handleDeleteClick = (postId) => {
-    // Handle delete functionality here
-    console.log(`Deleting post with ID: ${postId}`);
-  };
-
   return (
     <div>
       {posts?.map((post, index) => (
@@ -90,7 +80,6 @@ const UploadedPosts = ({ loggedIn }) => {
               <h3 className="font-bold text-sm sm:text-base first-letter:capitalize">
                 {loggedIn.firstName} {loggedIn.lastName}
               </h3>
-              
             </div>
             <div>
               <h2>{post.content}</h2>
@@ -144,7 +133,6 @@ const UploadedPosts = ({ loggedIn }) => {
                 </div>
               </div>
             </div>
-            
           </div>
         </div>
       ))}

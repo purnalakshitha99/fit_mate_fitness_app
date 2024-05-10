@@ -23,7 +23,7 @@ const EditUserDetails = () => {
     const value = e.target.value;
     setUser({ ...user, [e.target.name]: value });
   };
-  console.log("param id", id);
+
 
   useEffect(() => {
     const fetchData = async () => {

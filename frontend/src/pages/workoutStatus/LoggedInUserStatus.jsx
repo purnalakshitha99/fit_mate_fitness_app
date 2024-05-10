@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from "react";
-import Status from "../assets/status.jpg";
-import StatusService from "../services/StatusService";
-import { useNavigate } from "react-router-dom";
+import Status from "../../assets/status.jpg";
 
-export default function GetWorkOutStatus() {
-  const [loggedInUser, setLoggedInUser] = useState({});
+import { useNavigate } from "react-router-dom";
+import StatusService from "../../services/StatusService";
+
+export default function LoggedInUserStatus({ userId }) {
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState([]);
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    setLoggedInUser(JSON.parse(user));
-  }, []);
+  const [loggedInUser, setLoggedInUser] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
-        const response = await StatusService.getAllStatus();
+        const response = await StatusService.getByStatusId(userId);
+        setLoggedInUser(response.data);
+        // console.log(response);
+      } catch (error) {}
+    };
+    fetchData();
+  }, []);
+
+  console.log("logged in user: ", userId);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // await new Promise((resolve) => setTimeout(resolve, 1000));
+        const response = await StatusService.getByUserId(userId);
         if (Array.isArray(response.data)) {
           setStatus(response.data);
           console.log("status", response);
@@ -26,19 +36,22 @@ export default function GetWorkOutStatus() {
       } catch (error) {
         console.error(error);
       }
-      setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [userId]);
 
- 
+  const navigate = useNavigate();
+  const handlenavigate = (e, id) => {
+    e.preventDefault();
+    navigate(`/editStatus/${id}`);
+  };
   return (
     <>
       {status?.map((stat, index) => (
         <div
           className="mt-5 text-black rounded-xl bg-background space-y-10 hover:cursor-pointer"
           key={index}
-          
+          onClick={(e, id) => handlenavigate(e, stat.id)}
         >
           <div className="w-full sm:max-w-[1200px] p-4 space-y-5 bg-gray-300 rounded-md m-auto">
             <div className=" flex flex-row gap-x-5">
@@ -67,9 +80,9 @@ export default function GetWorkOutStatus() {
                           Duration:
                         </h3>
                         <div className="bg-gray-200 px-3 py-2 rounded-md">
-                          <p className="text-gray-800">
+                          <span className="text-gray-800">
                             {stat.duration} minutes
-                          </p>
+                          </span>
                         </div>
                       </div>
                       <div className="mx-3 mb-4 w-full">
@@ -77,7 +90,9 @@ export default function GetWorkOutStatus() {
                           Distance:
                         </h3>
                         <div className="bg-gray-200 px-3 py-2 rounded-md">
-                          <p className="text-gray-800">{stat.distance} miles</p>
+                          <span className="text-gray-800">
+                            {stat.distance} miles
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -87,9 +102,9 @@ export default function GetWorkOutStatus() {
                           Weight Lifted:
                         </h3>
                         <div className="bg-gray-200 px-3 py-2 rounded-md">
-                          <p className="text-gray-800">
+                          <span className="text-gray-800">
                             {stat.weightLifted} kg
-                          </p>
+                          </span>
                         </div>
                       </div>
                       <div className="mx-3 mb-4 w-full">
@@ -97,9 +112,9 @@ export default function GetWorkOutStatus() {
                           Calories Burned:
                         </h3>
                         <div className="bg-gray-200 px-3 py-2 rounded-md">
-                          <p className="text-gray-800">
+                          <span className="text-gray-800">
                             {stat.caloriesBurned} kcal
-                          </p>
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -108,7 +123,9 @@ export default function GetWorkOutStatus() {
                         Number Of Pushups:
                       </h3>
                       <div className="bg-gray-200 px-3 py-2 rounded-md">
-                        <p className="text-gray-800">{stat.numOfPushUps}</p>
+                        <span className="text-gray-800">
+                          {stat.numOfPushUps}
+                        </span>
                       </div>
                     </div>
                     <div className="mx-3 mb-4">
@@ -116,7 +133,9 @@ export default function GetWorkOutStatus() {
                         Load/Resistance:
                       </h3>
                       <div className="bg-gray-200 px-3 py-2 rounded-md">
-                        <p className="text-gray-800">{stat.loadResistance}</p>
+                        <span className="text-gray-800">
+                          {stat.loadResistance}
+                        </span>
                       </div>
                     </div>
                     <div className="mx-3 mb-4">
@@ -124,7 +143,7 @@ export default function GetWorkOutStatus() {
                         Date:
                       </h3>
                       <div className="bg-gray-200 px-3 py-2 rounded-md">
-                        <p className="text-gray-800">{stat.date}</p>
+                        <span className="text-gray-800">{stat.date}</span>
                       </div>
                     </div>
                     <div className="mx-3 mb-4">
@@ -132,12 +151,12 @@ export default function GetWorkOutStatus() {
                         Description:
                       </h3>
                       <div className="bg-gray-200 px-3 py-2 rounded-md">
-                        <p className="text-gray-800">
+                        <span className="text-gray-800">
                           Lorem ipsum dolor sit amet, consectetur adipiscing
                           elit. Phasellus volutpat, odio eget scelerisque
                           lacinia, ante nisi rhoncus lacus, ac rutrum eros leo
                           sed leo. Proin non odio vitae sem congue volutpat.
-                        </p>
+                        </span>
                       </div>
                     </div>
                   </div>

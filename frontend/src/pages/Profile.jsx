@@ -18,7 +18,6 @@ const Profile = ({ loggedInUser }) => {
     fetchData();
   }, [loggedInUser.id]);
 
-  console.log("one user",user)
 
 
   return (

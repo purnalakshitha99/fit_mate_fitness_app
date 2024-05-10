@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import PostService from "../services/PostService";
 import CommentPopup from "./CommentPopup";
 import LikeService from "../services/LikeService";
+import toast from "react-hot-toast";
 
 const FriendsPosts = ({ loggedIn }) => {
   const [clicked, setClicked] = useState(false);
@@ -22,14 +23,12 @@ const FriendsPosts = ({ loggedIn }) => {
 
   const [loggedInUser, setLoggedInUser] = useState({});
 
-
   useEffect(() => {
     const userData = localStorage.getItem("user");
     setLoggedInUser(JSON.parse(userData));
   }, []);
 
   const userId = loggedIn;
-  console.log("user id" , userId)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,8 +38,6 @@ const FriendsPosts = ({ loggedIn }) => {
           // Check if loggedInUser and its id are defined
           const response = await PostService.getPostByUser(userId);
           setPosts(Array.isArray(response.data) ? response.data : []);
-
-          console.log(response);
         }
       } catch (error) {
         console.error(error);
@@ -49,7 +46,7 @@ const FriendsPosts = ({ loggedIn }) => {
     };
     fetchData();
   }, [userId]); // Include loggedInUser in the dependency array
-  console.log(posts);
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -57,7 +54,6 @@ const FriendsPosts = ({ loggedIn }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
 
   const handleLikeClick = async (index, pId) => {
     try {
@@ -67,18 +63,14 @@ const FriendsPosts = ({ loggedIn }) => {
       setLikedPostId(pId);
 
       const response = await LikeService.setLike(loggedInUser.id, pId);
+      toast.success(response.data);
       setReFetch(true);
-      if (response) {
-        console.log("res");
-      }
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleOpenPopup = (postId) => {
-    console.log(postId);
     setSelectedPostId(postId);
     setShowPopup(true);
   };
@@ -87,18 +79,6 @@ const FriendsPosts = ({ loggedIn }) => {
     setShowPopup(false);
     setSelectedPostId(null);
   };
-
-  const handleEditClick = (postId) => {
-    // Handle edit functionality here
-    console.log(`Editing post with ID: ${postId}`);
-  };
-
-  const handleDeleteClick = (postId) => {
-    // Handle delete functionality here
-    console.log(`Deleting post with ID: ${postId}`);
-  };
-
-  console.log("posts", posts)
 
   return (
     <div>
@@ -142,7 +122,7 @@ const FriendsPosts = ({ loggedIn }) => {
             ) : null}
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-4  w-full justify-center">
-              <button
+                <button
                   className="w-1/2 flex justify-center p-3 border gap-5 cursor-pointer"
                   onClick={() => handleLikeClick(index, post.postId)}
                 >

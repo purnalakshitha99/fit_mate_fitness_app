@@ -15,8 +15,6 @@ const TabsForFriendsProfile = ({ userId }) => {
     setLoggedInUser(JSON.parse(userData));
   }, []);
 
-  
-
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
@@ -34,7 +32,7 @@ const TabsForFriendsProfile = ({ userId }) => {
               activeTab === "app" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
-            <a
+            <Link
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
@@ -43,14 +41,14 @@ const TabsForFriendsProfile = ({ userId }) => {
               onClick={() => handleTabClick("app")}
             >
               <span className="ml-1">Feed</span>
-            </a>
+            </Link>
           </li>
           <li
             className={` flex-auto text-center ${
               activeTab === "mealPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
-            <a
+            <Link
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
@@ -59,7 +57,7 @@ const TabsForFriendsProfile = ({ userId }) => {
               onClick={() => handleTabClick("mealPlan")}
             >
               <span className="ml-1">Meal Plan</span>
-            </a>
+            </Link>
           </li>
           <li
             className={` flex-auto text-center ${
@@ -87,7 +85,7 @@ const TabsForFriendsProfile = ({ userId }) => {
             role="tabpanel"
           >
             <span className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
-              <FriendsPosts loggedIn= {userId} />
+              <FriendsPosts loggedIn={userId} />
             </span>
           </div>
           <div

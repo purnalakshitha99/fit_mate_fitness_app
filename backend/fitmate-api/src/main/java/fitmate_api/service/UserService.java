@@ -28,4 +28,6 @@ public interface UserService {
 
 
     ResponseEntity<Object> loginUser(LoginDTO loginDTO);
+
+    void clearNotifications(Long id);
 }

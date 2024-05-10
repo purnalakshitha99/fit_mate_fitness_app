@@ -33,6 +33,10 @@ public class User {
     @CollectionTable(name = "followed_user_id", joinColumns = @JoinColumn(name = "follower_id"))
     private List<Long> followedUsers = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "notifications_id", joinColumns = @JoinColumn(name = "user_id"))
+    private List<String> notifications = new ArrayList<>();
+
     private String bio;
 
     private LocalTime accountCreated;
@@ -44,8 +48,6 @@ public class User {
 //    @OneToMany(mappedBy = "user")
 //    private List<MealPlan> mealPlanList;
 
-    @OneToMany(mappedBy = "user")
-    private List<WorkOutStatus> workOutStatuses;
 
 
 }

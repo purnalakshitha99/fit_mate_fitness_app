@@ -33,8 +33,12 @@ class UserService {
     return axios.get(BASE_URL);
   }
 
-  updateUser(user, userId){
-    return axios.put(BASE_URL + "/" + userId ,user);
+  updateUser(user, userId) {
+    return axios.put(BASE_URL + "/" + userId, user);
+  }
+
+  clearNotifications(userId) {
+    return axios.delete(BASE_URL + "/notifications/" + userId);
   }
 }
 

@@ -3,6 +3,8 @@ package fitmate_api.response;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class UserResponse {
     private Long id;
@@ -13,6 +15,7 @@ public class UserResponse {
     private String phoneNumber;
     private String bio;
     private String profilePictureUrl;
-    private Long followingCount;
-    private Long followerCount;
+    private Integer followingCount;
+    private Integer followersCount;
+    private List<String> notifications;
 }

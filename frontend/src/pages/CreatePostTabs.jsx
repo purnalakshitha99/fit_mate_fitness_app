@@ -36,7 +36,7 @@ const CreatPostTab = ({ userId }) => {
               activeTab === "app" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
-            <a
+            <Link
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
@@ -45,14 +45,14 @@ const CreatPostTab = ({ userId }) => {
               onClick={() => handleTabClick("app")}
             >
               <span className="ml-1">Upload Photos</span>
-            </a>
+            </Link>
           </li>
           <li
             className={` flex-auto text-center ${
               activeTab === "mealPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
             }`}
           >
-            <a
+            <Link
               className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
               data-tab-target=""
               role="tab"
@@ -61,7 +61,7 @@ const CreatPostTab = ({ userId }) => {
               onClick={() => handleTabClick("mealPlan")}
             >
               <span className="ml-1">Upload Vedio</span>
-            </a>
+            </Link>
           </li>
           
         </ul>
