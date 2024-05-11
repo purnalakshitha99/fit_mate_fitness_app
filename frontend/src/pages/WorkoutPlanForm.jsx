@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
 import WorkOutPlanAPIS from "../apis/modules/WorkOutPlanAPIS";
 import MealPlanImage from '../assets/mealPlan.png';
+import Swal from 'sweetalert2';
 
 const WorkoutPlanForm = ({ closeModel }) => {
   const [routingName, setRoutingName] = useState("");
@@ -28,6 +29,14 @@ const WorkoutPlanForm = ({ closeModel }) => {
     console.log(payload);
     const results = await WorkOutPlanAPIS.createWorkOutPlan(user.id, payload);
     console.log(results);
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'Data added successfully!'
+    });
+
+    closeModel()
   };
 
   return (
