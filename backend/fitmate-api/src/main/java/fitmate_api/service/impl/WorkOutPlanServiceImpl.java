@@ -15,6 +15,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 
@@ -42,6 +45,25 @@ public class WorkOutPlanServiceImpl implements WorkoutPlanService {
         workoutPlanRepository.save(workoutPlan);
 
         return modelMapper.map(workoutPlan, WorkOutPlanResponse.class);
+
+
+    }
+
+    @Override
+    public List<WorkOutPlanResponse> getAll() {
+
+        List<WorkoutPlan> workoutPlanList = workoutPlanRepository.findAll();
+
+        List<WorkOutPlanResponse> workOutPlanResponseList = new ArrayList<>();
+
+        for (WorkoutPlan workoutPlan:workoutPlanList){
+
+            WorkOutPlanResponse workOutPlanResponse = modelMapper.map(workoutPlan,WorkOutPlanResponse.class);
+            workOutPlanResponseList.add(workOutPlanResponse);
+
+        }
+
+        return workOutPlanResponseList;
 
 
     }

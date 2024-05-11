@@ -6,10 +6,9 @@ import fitmate_api.response.WorkOutPlanResponse;
 import fitmate_api.service.WorkoutPlanService;
 import lombok.AllArgsConstructor;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -25,6 +24,12 @@ public class WorkOutPlanController {
         System.out.println("routing name :"+workOutPlanDTO.getDescription());
 
         return workoutPlanService.createWorkOutPlan(userId,workOutPlanDTO);
+   }
+
+   @GetMapping("/users/work_out_plans")
+   public List<WorkOutPlanResponse> getAll(){
+
+       return workoutPlanService.getAll();
    }
 
 }
