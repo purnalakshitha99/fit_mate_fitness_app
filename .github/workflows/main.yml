@@ -23,6 +23,7 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      working-directory: D:\Project\PAF_Assignment\paf-assignment-2024-jun_we_28\frontend\node_modules
 
     - name: Run tests
       run: npm test
