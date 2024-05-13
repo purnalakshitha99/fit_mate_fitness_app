@@ -1,0 +1,34 @@
+name: Frontend CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Adjust as needed
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: frontend   # Assuming frontend code is in a directory named 'frontend'
+
+      - name: Build React app
+        run: npm run build
+        working-directory: frontend   # Assuming frontend code is in a directory named 'frontend'
+
+      - name: Test React app
+        run: npm test
+        working-directory: frontend   # Assuming frontend code is in a directory named 'frontend'
