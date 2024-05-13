@@ -3,6 +3,7 @@ import Post from "./Post";
 import { Link } from "react-router-dom";
 import MealPlansFeed from "./MealPlansFeed";
 import GetWorkOutStatus from "./GetWorkOutStatus";
+import GetWorkoutPlane from "./WorkOutPlanFeed";
 
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState("app");
@@ -51,6 +52,24 @@ const Tabs = () => {
               <span className="ml-1">Meal Plan</span>
             </Link>
           </li>
+          {/* <li
+            className={` flex-auto text-center ${
+              activeTab === "workOutPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
+            }`}
+          >
+            <Link
+              className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
+              data-tab-target=""
+              role="tab"
+              aria-selected={activeTab === "workOutStatus"}
+              aria-controls="workOutStatus"
+              onClick={() => handleTabClick("workOutStatus")}
+            >
+              <span className="ml-1">Workout Status</span>
+            </Link>
+          </li> */}
+
+
           <li
             className={` flex-auto text-center ${
               activeTab === "workOutPlan" ? "bg-gray-300 p-2 rounded-xl" : ""
@@ -67,6 +86,25 @@ const Tabs = () => {
               <span className="ml-1">Workout Plan</span>
             </Link>
           </li>
+
+          <li
+            className={` flex-auto text-center ${
+              activeTab === "workoutStatus" ? "bg-gray-300 p-2 rounded-xl" : ""
+            }`}
+          >
+            <Link
+              className=" flex items-center justify-center w-full px-0 py-1 mb-0 transition-all ease-in-out border-0 rounded-lg cursor-pointer text-slate-700 bg-inherit"
+              data-tab-target=""
+              role="tab"
+              aria-selected={activeTab === "workoutStatus"}
+              aria-controls="workoutStatus"
+              onClick={() => handleTabClick("workoutStatus")}
+            >
+              <span className="ml-1">Workout Status</span>
+            </Link>
+          </li>
+
+
         </ul>
         <div data-tab-content=" " className="p-5">
           <div
@@ -93,15 +131,44 @@ const Tabs = () => {
           </div>
           <div
             className={`block ${
-              activeTab === "workOutPlan" ? "opacity-100" : "hidden"
+              activeTab === "workOutStatus" ? "opacity-100" : "hidden"
             }`}
-            id="workOutPlan"
+            id="workOutStatus"
             role="tabpanel"
           >
             <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
               <GetWorkOutStatus />
             </p>
           </div>
+
+
+
+          <div
+            className={`block ${
+              activeTab === "workOutPlan" ? "opacity-100" : "hidden"
+            }`}
+            id="workOutPlan"
+            role="tabpanel"
+          >
+            <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
+             <GetWorkoutPlane/>
+            </p>
+          </div>
+
+          <div
+            className={`block ${
+              activeTab === "workoutStatus" ? "opacity-100" : "hidden"
+            }`}
+            id="workoutStatus"
+            role="tabpanel"
+          >
+            <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit text-blue-gray-500">
+             <GetWorkOutStatus />
+            </p>
+          </div>
+          
+
+          
         </div>
       </div>
     </div>
