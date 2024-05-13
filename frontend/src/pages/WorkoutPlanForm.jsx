@@ -47,9 +47,9 @@ const WorkoutPlanForm = ({ closeModel }) => {
         <div className='bg-white rounded' style={{ maxHeight: '80vh', overflowY: 'auto' }}>
           <div className='flex flex-row'>
             
-        <div>
+        {/* <div> */}
           <img className='object-cover' style={{ width: '50%', height: '100%' }} src={WorkOutPlanImage} alt='Meal Plan' />
-        </div>
+        {/* </div> */}
         <div className="bg-white rounded-lg shadow-xl p-8 ">
           <h2 className="text-2xl font-bold mb-6">Share your Workout Plan</h2>
           <form onSubmit={formData}>
